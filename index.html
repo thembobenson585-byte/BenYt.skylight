@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hut8 Pro V6 - Final Perfect</title><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<title>Hut8 V7 - Login First</title><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#00A6FF;--bg:#0A0A0A;--card:#141414;--border:#222}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
@@ -35,23 +35,23 @@ body{background:var(--bg);color:white;padding-bottom:90px}
 <body>
 <div id="authScreen" class="auth-screen">
 <div class="auth-box">
-<h2>🤖 Hut8 Mining UG</h2><p style="text-align:center;color:#aaa;font-size:12px;margin-bottom:15px">Signup to start mining</p>
-<div class="tab-auth"><button id="btnSignup" class="active" onclick="switchAuth('signup')">Sign Up</button><button id="btnLogin" onclick="switchAuth('login')">Login</button></div>
-<div id="signupForm">
+<h2>🤖 Hut8 Mining UG</h2><p style="text-align:center;color:#aaa;font-size:12px;margin-bottom:15px">Welcome back! Please Login</p>
+<div class="tab-auth"><button id="btnLogin" class="active" onclick="switchAuth('login')">Login</button><button id="btnSignup" onclick="switchAuth('signup')">Sign Up</button></div>
+<div id="loginForm">
+<input id="loginUser" class="input" placeholder="Phone or Email">
+<input id="loginPass" type="password" class="input" placeholder="Password - Enter your password">
+<button class="btn-blue" onclick="doLogin()">🔐 Login & Enter</button>
+<p style="text-align:center;margin-top:12px"><span style="color:var(--blue);font-size:13px" onclick="switchAuth('signup')">No account? Sign Up Here</span><br><span style="color:#666;font-size:11px;margin-top:5px;display:block" onclick="alert('Contact 0779434443 to reset')">Forgot Password?</span></p>
+</div>
+<div id="signupForm" style="display:none">
 <input id="fullName" class="input" placeholder="Full Name - e.g. Ben Yt">
 <input id="phoneReg" class="input" placeholder="Phone Number - 07XXXXXXXX">
-<input id="emailReg" class="input" placeholder="Email - ben@gmail.com (optional, can login with it)">
+<input id="emailReg" class="input" placeholder="Email - ben@gmail.com">
 <input id="passReg" type="password" class="input" placeholder="Password - min 6 chars">
 <input id="passConfirm" type="password" class="input" placeholder="Confirm Password">
-<input id="inviteCode" class="input" placeholder="Invite Code (optional) - auto fills if you came via link">
-<button class="btn-blue" onclick="doSignup()">Create Account & Start Mining</button>
-<p style="font-size:11px;color:#666;text-align:center;margin-top:10px">By signing up, you agree to Rules: Lock 30 Days, Fee 10%</p>
-</div>
-<div id="loginForm" style="display:none">
-<input id="loginUser" class="input" placeholder="Phone or Email">
-<input id="loginPass" type="password" class="input" placeholder="Password">
-<button class="btn-blue" onclick="doLogin()">Login</button>
-<p style="text-align:center;margin-top:10px"><span style="color:var(--blue);font-size:13px" onclick="switchAuth('signup')">No account? Sign Up</span></p>
+<input id="inviteCode" class="input" placeholder="Invite Code (auto if via link)">
+<button class="btn-blue" onclick="doSignup()">Create Account</button>
+<p style="text-align:center;margin-top:10px"><span style="color:var(--blue);font-size:13px" onclick="switchAuth('login')">Already have account? Login</span></p>
 </div>
 </div>
 </div>
@@ -65,9 +65,8 @@ body{background:var(--bg);color:white;padding-bottom:90px}
 <button id="tab-all" onclick="showSeries('all')">All (24)</button>
 </div>
 <div id="miners"></div>
-<div class="wallet-card"><h4 style="color:var(--blue)">💰 Deposit / Withdrawal - <span id="depHome">0 UGX</span></h4><div class="btn-row" style="margin-top:10px"><button class="btn-blue" onclick="openModal('depositModal')">💳 Deposit 0779434443</button><button class="btn-orange" onclick="openModal('withdrawModal')">💵 Withdrawal</button></div></div>
-<div class="wallet-card"><b style="color:var(--blue)">📈 Live Mining Chart</b><canvas id="chartHome" height="160" style="margin-top:12px"></canvas></div>
-<div class="wallet-card"><b>📜 Rules</b><div style="margin-top:10px;font-size:13px;line-height:2.4;color:var(--blue)"><div onclick="openModal('howDeposit')">▶️ How to Deposit & Withdraw</div><div onclick="openModal('rulesModal')">📜 Rules: Lock 30 Days Fee 10%</div></div></div>
+<div class="wallet-card"><h4 style="color:var(--blue)">💰 Deposit - <span id="depHome">0 UGX</span></h4><div class="btn-row" style="margin-top:10px"><button class="btn-blue" onclick="openModal('depositModal')">💳 Deposit 0779434443</button><button class="btn-orange" onclick="openModal('withdrawModal')">💵 Withdraw</button></div></div>
+<div class="wallet-card"><b style="color:var(--blue)">📈 Live Chart</b><canvas id="chartHome" height="160" style="margin-top:12px"></canvas></div>
 </div>
 <div id="p-ai" class="page"><div class="stats" style="padding:8px"><div class="sbox"><h3 id="depTotal">0.00 UGX</h3><small>Deposit</small></div><div class="sbox"><h3>0.00 UGX</h3><small>Withdraw</small></div><div class="sbox"><h3>0.00 UGX</h3><small>AI Income</small></div><div class="sbox"><h3>0.00 UGX</h3><small>Today</small></div></div><div class="btn-row" style="padding:8px"><button class="btn-blue" onclick="openModal('depositModal')">Deposit</button><button class="btn-orange" onclick="openModal('withdrawModal')">Withdraw</button></div><div class="wallet-card"><canvas id="chartIncome" height="160"></canvas></div></div>
 <div id="p-chats" class="page"><div class="wallet-card" onclick="openWA()">🎧 Support 0779434443</div></div>
@@ -76,8 +75,6 @@ body{background:var(--bg);color:white;padding-bottom:90px}
 <div class="bottom"><div class="active" onclick="switchPage('home',this)">🏠<br>Home</div><div onclick="switchPage('ai',this)">🤖<br>AI</div><div onclick="switchPage('chats',this)">💬<br>Chats</div><div onclick="switchPage('income',this)">💰<br>Income</div><div onclick="switchPage('profile',this)">👤<br>Profile</div></div>
 <div id="depositModal" class="modal"><div class="modal-box"><h3>💳 Deposit - 0779434443</h3><input id="momoInput" class="input" placeholder="Your MoMo"><input id="amountInput" class="input" placeholder="Amount"><button class="btn-blue" onclick="confirmDeposit()">I Have Sent</button><button class="btn-blue" style="background:#333;margin-top:8px" onclick="closeModal('depositModal')">Close</button></div></div>
 <div id="withdrawModal" class="modal"><div class="modal-box"><h3>💵 Withdrawal</h3><input id="withMomo" class="input" placeholder="MoMo"><input id="withAmount" class="input" placeholder="Amount"><button class="btn-orange" onclick="confirmWithdraw()">Request</button><button class="btn-blue" style="background:#333;margin-top:8px" onclick="closeModal('withdrawModal')">Close</button></div></div>
-<div id="rulesModal" class="modal"><div class="modal-box"><h3>📜 Rules</h3><ol style="margin-left:15px;color:#ccc;font-size:13px;line-height:1.8"><li>Lock 30 Days</li><li>Deposit 0779434443</li><li>Withdraw min 5k fee 10%</li><li>Team 10%/5%/2%</li></ol><button class="btn-blue" onclick="closeModal('rulesModal')">OK</button></div></div>
-<div id="howDeposit" class="modal"><div class="modal-box"><h3>How to</h3><p style="color:#ccc">Choose miner -> Send MoMo 0779434443 -> Confirm WhatsApp</p><button class="btn-blue" onclick="closeModal('howDeposit')">Close</button></div></div>
 <div id="msgModal" class="modal"><div class="modal-box"><h3>Welcome</h3><p id="welcomeMsg">Welcome</p><button class="btn-blue" onclick="closeModal('msgModal')">Close</button></div></div>
 <script>
 const allMiners={
@@ -111,18 +108,10 @@ localStorage.setItem('hut_user',JSON.stringify(user));
 localStorage.setItem('hut_user_name',name);
 localStorage.setItem('hut_user_phone',phone);
 localStorage.setItem('hut_user_email',email);
-localStorage.setItem('hut_logged','yes');
-document.getElementById('authScreen').style.display='none';
-document.getElementById('userBadge').innerText=name.split(' ')[0];
-document.getElementById('topName').innerText='Hi, '+name.split(' ')[0];
-document.getElementById('profileName').innerText=name;
-document.getElementById('userMomo').innerText=phone;
-document.getElementById('userEmail').innerText=email;
-updateInviteBox(phone);
-let referrer=localStorage.getItem('hut_referrer')||document.getElementById('inviteCode').value;
-if(referrer){setTimeout(()=>{window.open(`https://wa.me/256779434443?text=NEW USER ${name} Phone ${phone} joined via YOUR LINK ref=${referrer}`,'_blank');},800);}
-document.getElementById('welcomeMsg').innerText='Welcome '+name+'! Your account is ready. Start mining! Your invite link is in Profile.';
-openModal('msgModal');
+localStorage.setItem('hut_last_phone',phone);
+document.getElementById('loginUser').value=phone;
+switchAuth('login');
+alert('Account created! Now please LOGIN with your password to enter!');
 }
 function doLogin(){
 let lu=document.getElementById('loginUser').value.trim();
@@ -130,7 +119,6 @@ let lp=document.getElementById('loginPass').value;
 let saved=JSON.parse(localStorage.getItem('hut_user')||'null');
 if(!saved){alert('No account found. Please Sign Up first!');switchAuth('signup');return;}
 if((lu===saved.phone || lu===saved.email) && lp===saved.pass){
-localStorage.setItem('hut_logged','yes');
 document.getElementById('authScreen').style.display='none';
 document.getElementById('userBadge').innerText=saved.name.split(' ')[0];
 document.getElementById('topName').innerText='Hi, '+saved.name.split(' ')[0];
@@ -138,13 +126,15 @@ document.getElementById('profileName').innerText=saved.name;
 document.getElementById('userMomo').innerText=saved.phone;
 document.getElementById('userEmail').innerText=saved.email;
 updateInviteBox(saved.phone);
-}else{alert('Wrong phone/email or password!');}
+document.getElementById('welcomeMsg').innerText='Welcome back '+saved.name+'! 🔐 Login successful!';
+openModal('msgModal');
+}else{alert('Wrong phone/email or password! Try again.');}
 }
 function updateInviteBox(myPhone){
 let link='https://tinyurl.com/Hut8MiningUg?ref='+myPhone;
-document.getElementById('myInviteBox').innerHTML='<b style=color:#00A6FF>🎁 Your Invite Link (share to earn 10%):</b><br><small style=word-break:break-all;color:#aaa>'+link+'</small><br><button onclick="navigator.clipboard.writeText(\''+link+'\');alert(\'Link Copied! Share it now!\')" style=background:#00A6FF;border:none;padding:8px 14px;border-radius:8px;color:white;margin-top:8px;width:100%>📋 Copy My Link</button>';
+document.getElementById('myInviteBox').innerHTML='<b style=color:#00A6FF>🎁 Your Invite Link:</b><br><small style=word-break:break-all;color:#aaa>'+link+'</small><br><button onclick="navigator.clipboard.writeText(\''+link+'\');alert(\'Copied!\')" style=background:#00A6FF;border:none;padding:8px 14px;border-radius:8px;color:white;margin-top:8px;width:100%>📋 Copy My Link</button>';
 }
-function logout(){localStorage.removeItem('hut_logged');document.getElementById('authScreen').style.display='flex';}
+function logout(){document.getElementById('authScreen').style.display='flex';document.getElementById('loginUser').value=localStorage.getItem('hut_last_phone')||'';document.getElementById('loginPass').value='';switchAuth('login');}
 window.onload=()=>{
 const urlParams=new URLSearchParams(window.location.search);
 let ref=urlParams.get('ref')||urlParams.get('invite')||urlParams.get('code');
@@ -153,17 +143,12 @@ localStorage.setItem('hut_referrer',ref);
 let inv=document.getElementById('inviteCode');
 if(inv) inv.value=ref;
 }
-let logged=localStorage.getItem('hut_logged');
 let saved=JSON.parse(localStorage.getItem('hut_user')||'null');
-if(logged==='yes' && saved){
-document.getElementById('authScreen').style.display='none';
-document.getElementById('userBadge').innerText=saved.name.split(' ')[0];
-document.getElementById('topName').innerText='Hi, '+saved.name.split(' ')[0];
-document.getElementById('profileName').innerText=saved.name;
-document.getElementById('userMomo').innerText=saved.phone;
-document.getElementById('userEmail').innerText=saved.email;
-updateInviteBox(saved.phone);
-}
+let lastPhone=localStorage.getItem('hut_last_phone')|| (saved?saved.phone:'');
+if(lastPhone) document.getElementById('loginUser').value=lastPhone;
+// ALWAYS SHOW LOGIN FIRST - even if logged before
+document.getElementById('authScreen').style.display='flex';
+switchAuth('login');
 setTimeout(()=>{try{new Chart(document.getElementById('chartHome'),{type:'line',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{data:[0,12,19,33,45,52,67],borderColor:'#00A6FF',tension:0.4,fill:true,backgroundColor:'rgba(0,166,255,0.2)'}]},options:{plugins:{legend:{display:false}}}});new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:['CS-1','CS-2','VIP-1','VIP-2'],datasets:[{data:[33711,112408,6800000,13500000],backgroundColor:'#00A6FF'}]},options:{plugins:{legend:{display:false}}}});new Chart(document.getElementById('chartTeam'),{type:'doughnut',data:{labels:['L1 10%','L2 5%','L3 2%'],datasets:[{data:[60,30,10],backgroundColor:['#00A6FF','#ff6b2c','#00D632']}]},options:{plugins:{legend:{labels:{color:'white'}}}}});}catch(e){}},900);
 }
 </script></body></html>
