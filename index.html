@@ -1,20 +1,200 @@
 <!DOCTYPE html>
 <html>
-<head><title>Hut8 Mining Company</title>
+<head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hut8 - AI Machine Pro</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-body{font-family:Arial;background:#0a0a0a;color:white;text-align:center;padding:15px}
-.card{background:#1a1a1a;border:1px solid #333;border-radius:15px;padding:20px;margin:15px auto;max-width:400px}
-.price{color:#00D632;font-size:24px;font-weight:bold}
-.btn{background:#00D632;color:white;padding:14px;border-radius:10px;font-weight:bold;display:block;text-decoration:none;margin-top:12px}
-small{color:#aaa}
-</style></head><body>
-<h1>⛏️ Hut8 Mining Company</h1>
-<p>From 5k to 10M - Everyone Can Mine</p>
-<div class="card"><h3>🛺 Boda Test - 5K</h3><p class="price">UGX 5,000</p><a href="https://benyt-skylight-1.onrender.com/dashboard.html?pkg=5000" class="btn">Buy 5k - MoMo</a></div>
-<div class="card"><h3>🔹 Starter - 20K</h3><p class="price">UGX 20,000</p><a href="https://benyt-skylight-1.onrender.com/dashboard.html?pkg=20000" class="btn">Buy 20k - MoMo</a></div>
-<div class="card" style="border:2px solid #00D632"><h3>🔥 Popular - 100K ⭐</h3><p class="price">UGX 100,000</p><a href="https://benyt-skylight-1.onrender.com/dashboard.html?pkg=100000" class="btn">Buy 100k - MoMo</a></div>
-<div class="card"><h3>💼 Business - 500K</h3><p class="price">UGX 500,000</p><a href="https://benyt-skylight-1.onrender.com/dashboard.html?pkg=500000" class="btn">Buy 500k - MoMo</a></div>
-<div class="card"><h3>👑 Boss - 2M</h3><p class="price">UGX 2,000,000</p><a href="https://benyt-skylight-1.onrender.com/dashboard.html?pkg=2000000" class="btn">Buy 2M - MoMo</a></div>
-<div class="card"><h3>🐋 Whale - 10M</h3><p class="price">UGX 10,000,000</p><a href="https://benyt-skylight-1.onrender.com/dashboard.html?pkg=10000000" class="btn">Buy 10M - MoMo</a></div>
-</body></html>
+:root{--blue:#00A6FF;--bg:#0A0A0A;--card:#141414;--border:#222}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:var(--bg);color:white;padding-bottom:90px}
+.top{padding:14px;background:#000;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:20}
+.tabs{display:flex;gap:8px;padding:10px;overflow-x:auto;background:#000}
+.tabs button{background:#1a1a1a;border:1px solid #333;color:#aaa;padding:8px 14px;border-radius:20px;font-size:12px;white-space:nowrap}
+.tabs button.active{background:var(--blue);color:white}
+.miner{background:var(--card);margin:8px;border-radius:12px;display:flex;padding:10px;border:1px solid var(--border)}
+.miner img{width:110px;height:80px;object-fit:cover;border-radius:8px;background:#222}
+.miner-info{flex:1;margin-left:10px}
+.miner-info b{color:var(--blue)}
+.miner-info p{font-size:11px;color:#aaa;margin:3px 0}
+.badge-sold{background:#ff3b3b;color:white;padding:2px 8px;border-radius:10px;font-size:10px;float:right}
+.wallet-card{background:var(--card);margin:10px;border-radius:12px;padding:15px;border:1px solid var(--border)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:8px}
+.sbox{background:white;color:black;border-radius:10px;overflow:hidden;text-align:center;cursor:pointer}
+.sbox h3{padding:12px 0 6px;font-size:14px}
+.sbox small{background:var(--blue);color:white;display:block;padding:6px;font-size:11px}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
+.btn-blue{background:var(--blue);color:white;border:none;padding:13px;border-radius:10px;font-weight:bold;width:100%}
+.btn-orange{background:#ff6b2c;color:white;border:none;padding:13px;border-radius:10px;font-weight:bold;width:100%}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#000;border-top:1px solid #222;display:flex;justify-content:space-around;padding:8px 0;z-index:30}
+.bottom div{text-align:center;font-size:10px;color:#666;cursor:pointer}
+.bottom div.active{color:var(--blue)}
+.page{display:none}.page.active{display:block}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px}
+.gitem{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 4px;text-align:center;cursor:pointer}
+.gitem .ic{width:38px;height:38px;background:var(--blue);border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 5px}
+.gitem p{font-size:10px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:50;padding:15px;overflow-y:auto}
+.modal-box{background:#1a1a1a;border:1px solid #333;border-radius:15px;padding:20px;max-width:450px;margin:20px auto}
+.modal-box h3{color:var(--blue);margin-bottom:10px}
+.modal-box ol, .modal-box ul{margin-left:15px;font-size:13px;color:#ccc;line-height:1.8}
+.input{width:100%;padding:12px;border-radius:8px;border:1px solid #333;background:#111;color:white;margin:8px 0}
+.tag{background:#00D63222;border:1px solid #00D632;color:#00D632;padding:3px 8px;border-radius:10px;font-size:10px}
+</style>
+</head>
+<body>
+
+<div class="top"><b>AI Machine • Hut8</b><span onclick="openModal('msgModal')">🔔<span style="background:red;font-size:9px;padding:2px 5px;border-radius:10px">3</span></span></div>
+
+<div id="p-home" class="page active">
+<div class="tabs">
+<button class="active">CS series</button><button onclick="alert('Coming soon: VIP Series')">VIP Series</button><button onclick="alert('Coming soon')">A Series</button><button>N series</button><button>All</button>
+</div>
+<div id="miners"></div>
+<div class="wallet-card">
+<h4 style="color:var(--blue)">📈 Live Mining Chart</h4>
+<canvas id="chartMiners" height="150"></canvas>
+</div>
+</div>
+
+<div id="p-ai" class="page">
+<div style="display:flex;gap:8px;padding:8px;overflow-x:auto">
+<div style="background:#1a1a1a;padding:10px;border-radius:8px;white-space:nowrap;font-size:12px">⬆️ WITHDRAW<br><small style="color:var(--blue)">+2356 UGX - Today</small></div>
+<div style="background:#1a1a1a;padding:10px;border-radius:8px;white-space:nowrap;font-size:12px">⬆️ WITHDRAW<br><small style="color:var(--blue)">TQq2r... 1500 USDT</small></div>
+</div>
+<div class="stats">
+<div class="sbox" onclick="openModal('depositModal')"><h3 id="depTotal">0.00 UGX</h3><small>Deposit details</small></div>
+<div class="sbox" onclick="openModal('withdrawModal')"><h3>0.00 UGX</h3><small>Withdraw details</small></div>
+<div class="sbox"><h3 id="aiIncome">0.00 UGX</h3><small>AI Income</small></div>
+<div class="sbox"><h3 id="todayEarn">0.00 UGX</h3><small>Today's earnings</small></div>
+</div><div id="p-chats" class="page">
+<div class="wallet-card" onclick="openModal('howDeposit')" style="border-left:3px solid var(--blue)">📌 How to Deposit & Withdraw - Tap to view</div>
+<div style="padding:10px">
+<div style="background:#1a1a1a;padding:12px;border-radius:10px;display:flex;gap:10px;margin-bottom:8px"><div style="background:var(--blue);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center">💬</div><div><b>Messages</b><p style="color:#00D632;font-size:11px">All caught up</p></div></div>
+<div style="background:#1a1a1a;padding:12px;border-radius:10px;display:flex;gap:10px;margin-bottom:8px" onclick="openWA('Group')"><div style="background:#333;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center">🌐</div><div><b>Group Chat</b><p style="color:#777;font-size:11px">Chat with everyone</p></div></div>
+<div style="background:#1a1a1a;padding:12px;border-radius:10px;display:flex;gap:10px;margin-bottom:8px" onclick="openWA('Support')"><div style="background:var(--blue);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center">🎧</div><div><b>Support - BenYt 0779434443</b><p style="color:#777;font-size:11px">Tap to message support</p></div></div>
+</div>
+</div>
+
+<div id="p-income" class="page">
+<div class="wallet-card"><h4>Income Report</h4><canvas id="chartTeam" height="180"></canvas></div>
+<div class="wallet-card"><h4>Transactions</h4><p style="color:#777;font-size:12px">No transactions yet. Buy miner to start.</p></div>
+</div>
+
+<div id="p-profile" class="page">
+<div style="padding:15px">
+<p style="color:var(--blue);font-size:12px">Welcome to AI Machine</p>
+<h3>BenYt User <span style="color:#777;font-size:13px" id="userMomo">07XXXXXXXX</span></h3>
+<button style="background:#0a2a3a;border:1px solid var(--blue);color:var(--blue);padding:6px 12px;border-radius:15px;margin-top:8px;font-size:11px" onclick="openWA('Upline')">💬 Message Upline</button>
+</div>
+<div class="wallet-card">
+<div style="display:flex;justify-content:space-around;text-align:center">
+<div><small style="color:#777">Wallet</small><h2 id="w1">0.00 UGX</h2></div>
+<div><small style="color:#777">Balance</small><h2 id="w2" style="color:var(--blue)">0.00 UGX</h2></div>
+</div>
+</div>
+<div class="grid">
+<div class="gitem" onclick="openModal('depositModal')"><div class="ic">💳</div><p>Deposit</p></div>
+<div class="gitem" onclick="openModal('withdrawModal')"><div class="ic">💵</div><p>Withdraw</p></div>
+<div class="gitem" onclick="openModal('rulesModal')"><div class="ic">📄</div><p>Rules</p></div>
+<div class="gitem" onclick="shareLink()"><div class="ic">🤝</div><p>Invite</p></div>
+<div class="gitem"><div class="ic">👥</div><p>My team</p></div>
+<div class="gitem" onclick="openModal('assistantModal')"><div class="ic">⭐</div><p>Charts</p></div>
+<div class="gitem"><div class="ic">🎁</div><p>Reward</p></div>
+<div class="gitem" onclick="openWA('Manager')"><div class="ic">🎧</div><p>Manager</p></div>
+</div>
+</div>
+
+<div class="bottom">
+<div class="active" onclick="switchPage('home',this)">🏠<br>Home</div>
+<div onclick="switchPage('chats',this)">💬<br>Chats</div>
+<div onclick="switchPage('ai',this)">🤖<br>AI</div>
+<div onclick="switchPage('income',this)">💰<br>Income</div>
+<div onclick="switchPage('profile',this)">👤<br>Profile</div>
+</div>
+
+<!-- DEPOSIT MODAL -->
+<div id="depositModal" class="modal"><div class="modal-box">
+<h3>💳 Deposit Details - Hut8</h3>
+<div style="background:#111;padding:12px;border-radius:10px;margin:12px 0;border:1px solid #333">
+<p><b>Step 1:</b> Send to MTN MoMo:</p>
+<p style="margin:6px 0">📱 <b style="color:var(--blue);font-size:16px">0779434443</b> - BenYt</p>
+<p>Amount = Package price (e.g. 56,185 UGX)</p>
+<p style="margin-top:8px"><b>Step 2:</b> Keep MoMo message</p>
+<p><b>Step 3:</b> Tap Confirm below</p>
+</div>
+<input id="momoInput" class="input" placeholder="Your MoMo 07XX">
+<input id="amountInput" class="input" placeholder="Amount sent">
+<button class="btn-blue" onclick="confirmDeposit()">I Have Sent - Confirm</button>
+<button class="btn-blue" style="background:#333;margin-top:8px" onclick="closeModal('depositModal')">Close</button>
+</div></div>
+
+<!-- WITHDRAW MODAL -->
+<div id="withdrawModal" class="modal"><div class="modal-box">
+<h3>💵 Withdraw Rules</h3>
+<ul>
+<li>Min: 5,000 UGX | Fee: 10% | Time: 9AM-6PM</li>
+<li>Arrival: 10-30 mins to MoMo</li>
+<li>Daily profit every 24hrs</li>
+</ul>
+<div style="background:#111;padding:12px;border-radius:10px;margin:12px 0">
+<h2 style="color:#00D632" id="withBal">0.00 UGX</h2>
+</div>
+<input id="withMomo" class="input" placeholder="Withdraw to MoMo">
+<input id="withAmount" class="input" placeholder="Amount">
+<button class="btn-orange" onclick="confirmWithdraw()">Request Withdraw</button>
+<button class="btn-blue" style="background:#333;margin-top:8px" onclick="closeModal('withdrawModal')">Close</button>
+</div></div><!-- RULES MODAL -->
+<div id="rulesModal" class="modal"><div class="modal-box">
+<h3>📜 Rules & Instructions</h3>
+<ol>
+<li>Lock 30 Days — All CS series</li>
+<li>Daily Income every 24h after activation</li>
+<li>Deposit via MoMo 0779434443 only</li>
+<li>Withdraw Min 5k, Fee 10%, 9AM-6PM</li>
+<li>Invite = 10% L1, 5% L2, 2% L3</li>
+<li>One account per phone</li>
+</ol>
+<button class="btn-blue" style="margin-top:12px" onclick="closeModal('rulesModal')">I Understand</button>
+</div></div>
+
+<div id="howDeposit" class="modal"><div class="modal-box">
+<h3>🎥 How to Deposit & Withdraw</h3>
+<p style="font-size:13px;color:#ccc;line-height:1.7">
+1. Home → Choose CS-1<br>2. Tap → Deposit modal opens<br>3. Send MoMo to 0779434443<br>4. Confirm → WhatsApp manager<br>5. AI page → balance updates<br>6. Withdraw → Profile → Withdraw
+</p>
+<button class="btn-blue" onclick="closeModal('howDeposit')">Close</button>
+</div></div>
+
+<div id="assistantModal" class="modal"><div class="modal-box">
+<h3>🤖 Assistant Charts</h3>
+<canvas id="chartAssistant" height="180"></canvas>
+<button class="btn-blue" style="margin-top:12px" onclick="closeModal('assistantModal')">Close</button>
+</div></div>
+
+<div id="msgModal" class="modal"><div class="modal-box"><h3>Messages</h3><p style="font-size:13px;color:#ccc">Welcome to Hut8 AI! Deposit to start. Contact 0779434443</p><button class="btn-blue" onclick="closeModal('msgModal')">Close</button></div></div>
+
+<script>
+const miners=[
+{id:'CS-1',x:'x1',price:56185,daily:33711,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200',sold:false},
+{id:'CS-2',x:'x2',price:168593,daily:112408,img:'https://images.unsplash.com/photo-1591488320449-011701bb6704?w=200',sold:false},
+{id:'CS-3',x:'x3',price:505780,daily:370897,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200',sold:false},
+{id:'CS-4',x:'x4',price:1532687,daily:1277252,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200',sold:false},
+{id:'CS-5',x:'x5',price:3065374,daily:2861034,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200',sold:true},
+{id:'CS-6',x:'x6',price:4904592,daily:5231560,img:'https://images.unsplash.com/photo-1587202372616-b43abea06c2a?w=200',sold:true}
+];
+let h=''; miners.forEach(m=>{
+ h+=`<div class="miner" onclick="buy('${m.id}',${m.price})"><div><span style="color:gold;font-size:11px">⭐ ${m.x}</span><br><img src="${m.img}"></div><div class="miner-info">${m.sold?'<span class=badge-sold>Sold out</span>':''}<b>${m.id}</b><p>Lock: 30 Days</p><p>Price: ${m.price.toLocaleString()} UGX</p><p>Daily: ${m.daily.toLocaleString()} UGX</p></div></div>`;
+}); document.getElementById('miners').innerHTML=h;
+function switchPage(p,el){document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));document.getElementById('p-'+p).classList.add('active');document.querySelectorAll('.bottom div').forEach(e=>e.classList.remove('active'));el.classList.add('active');}
+function openModal(id){document.getElementById(id).style.display='block'}
+function closeModal(id){document.getElementById(id).style.display='none'}
+function buy(id,price){document.getElementById('amountInput').value=price;openModal('depositModal');localStorage.setItem('last_pkg',id);localStorage.setItem('last_price',price);}
+function confirmDeposit(){let momo=document.getElementById('momoInput').value;let amt=document.getElementById('amountInput').value;if(momo.length<10){alert('Enter MoMo');return;}localStorage.setItem('hut8_momo',momo);localStorage.setItem('hut8_deposit',amt);document.getElementById('userMomo').innerText=momo;document.getElementById('depTotal').innerText=parseInt(amt).toLocaleString()+' UGX';document.getElementById('withBal').innerText=parseInt(amt).toLocaleString()+' UGX';closeModal('depositModal');let msg=`DEPOSIT%0APkg:${localStorage.getItem('last_pkg')}%0AAmt:${amt}%0AMoMo:${momo}%0ASent to 0779434443`;window.open(`https://wa.me/256779434443?text=${encodeURIComponent(msg)}`,'_blank');}
+function confirmWithdraw(){let momo=document.getElementById('withMomo').value||localStorage.getItem('hut8_momo')||'';let amt=document.getElementById('withAmount').value;if(!momo||!amt){alert('Enter MoMo and amount');return;}closeModal('withdrawModal');let msg=`WITHDRAW%0AAmt:${amt}%0AMoMo:${momo}`;window.open(`https://wa.me/256779434443?text=${encodeURIComponent(msg)}`,'_blank');}
+function openWA(t){window.open(`https://wa.me/256779434443?text=Hello%20${t}%20need%20help`,'_blank')}
+function shareLink(){let momo=localStorage.getItem('hut8_momo')||'0779434443';let link=`https://benyt-skylight-1.onrender.com/?ref=${momo}`;navigator.clipboard.writeText(link);alert('Link copied: '+link);}
+</script>
+</body>
+  </html>
