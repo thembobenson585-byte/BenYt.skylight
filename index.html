@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hut8 Pro V4 - All Machines</title><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<title>Hut8 Pro V5 - Auth Perfect</title><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root{--blue:#00A6FF;--bg:#0A0A0A;--card:#141414;--border:#222}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
@@ -8,7 +8,7 @@ body{background:var(--bg);color:white;padding-bottom:90px}
 .top{padding:14px;background:#000;display:flex;justify-content:space-between;position:sticky;top:0;z-index:20}
 .tabs{display:flex;gap:8px;padding:10px;overflow-x:auto;background:#000;position:sticky;top:50px;z-index:15}
 .tabs button{background:#1a1a1a;border:1px solid #333;color:#aaa;padding:10px 16px;border-radius:20px;font-size:12px;white-space:nowrap}
-.tabs button.active{background:var(--blue);color:white;border-color:var(--blue)}
+.tabs button.active{background:var(--blue);color:white}
 .miner{background:var(--card);margin:8px;border-radius:12px;display:flex;padding:10px;border:1px solid var(--border)}
 .miner img{width:110px;height:80px;object-fit:cover;border-radius:8px}
 .miner-info{flex:1;margin-left:10px}.miner-info b{color:var(--blue)}.miner-info p{font-size:11px;color:#aaa;margin:3px 0}
@@ -25,84 +25,122 @@ body{background:var(--bg);color:white;padding-bottom:90px}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:50;padding:15px;overflow-y:auto}
 .modal-box{background:#1a1a1a;border:1px solid #333;border-radius:15px;padding:20px;max-width:450px;margin:20px auto}
 .input{width:100%;padding:12px;border-radius:8px;border:1px solid #333;background:#111;color:white;margin:8px 0}
+.auth-screen{position:fixed;inset:0;background:linear-gradient(180deg,#000,#0a0a0a);z-index:100;display:flex;align-items:center;justify-content:center;padding:20px}
+.auth-box{background:#141414;border:1px solid #222;border-radius:16px;padding:20px;width:100%;max-width:400px}
+.auth-box h2{text-align:center;color:var(--blue);margin-bottom:10px}
+.tab-auth{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:15px}
+.tab-auth button{background:#1a1a1a;border:1px solid #333;color:#aaa;padding:10px;border-radius:10px}
+.tab-auth button.active{background:var(--blue);color:white}
 </style></head>
 <body>
-<div class="top"><b>AI Machine - Hut8 - All Machines</b><span onclick="openModal('msgModal')">🔔 3</span></div>
+<div id="authScreen" class="auth-screen">
+<div class="auth-box">
+<h2>🤖 Hut8 Mining UG</h2><p style="text-align:center;color:#aaa;font-size:12px;margin-bottom:15px">Signup to start mining</p>
+<div class="tab-auth"><button id="btnSignup" class="active" onclick="switchAuth('signup')">Sign Up</button><button id="btnLogin" onclick="switchAuth('login')">Login</button></div>
+<div id="signupForm">
+<input id="fullName" class="input" placeholder="Full Name - e.g. Ben Yt">
+<input id="phoneReg" class="input" placeholder="Phone Number - 07XXXXXXXX">
+<input id="emailReg" class="input" placeholder="Email - ben@gmail.com (optional, can login with it)">
+<input id="passReg" type="password" class="input" placeholder="Password - min 6 chars">
+<input id="passConfirm" type="password" class="input" placeholder="Confirm Password">
+<input id="inviteCode" class="input" placeholder="Invite Code (optional)">
+<button class="btn-blue" onclick="doSignup()">Create Account & Start Mining</button>
+<p style="font-size:11px;color:#666;text-align:center;margin-top:10px">By signing up, you agree to Rules: Lock 30 Days, Fee 10%</p>
+</div>
+<div id="loginForm" style="display:none">
+<input id="loginUser" class="input" placeholder="Phone or Email">
+<input id="loginPass" type="password" class="input" placeholder="Password">
+<button class="btn-blue" onclick="doLogin()">Login</button>
+<p style="text-align:center;margin-top:10px"><span style="color:var(--blue);font-size:13px" onclick="switchAuth('signup')">No account? Sign Up</span></p>
+</div>
+</div>
+</div>
+<div class="top"><b id="topName">AI Machine - Hut8</b><span onclick="openModal('msgModal')">👤 <span id="userBadge">Guest</span></span></div>
 <div id="p-home" class="page active">
 <div class="tabs">
-<button id="tab-cs" class="active" onclick="showSeries('cs')">CS series (6)</button>
-<button id="tab-vip" onclick="showSeries('vip')">VIP Series (6)</button>
-<button id="tab-a" onclick="showSeries('a')">A Series (6)</button>
-<button id="tab-n" onclick="showSeries('n')">N Series (6)</button>
+<button id="tab-cs" class="active" onclick="showSeries('cs')">CS (6)</button>
+<button id="tab-vip" onclick="showSeries('vip')">VIP (6)</button>
+<button id="tab-a" onclick="showSeries('a')">A (6)</button>
+<button id="tab-n" onclick="showSeries('n')">N (6)</button>
 <button id="tab-all" onclick="showSeries('all')">All (24)</button>
 </div>
 <div id="miners"></div>
-<div class="wallet-card"><h4 style="color:var(--blue)">💰 Deposit / Withdrawal</h4>
-<div class="btn-row" style="margin-top:10px"><button class="btn-blue" onclick="openModal('depositModal')">💳 Deposit Details - 0779434443</button><button class="btn-orange" onclick="openModal('withdrawModal')">💵 Withdrawal Details</button></div>
-<div class="stats" style="margin-top:10px"><div class="sbox"><h3 id="depHome">0.00 UGX</h3><small>Deposit 0779434443</small></div><div class="sbox"><h3>0.00 UGX</h3><small>Withdraw Min 5k</small></div></div></div>
+<div class="wallet-card"><h4 style="color:var(--blue)">💰 Deposit / Withdrawal - <span id="depHome">0 UGX</span></h4><div class="btn-row" style="margin-top:10px"><button class="btn-blue" onclick="openModal('depositModal')">💳 Deposit 0779434443</button><button class="btn-orange" onclick="openModal('withdrawModal')">💵 Withdrawal</button></div></div>
 <div class="wallet-card"><b style="color:var(--blue)">📈 Live Mining Chart</b><canvas id="chartHome" height="160" style="margin-top:12px"></canvas></div>
-<div class="wallet-card"><b>📜 Rules & Instructions</b><div style="margin-top:10px;font-size:13px;line-height:2.4;color:var(--blue)"><div onclick="openModal('howDeposit')">▶️ How to Deposit & Withdraw</div><div onclick="openModal('depositModal')">▶️ Deposit via MoMo 0779434443</div><div onclick="openModal('withdrawModal')">▶️ Withdraw via MoMo / Binance</div><div onclick="openModal('rulesModal')">📜 Rules: Lock 30 Days, Fee 10%</div></div></div>
+<div class="wallet-card"><b>📜 Rules</b><div style="margin-top:10px;font-size:13px;line-height:2.4;color:var(--blue)"><div onclick="openModal('howDeposit')">▶️ How to Deposit & Withdraw</div><div onclick="openModal('rulesModal')">📜 Rules: Lock 30 Days Fee 10%</div></div></div>
 </div>
 <div id="p-ai" class="page"><div class="stats" style="padding:8px"><div class="sbox"><h3 id="depTotal">0.00 UGX</h3><small>Deposit</small></div><div class="sbox"><h3>0.00 UGX</h3><small>Withdraw</small></div><div class="sbox"><h3>0.00 UGX</h3><small>AI Income</small></div><div class="sbox"><h3>0.00 UGX</h3><small>Today</small></div></div><div class="btn-row" style="padding:8px"><button class="btn-blue" onclick="openModal('depositModal')">Deposit</button><button class="btn-orange" onclick="openModal('withdrawModal')">Withdraw</button></div><div class="wallet-card"><canvas id="chartIncome" height="160"></canvas></div></div>
 <div id="p-chats" class="page"><div class="wallet-card" onclick="openWA()">🎧 Support 0779434443</div></div>
 <div id="p-income" class="page"><div class="wallet-card"><canvas id="chartTeam" height="180"></canvas></div></div>
-<div id="p-profile" class="page"><div class="wallet-card"><h3>Profile</h3><p id="userMomo">07XXXXXXXX</p></div></div>
+<div id="p-profile" class="page"><div class="wallet-card"><h3 id="profileName">Profile</h3><p id="userMomo">07XXXXXXXX</p><p id="userEmail" style="color:#aaa;font-size:12px"></p><button class="btn-blue" style="background:#333;margin-top:10px" onclick="logout()">Logout</button></div></div>
 <div class="bottom"><div class="active" onclick="switchPage('home',this)">🏠<br>Home</div><div onclick="switchPage('ai',this)">🤖<br>AI</div><div onclick="switchPage('chats',this)">💬<br>Chats</div><div onclick="switchPage('income',this)">💰<br>Income</div><div onclick="switchPage('profile',this)">👤<br>Profile</div></div>
-<div id="depositModal" class="modal"><div class="modal-box"><h3>💳 Deposit</h3><p>MoMo <b style="color:var(--blue)">0779434443</b></p><input id="momoInput" class="input" placeholder="Your MoMo"><input id="amountInput" class="input" placeholder="Amount"><button class="btn-blue" onclick="confirmDeposit()">I Have Sent</button><button class="btn-blue" style="background:#333;margin-top:8px" onclick="closeModal('depositModal')">Close</button></div></div>
-<div id="withdrawModal" class="modal"><div class="modal-box"><h3>💵 Withdrawal</h3><p style="color:#ccc;font-size:13px">Min 5k Fee 10% Time 9AM-6PM</p><input id="withMomo" class="input" placeholder="MoMo"><input id="withAmount" class="input" placeholder="Amount"><button class="btn-orange" onclick="confirmWithdraw()">Request</button><button class="btn-blue" style="background:#333;margin-top:8px" onclick="closeModal('withdrawModal')">Close</button></div></div>
-<div id="rulesModal" class="modal"><div class="modal-box"><h3>📜 Rules</h3><ol style="margin-left:15px;color:#ccc;font-size:13px;line-height:1.8"><li>Lock 30 Days</li><li>Daily income 24h</li><li>Deposit 0779434443</li><li>Withdraw min 5k fee 10%</li><li>Team 10%/5%/2%</li></ol><button class="btn-blue" onclick="closeModal('rulesModal')">OK</button></div></div>
-<div id="howDeposit" class="modal"><div class="modal-box"><h3>How to Deposit</h3><p style="color:#ccc">1. Choose miner<br>2. Tap miner<br>3. Send MoMo 0779434443<br>4. Confirm WhatsApp<br>5. Balance in AI</p><button class="btn-blue" onclick="closeModal('howDeposit')">Close</button></div></div>
-<div id="msgModal" class="modal"><div class="modal-box"><h3>Welcome</h3><p>0779434443</p><button class="btn-blue" onclick="closeModal('msgModal')">Close</button></div></div>
+<div id="depositModal" class="modal"><div class="modal-box"><h3>💳 Deposit - 0779434443</h3><input id="momoInput" class="input" placeholder="Your MoMo"><input id="amountInput" class="input" placeholder="Amount"><button class="btn-blue" onclick="confirmDeposit()">I Have Sent</button><button class="btn-blue" style="background:#333;margin-top:8px" onclick="closeModal('depositModal')">Close</button></div></div>
+<div id="withdrawModal" class="modal"><div class="modal-box"><h3>💵 Withdrawal</h3><input id="withMomo" class="input" placeholder="MoMo"><input id="withAmount" class="input" placeholder="Amount"><button class="btn-orange" onclick="confirmWithdraw()">Request</button><button class="btn-blue" style="background:#333;margin-top:8px" onclick="closeModal('withdrawModal')">Close</button></div></div>
+<div id="rulesModal" class="modal"><div class="modal-box"><h3>📜 Rules</h3><ol style="margin-left:15px;color:#ccc;font-size:13px;line-height:1.8"><li>Lock 30 Days</li><li>Deposit 0779434443</li><li>Withdraw min 5k fee 10%</li><li>Team 10%/5%/2%</li></ol><button class="btn-blue" onclick="closeModal('rulesModal')">OK</button></div></div>
+<div id="howDeposit" class="modal"><div class="modal-box"><h3>How to</h3><p style="color:#ccc">Choose miner -> Send MoMo 0779434443 -> Confirm WhatsApp</p><button class="btn-blue" onclick="closeModal('howDeposit')">Close</button></div></div>
+<div id="msgModal" class="modal"><div class="modal-box"><h3>Welcome</h3><p id="welcomeMsg">Welcome</p><button class="btn-blue" onclick="closeModal('msgModal')">Close</button></div></div>
 <script>
 const allMiners={
-cs:[
-{id:'CS-1',x:'x1',price:56185,daily:33711,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},
-{id:'CS-2',x:'x2',price:168593,daily:112408,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},
-{id:'CS-3',x:'x3',price:505780,daily:370897,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},
-{id:'CS-4',x:'x4',price:1532687,daily:1277252,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},
-{id:'CS-5',x:'x5',price:3065374,daily:2861034,sold:true,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},
-{id:'CS-6',x:'x6',price:4904592,daily:5231560,sold:true,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'}
-],
-vip:[
-{id:'VIP-1',x:'x2',price:8000000,daily:6800000,hot:true,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},
-{id:'VIP-2',x:'x3',price:15000000,daily:13500000,hot:true,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},
-{id:'VIP-3',x:'x4',price:28000000,daily:26500000,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},
-{id:'VIP-4',x:'x5',price:45000000,daily:44000000,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},
-{id:'VIP-5',x:'x6',price:70000000,daily:70000000,sold:true,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},
-{id:'VIP-6',x:'x7',price:100000000,daily:110000000,sold:true,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'}
-],
-a:[
-{id:'A-1',x:'x1',price:35000,daily:18000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},
-{id:'A-2',x:'x1',price:75000,daily:45000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},
-{id:'A-3',x:'x2',price:150000,daily:98000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},
-{id:'A-4',x:'x2',price:350000,daily:245000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},
-{id:'A-5',x:'x3',price:800000,daily:600000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},
-{id:'A-6',x:'x3',price:1800000,daily:1450000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'}
-],
-n:[
-{id:'N-1',x:'x1',price:120000,daily:75000,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},
-{id:'N-2',x:'x2',price:300000,daily:195000,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},
-{id:'N-3',x:'x3',price:700000,daily:480000,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},
-{id:'N-4',x:'x4',price:1500000,daily:1100000,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},
-{id:'N-5',x:'x5',price:3200000,daily:2500000,sold:true,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},
-{id:'N-6',x:'x6',price:5500000,daily:4800000,sold:true,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'}
-]
+cs:[{id:'CS-1',x:'x1',price:56185,daily:33711,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},{id:'CS-2',x:'x2',price:168593,daily:112408,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},{id:'CS-3',x:'x3',price:505780,daily:370897,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},{id:'CS-4',x:'x4',price:1532687,daily:1277252,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},{id:'CS-5',x:'x5',price:3065374,daily:2861034,sold:true,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'},{id:'CS-6',x:'x6',price:4904592,daily:5231560,sold:true,img:'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?w=200'}],
+vip:[{id:'VIP-1',x:'x2',price:8000000,daily:6800000,hot:true,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},{id:'VIP-2',x:'x3',price:15000000,daily:13500000,hot:true,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},{id:'VIP-3',x:'x4',price:28000000,daily:26500000,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},{id:'VIP-4',x:'x5',price:45000000,daily:44000000,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},{id:'VIP-5',x:'x6',price:70000000,daily:70000000,sold:true,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'},{id:'VIP-6',x:'x7',price:100000000,daily:110000000,sold:true,img:'https://images.unsplash.com/photo-1518770660439-4636190af475?w=200'}],
+a:[{id:'A-1',x:'x1',price:35000,daily:18000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},{id:'A-2',x:'x1',price:75000,daily:45000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},{id:'A-3',x:'x2',price:150000,daily:98000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},{id:'A-4',x:'x2',price:350000,daily:245000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},{id:'A-5',x:'x3',price:800000,daily:600000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'},{id:'A-6',x:'x3',price:1800000,daily:1450000,img:'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=200'}],
+n:[{id:'N-1',x:'x1',price:120000,daily:75000,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},{id:'N-2',x:'x2',price:300000,daily:195000,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},{id:'N-3',x:'x3',price:700000,daily:480000,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},{id:'N-4',x:'x4',price:1500000,daily:1100000,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},{id:'N-5',x:'x5',price:3200000,daily:2500000,sold:true,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'},{id:'N-6',x:'x6',price:5500000,daily:4800000,sold:true,img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=200'}]
 };
-let current='cs';
-function render(list){
-let h='';list.forEach(m=>{h+=`<div class="miner" onclick="buy('${m.id}',${m.price})"><div><span style="color:gold;font-size:11px">⭐ ${m.x}</span><br><img src="${m.img}"></div><div class="miner-info">${m.sold?'<span style="background:red;color:white;padding:2px 8px;border-radius:10px;font-size:10px;float:right">Sold out</span>':''}${m.hot?'<span style="background:#00D632;color:white;padding:2px 8px;border-radius:10px;font-size:10px;float:right">HOT 🔥</span>':''}<b>${m.id}</b><p>Lock: 30 Days</p><p>Price: ${m.price.toLocaleString()} UGX</p><p style="color:#00D632">Daily: ${m.daily.toLocaleString()} UGX</p></div></div>`});document.getElementById('miners').innerHTML=h;
-}
-function showSeries(s){
-current=s;document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+s).classList.add('active');
-if(s==='all'){render([...allMiners.cs,...allMiners.vip,...allMiners.a,...allMiners.n]);}
-else{render(allMiners[s]);}
-}
+function render(list){let h='';list.forEach(m=>{h+=`<div class="miner" onclick="buy('${m.id}',${m.price})"><div><span style="color:gold;font-size:11px">⭐ ${m.x}</span><br><img src="${m.img}"></div><div class="miner-info">${m.sold?'<span style="background:red;color:white;padding:2px 8px;border-radius:10px;font-size:10px;float:right">Sold out</span>':''}${m.hot?'<span style="background:#00D632;color:white;padding:2px 8px;border-radius:10px;font-size:10px;float:right">HOT 🔥</span>':''}<b>${m.id}</b><p>Lock: 30 Days</p><p>Price: ${m.price.toLocaleString()} UGX</p><p style="color:#00D632">Daily: ${m.daily.toLocaleString()} UGX</p></div></div>`});document.getElementById('miners').innerHTML=h;}
+function showSeries(s){document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+s).classList.add('active');if(s==='all'){render([...allMiners.cs,...allMiners.vip,...allMiners.a,...allMiners.n]);}else{render(allMiners[s]);}}
 render(allMiners.cs);
 function switchPage(p,el){document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));document.getElementById('p-'+p).classList.add('active');document.querySelectorAll('.bottom div').forEach(e=>e.classList.remove('active'));el.classList.add('active');}
 function openModal(id){document.getElementById(id).style.display='block'}function closeModal(id){document.getElementById(id).style.display='none'}
 function buy(id,price){document.getElementById('amountInput').value=price;openModal('depositModal');localStorage.setItem('last_pkg',id);}
-function confirmDeposit(){let momo=document.getElementById('momoInput').value;let amt=document.getElementById('amountInput').value;if(momo.length<10){alert('MoMo');return;}document.getElementById('userMomo').innerText=momo;document.getElementById('depTotal').innerText=amt+' UGX';document.getElementById('depHome').innerText=amt+' UGX';closeModal('depositModal');window.open(`https://wa.me/256779434443?text=DEPOSIT ${amt} MoMo ${momo} pkg ${localStorage.getItem('last_pkg')}`,'_blank');}
-function confirmWithdraw(){let momo=document.getElementById('withMomo').value;let amt=document.getElementById('withAmount').value;closeModal('withdrawModal');window.open(`https://wa.me/256779434443?text=WITHDRAW ${amt} to ${momo}`,'_blank');}
+function confirmDeposit(){let momo=document.getElementById('momoInput').value;let amt=document.getElementById('amountInput').value;if(momo.length<10){alert('MoMo');return;}document.getElementById('userMomo').innerText=momo;document.getElementById('depTotal').innerText=amt+' UGX';document.getElementById('depHome').innerText=amt+' UGX';closeModal('depositModal');window.open(`https://wa.me/256779434443?text=DEPOSIT ${amt} MoMo ${momo} pkg ${localStorage.getItem('last_pkg')} User ${localStorage.getItem('hut_user_name')}`,'_blank');}
+function confirmWithdraw(){closeModal('withdrawModal');window.open(`https://wa.me/256779434443?text=WITHDRAW ${document.getElementById('withAmount').value} to ${document.getElementById('withMomo').value} User ${localStorage.getItem('hut_user_name')}`,'_blank');}
 function openWA(){window.open(`https://wa.me/256779434443?text=Hello`,'_blank')}
-setTimeout(()=>{try{new Chart(document.getElementById('chartHome'),{type:'line',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{data:[0,12,19,33,45,52,67],borderColor:'#00A6FF',tension:0.4,fill:true,backgroundColor:'rgba(0,166,255,0.2)'}]},options:{plugins:{legend:{display:false}}}});new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:['CS-1','CS-2','CS-3','VIP-1','VIP-2'],datasets:[{data:[33711,112408,370897,6800000,13500000],backgroundColor:'#00A6FF'}]},options:{plugins:{legend:{display:false}}}});new Chart(document.getElementById('chartTeam'),{type:'doughnut',data:{labels:['L1 10%','L2 5%','L3 2%'],datasets:[{data:[60,30,10],backgroundColor:['#00A6FF','#ff6b2c','#00D632']}]},options:{plugins:{legend:{labels:{color:'white'}}}}});}catch(e){}},900);
+function switchAuth(t){if(t==='signup'){document.getElementById('signupForm').style.display='block';document.getElementById('loginForm').style.display='none';document.getElementById('btnSignup').classList.add('active');document.getElementById('btnLogin').classList.remove('active');}else{document.getElementById('signupForm').style.display='none';document.getElementById('loginForm').style.display='block';document.getElementById('btnSignup').classList.remove('active');document.getElementById('btnLogin').classList.add('active');}}
+function doSignup(){
+let name=document.getElementById('fullName').value.trim();
+let phone=document.getElementById('phoneReg').value.trim();
+let email=document.getElementById('emailReg').value.trim();
+let pass=document.getElementById('passReg').value;
+let confirm=document.getElementById('passConfirm').value;
+if(name.length<3){alert('Enter Full Name');return;}
+if(phone.length<10){alert('Enter Phone 07XX');return;}
+if(pass.length<6){alert('Password min 6 chars');return;}
+if(pass!==confirm){alert('Passwords do not match!');return;}
+let user={name,phone,email,pass};
+localStorage.setItem('hut_user',JSON.stringify(user));
+localStorage.setItem('hut_user_name',name);
+localStorage.setItem('hut_user_phone',phone);
+localStorage.setItem('hut_user_email',email);
+localStorage.setItem('hut_logged','yes');
+document.getElementById('authScreen').style.display='none';
+document.getElementById('userBadge').innerText=name.split(' ')[0];
+document.getElementById('topName').innerText='Hi, '+name.split(' ')[0];
+document.getElementById('profileName').innerText=name;
+document.getElementById('userMomo').innerText=phone;
+document.getElementById('userEmail').innerText=email;
+document.getElementById('welcomeMsg').innerText='Welcome '+name+'! Your account is ready. Start mining!';
+openModal('msgModal');
+}
+function doLogin(){
+let lu=document.getElementById('loginUser').value.trim();
+let lp=document.getElementById('loginPass').value;
+let saved=JSON.parse(localStorage.getItem('hut_user')||'null');
+if(!saved){alert('No account found. Please Sign Up first!');switchAuth('signup');return;}
+if((lu===saved.phone || lu===saved.email) && lp===saved.pass){
+localStorage.setItem('hut_logged','yes');
+document.getElementById('authScreen').style.display='none';
+document.getElementById('userBadge').innerText=saved.name.split(' ')[0];
+document.getElementById('topName').innerText='Hi, '+saved.name.split(' ')[0];
+document.getElementById('profileName').innerText=saved.name;
+document.getElementById('userMomo').innerText=saved.phone;
+document.getElementById('userEmail').innerText=saved.email;
+}else{alert('Wrong phone/email or password!');}
+}
+function logout(){localStorage.removeItem('hut_logged');document.getElementById('authScreen').style.display='flex';}
+window.onload=()=>{
+let logged=localStorage.getItem('hut_logged');
+let saved=JSON.parse(localStorage.getItem('hut_user')||'null');
+if(logged==='yes' && saved){document.getElementById('authScreen').style.display='none';document.getElementById('userBadge').innerText=saved.name.split(' ')[0];document.getElementById('topName').innerText='Hi, '+saved.name.split(' ')[0];document.getElementById('profileName').innerText=saved.name;document.getElementById('userMomo').innerText=saved.phone;document.getElementById('userEmail').innerText=saved.email;}
+setTimeout(()=>{try{new Chart(document.getElementById('chartHome'),{type:'line',data:{labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],datasets:[{data:[0,12,19,33,45,52,67],borderColor:'#00A6FF',tension:0.4,fill:true,backgroundColor:'rgba(0,166,255,0.2)'}]},options:{plugins:{legend:{display:false}}}});new Chart(document.getElementById('chartIncome'),{type:'bar',data:{labels:['CS-1','CS-2','VIP-1','VIP-2'],datasets:[{data:[33711,112408,6800000,13500000],backgroundColor:'#00A6FF'}]},options:{plugins:{legend:{display:false}}}});new Chart(document.getElementById('chartTeam'),{type:'doughnut',data:{labels:['L1 10%','L2 5%','L3 2%'],datasets:[{data:[60,30,10],backgroundColor:['#00A6FF','#ff6b2c','#00D632']}]},options:{plugins:{legend:{labels:{color:'white'}}}}});}catch(e){}},900);
+}
 </script></body></html>
