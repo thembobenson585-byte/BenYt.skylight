@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hut8 Rewards - My Mining</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Arial;background:#0a0a0a;color:white;text-align:center;padding:15px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:16px;padding:20px;margin:15px auto;max-width:380px}
+.big{font-size:32px;color:#00D632;font-weight:bold}
+.btn{background:#00D632;color:white;padding:14px;border-radius:10px;text-decoration:none;display:block;margin:10px 0;font-weight:bold;border:none;width:100%}
+.btn2{background:#333}
+input{padding:12px;border-radius:8px;border:1px solid #333;width:80%;margin:10px}
+</style>
+</head>
+<body>
+<h1>⛏️ My Hut8 Mining</h1>
+
+<div id="login" class="card">
+<h3>Enter Your MoMo Number</h3>
+<input id="phone" placeholder="0779434443">
+<select id="pkg" style="padding:12px;border-radius:8px;width:85%;margin:10px">
+<option value="5000">Boda 5k - 1k/day</option>
+<option value="20000">Starter 20k - 2k/day</option>
+<option value="100000" selected>Popular 100k - 6k/day</option>
+<option value="500000">Business 500k - 22k/day</option>
+<option value="2000000">Boss 2M - 65k/day</option>
+<option value="10000000">Whale 10M - 350k/day</option>
+</select>
+<button class="btn" onclick="startMining()">Start My Mining</button>
+<p><small>Use number you paid with</small></p>
+</div>
+
+<div id="dash" class="card" style="display:none">
+<h2 id="pkgName">Mining Active ✅</h2>
+<p>Mining Power: <span id="power">150 TH/s</span></p>
+<p>Started: <span id="startDate"></span></p>
+<hr>
+<p>Total Mined</p>
+<div class="big" id="earned">UGX 0</div>
+<p>Daily Reward: <span id="daily" style="color:#00D632">UGX 6,000</span></p>
+<p>Days Left: <span id="daysLeft">30</span> days</p>
+<hr>
+<a id="withdrawBtn" class="btn" href="#">Withdraw to MoMo - WhatsApp Ben</a>
+<button class="btn btn2" onclick="reset()">Logout</button>
+</div>
+
+<script>
+let dailyMap={5000:1000,20000:2000,100000:6000,500000:22000,2000000:65000,10000000:350000};
+let powerMap={5000:"5 TH/s",20000:"25 TH/s",100000:"150 TH/s",500000:"800 TH/s",2000000:"2000 TH/s",10000000:"12000 TH/s"};
+
+function startMining(){
+let phone=document.getElementById('phone').value;
+let pkg=document.getElementById('pkg').value;
+if(phone.length<9){alert("Enter phone");return}
+localStorage.setItem('hut8_phone',phone);
+localStorage.setItem('hut8_pkg',pkg);
+localStorage.setItem('hut8_start',Date.now());
+showDash();
+}
+function showDash(){
+let pkg=localStorage.getItem('hut8_pkg');
+let start=localStorage.getItem('hut8_start');
+let phone=localStorage.getItem('hut8_phone');
+if(!pkg) return;
+document.getElementById('login').style.display='none';
+document.getElementById('dash').style.display='block';
+document.getElementById('daily').innerText='UGX '+dailyMap[pkg].toLocaleString();
+document.getElementById('power').innerText=powerMap[pkg];
+let startD=new Date(parseInt(start));
+document.getElementById('startDate').innerText=startD.toLocaleDateString();
+let daysPassed=Math.floor((Date.now()-start)/86400000);
+let earned=daysPassed*dailyMap[pkg];
+if(earned<0) earned=0;
+document.getElementById('earned').innerText='UGX '+earned.toLocaleString();
+document.getElementById('daysLeft').innerText=Math.max(0,30-daysPassed);
+let btn=document.getElementById('withdrawBtn');
+btn.href=`https://wa.me/256779434443?text=Hello%20Ben%20Hut8%20WITHDRAW%20request%0APhone:${phone}%0APackage:${pkg}%0AEarned:UGX${earned}`;
+setInterval(()=>{
+ let d=Math.floor((Date.now()-start)/86400000);
+ document.getElementById('earned').innerText='UGX '+(d*dailyMap[pkg]).toLocaleString();
+},2000);
+}
+function reset(){localStorage.clear();location.reload()}
+if(localStorage.getItem('hut8_pkg')) showDash();
+// auto package from url?pkg=5000
+let urlPkg=new URLSearchParams(window.location.search).get('pkg');
+if(urlPkg){document.getElementById('pkg').value=urlPkg}
+</script>
+<p><a href="index.html" style="color:#888">← Back to Shop</a></p>
+</body>
+</html>
