@@ -1,83 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<title>Block254 Gold Snake</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<title>Block254 UG Gold Snake</title>
 <style>
 body{margin:0;background:#0b3d20;color:white;text-align:center;font-family:Arial}
-canvas{border:4px solid #f5c542;background:#000;margin:8px auto;display:block;border-radius:8px}
-.btn{background:#f5c542;color:#000;padding:12px 22px;border-radius:10px;font-weight:bold;border:none;margin:6px;cursor:pointer}
-.btn-green{background:#25D366;color:white;width:90%;max-width:330px;padding:14px}
+canvas{border:4px solid #f5c542;background:#000;margin:8px auto;display:block;border-radius:12px}
+.btn{background:#f5c542;color:#000;padding:12px 22px;border-radius:10px;font-weight:bold;border:none;margin:6px}
+.btn-green{background:#25D366;color:white;width:90%;max-width:330px;padding:14px;display:inline-block;text-decoration:none;border-radius:10px;font-weight:bold;margin:6px}
+.btn-group{background:#128C7E;color:white;width:90%;max-width:330px;padding:14px;display:inline-block;text-decoration:none;border-radius:10px;font-weight:bold;margin:6px}
 .controls{display:grid;grid-template-columns:75px 75px 75px;gap:10px;justify-content:center;margin:12px auto}
 .c-btn{background:rgba(255,255,255,0.15);border:2px solid #f5c542;color:#f5c542;font-size:26px;border-radius:12px;padding:12px}
-.c-btn:active{background:#f5c542;color:black}
-#panel{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:none;overflow-y:auto;padding:20px;box-sizing:border-box;text-align:left}
+.c-btn:active{background:#f5c542;color:#000}
+#panel{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.96);display:none;overflow-y:auto;padding:20px;box-sizing:border-box;text-align:left;z-index:10}
 </style>
 </head>
 <body>
-<h2>🐍 Block254 <span id="skinName">UG</span> Snake</h2>
+<h2>🐍 Block254 <span id="skin">UG</span> Snake</h2>
 <p id="score">Score: 0 | Top: 0</p>
 <canvas id="game" width="320" height="320"></canvas>
-
 <div>
 <button class="btn" onclick="startGame()">▶️ Play / Restart</button>
-<button class="btn" style="background:#fff" onclick="openPanel()">⚙️ Settings / Gold Skin</button>
+<button class="btn" style="background:#fff" onclick="openP()">⚙️ Settings / Gold</button>
 </div>
-
 <div class="controls">
 <button class="c-btn" style="grid-column:2" onclick="setDir(0,-1)">▲</button>
 <button class="c-btn" style="grid-column:1;grid-row:2" onclick="setDir(-1,0)">◀</button>
 <button class="c-btn" style="grid-column:2;grid-row:2" onclick="setDir(0,1)">▼</button>
 <button class="c-btn" style="grid-column:3;grid-row:2" onclick="setDir(1,0)">▶</button>
 </div>
-
-<a class="btn btn-green" href="https://wa.me/256793814204?text=Hi%20Block254%20I%20send%201k%20for%20Gold%20Skin%20Give%20me%20code">Support 1k Gold Skin — 0793814204</a><br>
-<a class="btn" style="background:#128C7E;color:white;width:90%;max-width:330px" href="https://chat.whatsapp.com/YOURGROUP" target="_blank">👥 Join General Group</a>
+<a class="btn-green" href="https://wa.me/256793814204?text=Hi%20Block254%20I%20sent%201k%20for%20Gold%20Skin%20Code%20GOLD254">Support 1k Gold — 0793814204</a><br>
+<a class="btn-group" href="https://chat.whatsapp.com/FYWY5k4wWd3EXaxzhK96IO" target="_blank">👥 Join General Group</a>
 
 <div id="panel">
-<h2 style="color:#f5c542">⚙️ Settings & Gold Skin 1k</h2>
+<h2 style="color:#f5c542">Gold Skin & Settings</h2>
 <p><b>Speed:</b><br>
 <button class="btn" onclick="setSpeed(200)">Low</button>
 <button class="btn" onclick="setSpeed(130)">Normal</button>
 <button class="btn" onclick="setSpeed(70)">High</button></p>
-
-<p><b>Gold Skin Support 1k:</b><br>
-1. Tap Support button, send 1k to 0793814204<br>
-2. I reply with code: <b style="color:#f5c542">GOLD254</b><br>
-3. Enter below to unlock forever</p>
-<button class="btn" style="background:#f5c542;width:100%" onclick="unlockGold()">🔓 Enter Code to Unlock Gold</button>
-
-<p><b>Rules:</b> Free play. Gold is cosmetic only. No deposit, no withdrawal. Skill only.</p>
-<p><b>How it works:</b> Eat red, avoid wall. Top score saved.</p>
-<button class="btn" style="background:white;width:100%" onclick="closePanel()">❌ Close</button>
+<p>Send 1k to 0793814204 → Get code <b>GOLD254</b> → Unlock permanent gold glow.</p>
+<button class="btn" style="background:#f5c542;width:100%" onclick="unlock()">🔓 Enter Code GOLD254</button>
+<br><br>
+<a class="btn-group" href="https://chat.whatsapp.com/FYWY5k4wWd3EXaxzhK96IO" style="width:100%;text-align:center;box-sizing:border-box">👥 Join WhatsApp Group</a>
+<button class="btn" style="background:white;width:100%;margin-top:10px" onclick="closeP()">❌ Close</button>
 </div>
 
 <script>
-let canvas=document.getElementById('game'),ctx=canvas.getContext('2d');
-let snake,food,dir,score,gameLoop,speed=130;let topScore=localStorage.getItem('top')||0;
-let goldUnlocked=localStorage.getItem('gold')==='yes';
-let skinColor=goldUnlocked?'#f5c542':'#00ff88';
-document.getElementById('skinName').innerText=goldUnlocked?'GOLD':'UG';
-function openPanel(){document.getElementById('panel').style.display='block'} function closePanel(){document.getElementById('panel').style.display='none'}
-function setSpeed(s){speed=s;startGame();closePanel();}
-function unlockGold(){
- let c=prompt('Enter code from 0793814204 after 1k support:');
- if(c==='GOLD254'){localStorage.setItem('gold','yes');goldUnlocked=true;skinColor='#f5c542';alert('🔥 GOLD UNLOCKED FOREVER!');location.reload();}
- else alert('Wrong code. Support 0793814204 on WhatsApp with 1k to get code GOLD254');
-}
-function startGame(){snake=[{x:160,y:160}];dir={x:16,y:0};food={x:80,y:80};score=0;document.getElementById('score').innerText=`Score: 0 | Top: ${topScore}`;clearInterval(gameLoop);gameLoop=setInterval(update,speed);}
+let c=document.getElementById('game'),ctx=c.getContext('2d');
+let snake,food,dir,score,loop,speed=130;
+let top=localStorage.getItem('top')||0;
+let gold=localStorage.getItem('gold')==='yes';
+let col=gold?'#f5c542':'#00ff88';
+document.getElementById('skin').innerText=gold?'GOLD':'UG';
+function openP(){document.getElementById('panel').style.display='block'}
+function closeP(){document.getElementById('panel').style.display='none'}
+function setSpeed(s){speed=s;startGame();closeP();}
+function unlock(){let x=prompt('Enter code after 1k to 0793814204:');if(x==='GOLD254'){localStorage.setItem('gold','yes');alert('GOLD UNLOCKED FOREVER!');location.reload();}else alert('Wrong code. Send 1k to get GOLD254');}
+function startGame(){snake=[{x:160,y:160}];dir={x:16,y:0};food={x:80,y:80};score=0;document.getElementById('score').innerText=`Score: 0 | Top: ${top}`;clearInterval(loop);loop=setInterval(upd,speed);}
 function setDir(x,y){if(x!==0&&dir.x!==0)return;if(y!==0&&dir.y!==0)return;dir={x:x*16,y:y*16};}
-function update(){
- const head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
- if(head.x<0||head.x>=320||head.y<0||head.y>=320||snake.some(s=>s.x==head.x&&s.y==head.y)){clearInterval(gameLoop);if(score>topScore){topScore=score;localStorage.setItem('top',topScore);} alert('Game Over: '+score);return;}
- snake.unshift(head);
- if(head.x==food.x&&head.y==food.y){score+=10;document.getElementById('score').innerText=`Score: ${score} | Top: ${topScore}`;food={x:Math.floor(Math.random()*20)*16,y:Math.floor(Math.random()*20)*16};}
- else snake.pop();
- ctx.fillStyle='black';ctx.fillRect(0,0,320,320);
- ctx.fillStyle=skinColor; if(goldUnlocked){ctx.shadowColor='#f5c542';ctx.shadowBlur=15;} snake.forEach(s=>ctx.fillRect(s.x+1,s.y+1,14,14));ctx.shadowBlur=0;
- ctx.fillStyle='red';ctx.fillRect(food.x,food.y,14,14);
-}
-document.getElementById('score').innerText=`Score: 0 | Top: ${topScore}`; startGame();
+function upd(){let h={x:snake[0].x+dir.x,y:snake[0].y+dir.y};if(h.x<0||h.x>=320||h.y<0||h.y>=320||snake.some(s=>s.x==h.x&&s.y==h.y)){clearInterval(loop);if(score>top){top=score;localStorage.setItem('top',top);}alert('Game Over! Score:'+score+' Top:'+top);return;}snake.unshift(h);if(h.x==food.x&&h.y==food.y){score+=10;document.getElementById('score').innerText=`Score: ${score} | Top: ${top}`;food={x:Math.floor(Math.random()*20)*16,y:Math.floor(Math.random()*20)*16};}else snake.pop();ctx.fillStyle='black';ctx.fillRect(0,0,320,320);ctx.fillStyle=col;if(gold){ctx.shadowColor='#f5c542';ctx.shadowBlur=15;}snake.forEach(s=>ctx.fillRect(s.x+1,s.y+1,14,14));ctx.shadowBlur=0;ctx.fillStyle='red';ctx.fillRect(food.x,food.y,14,14);}
+document.getElementById('score').innerText=`Score: 0 | Top: ${top}`;startGame();
 </script>
 </body>
 </html>
