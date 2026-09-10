@@ -1,67 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SKYLIGHT GAMES - Snake Gold</title>
+<title>SKYLIGHT GAMES - Login</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 body{background:#020617;color:white;font-family:Arial;text-align:center}
 .header{background:#0f172a;padding:14px;border-bottom:2px solid #facc15}
 .logo{font-size:26px;font-weight:900;color:#facc15;letter-spacing:3px}
-.tag{font-size:12px;color:#94a3b8}
-.stats{display:flex;justify-content:center;gap:15px;margin:12px 0}
-.stat{background:#1e293b;padding:8px 16px;border-radius:20px;border:1px solid #334155;font-size:14px;font-weight:bold}
-canvas{background:#000;border:3px solid #facc15;border-radius:16px;margin-top:5px}
-.controls{margin:12px auto;display:grid;grid-template-columns:60px 60px 60px;gap:8px;justify-content:center}
-.ctrl-btn{background:#1e293b;border:1px solid #334155;color:white;width:60px;height:50px;border-radius:10px;font-size:20px}
-.btn{padding:13px 18px;margin:6px;border:none;border-radius:10px;font-weight:900;width:90%;max-width:320px}
+.box{background:#0f172a;max-width:350px;margin:20px auto;padding:20px;border-radius:14px;border:1px solid #1e293b}
+input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #334155;background:#1e293b;color:white}
+.btn{width:100%;padding:12px;margin:8px 0;border:none;border-radius:8px;font-weight:900;cursor:pointer}
 .btn-gold{background:#facc15;color:black}
-.btn-vip{background:#a855f7;color:white}
-.momo{background:#0f172a;margin:15px;padding:16px;border-radius:14px;border:1px solid #1e293b;text-align:left;max-width:360px;margin:0 auto}
-.highlight{color:#facc15;font-weight:bold}
+.btn-dark{background:#1e293b;color:white;border:1px solid #334155}
+canvas{background:#000;border:3px solid #facc15;border-radius:12px;margin:10px 0}
+.link{color:#facc15;cursor:pointer;font-size:13px;margin-top:10px;display:block}
 </style>
 </head>
 <body>
-<div class="header">
-<div class="logo">💡 SKYLIGHT GAMES</div>
-<div class="tag">SNAKE GOLD • KAMPALA UGANDA</div>
+<div class="header"><div class="logo">💡 SKYLIGHT GAMES</div><div style="font-size:11px;color:#94a3b8">SNAKE GOLD - KAMPALA</div></div>
+
+<!-- REGISTER BOX -->
+<div id="registerBox" class="box">
+<h2 style="color:#facc15">📝 Create Account</h2>
+<p style="font-size:12px;color:#94a3b8;margin:8px 0">Join Skylight to save score & win MoMo</p>
+<input id="regName" placeholder="Full Name">
+<input id="regPhone" placeholder="Phone 07...">
+<input id="regPass" type="password" placeholder="Password">
+<button class="btn btn-gold" onclick="register()">REGISTER & PLAY</button>
+<span class="link" onclick="showLogin()">Already have account? Login</span>
 </div>
-<div class="stats">
-<div class="stat">⭐ Score: <span id="score">0</span></div>
-<div class="stat">🏆 High: <span id="high">0</span></div>
+
+<!-- LOGIN BOX -->
+<div id="loginBox" class="box" style="display:none">
+<h2 style="color:#facc15">🔐 Login</h2>
+<input id="logPhone" placeholder="Phone">
+<input id="logPass" type="password" placeholder="Password">
+<button class="btn btn-gold" onclick="login()">LOGIN & PLAY</button>
+<span class="link" onclick="showRegister()">No account? Register</span>
 </div>
-<canvas id="game" width="300" height="300"></canvas>
-<div class="controls">
-<div></div><button class="ctrl-btn" onclick="setDir(0,-1)">▲</button><div></div>
-<button class="ctrl-btn" onclick="setDir(-1,0)">◀</button><button class="ctrl-btn" onclick="setDir(0,1)">▼</button><button class="ctrl-btn" onclick="setDir(1,0)">▶</button>
+
+<!-- GAME BOX -->
+<div id="gameBox" style="display:none">
+<div style="padding:10px">Welcome <b id="userName" style="color:#facc15"></b>! <button onclick="logout()" style="font-size:11px">Logout</button></div>
+<div>Score: <span id="score">0</span> | High: <span id="high">0</span></div>
+<canvas id="game" width="300" height="300"></canvas><br>
+<button onclick="setDir(0,-1)">▲</button><br>
+<button onclick="setDir(-1,0)">◀</button>
+<button onclick="setDir(0,1)">▼</button>
+<button onclick="setDir(1,0)">▶</button><br>
+<button class="btn btn-gold" style="max-width:300px" onclick="alert('MoMo 0793814204 - Skylight Games - 2K Gold')">🔓 GOLD 2K</button><br>
+<button class="btn" style="background:#a855f7;color:white;max-width:300px" onclick="alert('MoMo 0793814204 - Skylight Games - 5K VIP')">👑 VIP 5K</button>
+<div style="font-size:11px;color:#475569;margin:10px">📢 Advertise 10K/week | 0793814204 Skylight</div>
 </div>
-<button class="btn btn-gold" onclick="buyGold()">🔓 GOLD MODE - 2,000 UGX</button>
-<button class="btn btn-vip" onclick="buyVip()">👑 VIP MODE - 5,000 UGX</button>
-<div class="momo">
-<h3 style="color:#facc15;text-align:center">💰 HOW TO PAY</h3>
-<p>Send MoMo to: <span class="highlight">0793814204</span><br>Name: <span class="highlight">Skylight Games</span><br>2K Gold / 5K VIP<br>Send screenshot to unlock!</p>
-<hr>
-<p>📢 ADVERTISE IN THIS GAME - 10,000 UGX/week<br>🌐 skylight-game.onrender.com</p>
-</div>
+
 <script>
-const canvas=document.getElementById('game');const ctx=canvas.getContext('2d');
-let snake=[{x:10,y:10}];let food={x:15,y:15};let dir={x:1,y:0};let nextDir={x:1,y:0};let score=0;let high=localStorage.getItem('skylight_high')||0;
-document.getElementById('high').innerText=high;
-function setDir(x,y){if(dir.x===-x&&dir.y===-y)return;nextDir={x,y};}
-document.addEventListener('keydown',e=>{if(e.key==='ArrowUp')setDir(0,-1);if(e.key==='ArrowDown')setDir(0,1);if(e.key==='ArrowLeft')setDir(-1,0);if(e.key==='ArrowRight')setDir(1,0);});
-function randFood(){food={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)};}
-function gameLoop(){
-dir=nextDir;let head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
-if(head.x<0)head.x=19;if(head.x>19)head.x=0;if(head.y<0)head.y=19;if(head.y>19)head.y=0;
-if(snake.some(s=>s.x===head.x&&s.y===head.y)){if(score>high){high=score;localStorage.setItem('skylight_high',high);document.getElementById('high').innerText=high;}snake=[{x:10,y:10}];score=0;dir={x:1,y:0};nextDir={x:1,y:0};}
-else{snake.unshift(head);if(head.x===food.x&&head.y===food.y){score++;document.getElementById('score').innerText=score;randFood();}else snake.pop();}
-ctx.fillStyle='#000';ctx.fillRect(0,0,300,300);ctx.fillStyle='#22c55e';ctx.fillRect(food.x*15,food.y*15,14,14);ctx.fillStyle='#4ade80';
-snake.forEach((s,i)=>{ctx.fillRect(s.x*15,s.y*15,14,14);if(i===0){ctx.fillStyle='white';ctx.fillRect(s.x*15+4,s.y*15+4,3,3);ctx.fillRect(s.x*15+8,s.y*15+4,3,3);ctx.fillStyle='#4ade80';}});
+// AUTH SYSTEM
+let users = JSON.parse(localStorage.getItem('skylight_users')||'{}');
+let currentUser = localStorage.getItem('skylight_current');
+
+function showLogin(){document.getElementById('registerBox').style.display='none';document.getElementById('loginBox').style.display='block';}
+function showRegister(){document.getElementById('loginBox').style.display='none';document.getElementById('registerBox').style.display='block';}
+
+function register(){
+ let n=document.getElementById('regName').value;
+ let p=document.getElementById('regPhone').value;
+ let pw=document.getElementById('regPass').value;
+ if(!n||!p||!pw){alert('Fill all fields');return;}
+ if(users[p]){alert('Phone already registered! Login');showLogin();return;}
+ users[p]={name:n,pass:pw,high:0};
+ localStorage.setItem('skylight_users',JSON.stringify(users));
+ localStorage.setItem('skylight_current',p);
+ startGame(n);
 }
-function buyGold(){alert('SKYLIGHT GAMES\nPay 2,000 UGX to 0793814204 - Skylight Games\nSend screenshot!');}
-function buyVip(){alert('SKYLIGHT VIP\nPay 5,000 UGX to 0793814204 - Skylight Games');}
-randFood();setInterval(gameLoop,120);
+
+function login(){
+ let p=document.getElementById('logPhone').value;
+ let pw=document.getElementById('logPass').value;
+ if(!users[p]||users[p].pass!==pw){alert('Wrong phone or password!');return;}
+ localStorage.setItem('skylight_current',p);
+ startGame(users[p].name);
+}
+
+function logout(){
+ localStorage.removeItem('skylight_current');
+ location.reload();
+}
+
+function startGame(name){
+ document.getElementById('registerBox').style.display='none';
+ document.getElementById('loginBox').style.display='none';
+ document.getElementById('gameBox').style.display='block';
+ document.getElementById('userName').innerText=name;
+ initGame();
+}
+
+// AUTO LOGIN
+if(currentUser && users[currentUser]){ showLogin(); document.getElementById('logPhone').value=currentUser; startGame(users[currentUser].name); }
+
+// GAME LOGIC
+let snake,food,dir,nextDir,score,high;
+function initGame(){
+ snake=[{x:10,y:10}]; food={x:15,y:15}; dir={x:1,y:0}; nextDir={x:1,y:0}; score=0;
+ let phone=localStorage.getItem('skylight_current');
+ high=users[phone]?.high||0;
+ document.getElementById('high').innerText=high;
+ randFood(); setInterval(loop,120);
+}
+function setDir(x,y){if(dir.x===-x&&dir.y===-y)return;nextDir={x,y};}
+function randFood(){food={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)};}
+function loop(){
+ dir=nextDir;let head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
+ if(head.x<0)head.x=19;if(head.x>19)head.x=0;if(head.y<0)head.y=19;if(head.y>19)head.y=0;
+ if(snake.some(s=>s.x===head.x&&s.y===head.y)){if(score>high){high=score;let ph=localStorage.getItem('skylight_current');users[ph].high=high;localStorage.setItem('skylight_users',JSON.stringify(users));document.getElementById('high').innerText=high;}snake=[{x:10,y:10}];score=0;dir={x:1,y:0};nextDir={x:1,y:0};}
+ else{snake.unshift(head);if(head.x===food.x&&head.y===food.y){score++;document.getElementById('score').innerText=score;randFood();}else snake.pop();}
+ const c=document.getElementById('game');const ctx=c.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,300,300);ctx.fillStyle='#22c55e';ctx.fillRect(food.x*15,food.y*15,14,14);ctx.fillStyle='#4ade80';snake.forEach(s=>ctx.fillRect(s.x*15,s.y*15,14,14));
+}
 </script>
 </body>
 </html>
