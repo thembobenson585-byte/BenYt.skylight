@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SKYLIGHT GAMES - Login</title>
+<title>SKYLIGHT GAMES</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#020617;color:white;font-family:Arial;text-align:center}
@@ -13,7 +13,6 @@ body{background:#020617;color:white;font-family:Arial;text-align:center}
 input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #334155;background:#1e293b;color:white}
 .btn{width:100%;padding:12px;margin:8px 0;border:none;border-radius:8px;font-weight:900;cursor:pointer}
 .btn-gold{background:#facc15;color:black}
-.btn-dark{background:#1e293b;color:white;border:1px solid #334155}
 canvas{background:#000;border:3px solid #facc15;border-radius:12px;margin:10px 0}
 .link{color:#facc15;cursor:pointer;font-size:13px;margin-top:10px;display:block}
 </style>
@@ -21,10 +20,8 @@ canvas{background:#000;border:3px solid #facc15;border-radius:12px;margin:10px 0
 <body>
 <div class="header"><div class="logo">💡 SKYLIGHT GAMES</div><div style="font-size:11px;color:#94a3b8">SNAKE GOLD - KAMPALA</div></div>
 
-<!-- REGISTER BOX -->
 <div id="registerBox" class="box">
 <h2 style="color:#facc15">📝 Create Account</h2>
-<p style="font-size:12px;color:#94a3b8;margin:8px 0">Join Skylight to save score & win MoMo</p>
 <input id="regName" placeholder="Full Name">
 <input id="regPhone" placeholder="Phone 07...">
 <input id="regPass" type="password" placeholder="Password">
@@ -32,91 +29,88 @@ canvas{background:#000;border:3px solid #facc15;border-radius:12px;margin:10px 0
 <span class="link" onclick="showLogin()">Already have account? Login</span>
 </div>
 
-<!-- LOGIN BOX -->
 <div id="loginBox" class="box" style="display:none">
 <h2 style="color:#facc15">🔐 Login</h2>
 <input id="logPhone" placeholder="Phone">
 <input id="logPass" type="password" placeholder="Password">
-<button class="btn btn-gold" onclick="login()">LOGIN & PLAY</button>
+<button class="btn btn-gold" onclick="login()">LOGIN</button>
 <span class="link" onclick="showRegister()">No account? Register</span>
 </div>
 
-<!-- GAME BOX -->
 <div id="gameBox" style="display:none">
-<div style="padding:10px">Welcome <b id="userName" style="color:#facc15"></b>! <button onclick="logout()" style="font-size:11px">Logout</button></div>
+<div style="padding:10px">Welcome <b id="userName" style="color:#facc15"></b>! <button onclick="logout()" style="font-size:11px;padding:4px 8px;border-radius:4px">Logout</button> <button onclick="clearBenson()" style="font-size:11px;padding:4px 8px;background:red;color:white;border-radius:4px">Clear All</button></div>
 <div>Score: <span id="score">0</span> | High: <span id="high">0</span></div>
 <canvas id="game" width="300" height="300"></canvas><br>
 <button onclick="setDir(0,-1)">▲</button><br>
 <button onclick="setDir(-1,0)">◀</button>
 <button onclick="setDir(0,1)">▼</button>
 <button onclick="setDir(1,0)">▶</button><br>
-<button class="btn btn-gold" style="max-width:300px" onclick="alert('MoMo 0793814204 - Skylight Games - 2K Gold')">🔓 GOLD 2K</button><br>
-<button class="btn" style="background:#a855f7;color:white;max-width:300px" onclick="alert('MoMo 0793814204 - Skylight Games - 5K VIP')">👑 VIP 5K</button>
-<div style="font-size:11px;color:#475569;margin:10px">📢 Advertise 10K/week | 0793814204 Skylight</div>
+<button class="btn btn-gold" style="max-width:300px" onclick="alert('MoMo 0793814204 - Skylight Games - 2K')">🔓 GOLD 2K</button><br>
+<button class="btn" style="background:#a855f7;color:white;max-width:300px" onclick="alert('MoMo 0793814204 - Skylight Games - 5K')">👑 VIP 5K</button>
 </div>
 
 <script>
-// AUTH SYSTEM
 let users = JSON.parse(localStorage.getItem('skylight_users')||'{}');
 let currentUser = localStorage.getItem('skylight_current');
 
 function showLogin(){document.getElementById('registerBox').style.display='none';document.getElementById('loginBox').style.display='block';}
 function showRegister(){document.getElementById('loginBox').style.display='none';document.getElementById('registerBox').style.display='block';}
+function showGame(){document.getElementById('registerBox').style.display='none';document.getElementById('loginBox').style.display='none';document.getElementById('gameBox').style.display='block';}
 
 function register(){
  let n=document.getElementById('regName').value;
  let p=document.getElementById('regPhone').value;
  let pw=document.getElementById('regPass').value;
- if(!n||!p||!pw){alert('Fill all fields');return;}
- if(users[p]){alert('Phone already registered! Login');showLogin();return;}
+ if(!n||!p||!pw){alert('Fill all');return;}
  users[p]={name:n,pass:pw,high:0};
  localStorage.setItem('skylight_users',JSON.stringify(users));
  localStorage.setItem('skylight_current',p);
- startGame(n);
+ document.getElementById('userName').innerText=n;
+ showGame(); initGame();
 }
-
 function login(){
  let p=document.getElementById('logPhone').value;
  let pw=document.getElementById('logPass').value;
- if(!users[p]||users[p].pass!==pw){alert('Wrong phone or password!');return;}
+ if(!users[p]||users[p].pass!==pw){alert('Wrong!');return;}
  localStorage.setItem('skylight_current',p);
- startGame(users[p].name);
+ document.getElementById('userName').innerText=users[p].name;
+ showGame(); initGame();
 }
-
 function logout(){
  localStorage.removeItem('skylight_current');
- location.reload();
+ document.getElementById('gameBox').style.display='none';
+ document.getElementById('registerBox').style.display='block';
+}
+function clearBenson(){
+ localStorage.clear();
+ document.getElementById('gameBox').style.display='none';
+ document.getElementById('registerBox').style.display='block';
+ alert('All cleared! Benson removed! Now register new.');
 }
 
-function startGame(name){
- document.getElementById('registerBox').style.display='none';
- document.getElementById('loginBox').style.display='none';
- document.getElementById('gameBox').style.display='block';
- document.getElementById('userName').innerText=name;
- initGame();
+if(currentUser && users[currentUser]){
+ document.getElementById('userName').innerText=users[currentUser].name;
+ showGame();
 }
 
-// AUTO LOGIN
-if(currentUser && users[currentUser]){ showLogin(); document.getElementById('logPhone').value=currentUser; startGame(users[currentUser].name); }
-
-// GAME LOGIC
 let snake,food,dir,nextDir,score,high;
 function initGame(){
  snake=[{x:10,y:10}]; food={x:15,y:15}; dir={x:1,y:0}; nextDir={x:1,y:0}; score=0;
- let phone=localStorage.getItem('skylight_current');
- high=users[phone]?.high||0;
+ let ph=localStorage.getItem('skylight_current');
+ high=users[ph]?.high||0;
  document.getElementById('high').innerText=high;
- randFood(); setInterval(loop,120);
+ randFood();
 }
 function setDir(x,y){if(dir.x===-x&&dir.y===-y)return;nextDir={x,y};}
 function randFood(){food={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)};}
-function loop(){
+setInterval(()=>{
+ if(!snake)return;
  dir=nextDir;let head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
  if(head.x<0)head.x=19;if(head.x>19)head.x=0;if(head.y<0)head.y=19;if(head.y>19)head.y=0;
  if(snake.some(s=>s.x===head.x&&s.y===head.y)){if(score>high){high=score;let ph=localStorage.getItem('skylight_current');users[ph].high=high;localStorage.setItem('skylight_users',JSON.stringify(users));document.getElementById('high').innerText=high;}snake=[{x:10,y:10}];score=0;dir={x:1,y:0};nextDir={x:1,y:0};}
- else{snake.unshift(head);if(head.x===food.x&&head.y===food.y){score++;document.getElementById('score').innerText=score;randFood();}else snake.pop();}
- const c=document.getElementById('game');const ctx=c.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,300,300);ctx.fillStyle='#22c55e';ctx.fillRect(food.x*15,food.y*15,14,14);ctx.fillStyle='#4ade80';snake.forEach(s=>ctx.fillRect(s.x*15,s.y*15,14,14));
-}
+ else{snake.unshift(head);if(head.x===food.x&&head.y===food.y){score++;let el=document.getElementById('score');if(el)el.innerText=score;randFood();}else snake.pop();}
+ const c=document.getElementById('game');if(!c)return;const ctx=c.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,300,300);ctx.fillStyle='#22c55e';ctx.fillRect(food.x*15,food.y*15,14,14);ctx.fillStyle='#4ade80';snake.forEach(s=>ctx.fillRect(s.x*15,s.y*15,14,14));
+},120);
 </script>
 </body>
 </html>
