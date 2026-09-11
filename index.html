@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SKYLIGHT GAMES - SNAKE GOLD</title>
+<title>SKYLIGHT GAMES</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#020617;color:white;font-family:Arial;text-align:center}
-.header{background:#0f172a;padding:14px;border-bottom:3px solid #facc15;position:sticky;top:0;z-index:10}
+.header{background:#0f172a;padding:14px;border-bottom:3px solid #facc15}
 .logo{font-size:26px;font-weight:900;color:#facc15;letter-spacing:3px}
 .nav{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px}
-.nav button{padding:6px 12px;border-radius:20px;border:1px solid #334155;background:#1e293b;color:white;font-size:11px;font-weight:700;cursor:pointer}
+.nav button{padding:6px 12px;border-radius:20px;border:1px solid #334155;background:#1e293b;color:white;font-size:11px;font-weight:700}
 .nav button.active{background:#facc15;color:black}
 .box{background:#0f172a;max-width:380px;margin:15px auto;padding:18px;border-radius:14px;border:1px solid #1e293b;text-align:left}
 input,select,textarea{width:100%;padding:11px;margin:6px 0;border-radius:8px;border:1px solid #334155;background:#1e293b;color:white}
@@ -26,7 +26,7 @@ canvas{background:#000;border:3px solid #facc15;border-radius:12px;display:block
 <body>
 <div class="header">
 <div class="logo">💡 SKYLIGHT GAMES</div>
-<div class="small">SNAKE GOLD • KAMPALA UGANDA • MoMo: 0793814204</div>
+<div class="small">MoMo: 0793814204 - SKYLIGHT GAMES</div>
 <div class="nav">
 <button onclick="showTab('game')" id="tab-game" class="active">🎮 GAME</button>
 <button onclick="showTab('settings')" id="tab-settings">⚙️ SETTINGS</button>
@@ -37,29 +37,39 @@ canvas{background:#000;border:3px solid #facc15;border-radius:12px;display:block
 </div>
 </div>
 
-<!-- REGISTER / LOGIN -->
 <div id="authBox">
-<div id="registerBox" class="box">
-<h2 style="color:#facc15;text-align:center">📝 Create SKYLIGHT Account</h2>
-<input id="regName" placeholder="Full Name">
-<input id="regPhone" placeholder="Phone 07XX XXX XXX">
-<input id="regPass" type="password" placeholder="Password">
-<select id="regLevel"><option value="low">LOW - Slow</option><option value="medium" selected>MEDIUM - Normal</option><option value="high">HIGH - Fast</option></select>
-<button class="btn btn-gold" onclick="register()">REGISTER & PLAY</button>
-<span class="small" style="text-align:center;display:block;cursor:pointer" onclick="showLogin()">Already have account? Login</span>
+<div id="registerBox" class="box" style="text-align:center">
+<h2 style="color:#facc15">📝 Create SKYLIGHT Account</h2>
+<div style="background:#1e293b;padding:8px;border-radius:8px;margin:8px 0;border:1px dashed #facc15">
+<div class="small">YOUR GAME LINK (Share before entering):</div>
+<div style="color:#facc15;font-weight:900;word-break:break-all;font-size:13px">https://skylight-1.onrender.com</div>
+<button class="btn" style="background:#22c55e;color:black;padding:6px;margin-top:6px" onclick="navigator.clipboard.writeText('https://skylight-1.onrender.com');alert('Link copied!')">📋 COPY LINK</button>
 </div>
-<div id="loginBox" class="box" style="display:none">
-<h2 style="color:#facc15;text-align:center">🔐 Login to SKYLIGHT</h2>
+<input id="regName" placeholder="Full Name">
+<input id="regPhone" placeholder="Phone 07XX">
+<input id="regPass" type="password" placeholder="Create Password - You need this to enter">
+<select id="regLevel"><option value="low">LOW - Slow</option><option value="medium" selected>MEDIUM - Normal</option><option value="high">HIGH - Fast</option></select>
+<button class="btn btn-gold" onclick="register()">REGISTER & ENTER INSIDE</button>
+<span class="small" style="display:block;cursor:pointer;margin-top:8px" onclick="showLogin()">Already have account? Login here</span>
+</div>
+
+<div id="loginBox" class="box" style="display:none;text-align:center">
+<h2 style="color:#facc15">🔐 Login to SKYLIGHT</h2>
+<div style="background:#1e293b;padding:8px;border-radius:8px;margin:8px 0;border:1px dashed #facc15">
+<div class="small">YOUR GAME LINK (Share before entering):</div>
+<div style="color:#facc15;font-weight:900;word-break:break-all;font-size:13px">https://skylight-1.onrender.com</div>
+<button class="btn" style="background:#22c55e;color:black;padding:6px;margin-top:6px" onclick="navigator.clipboard.writeText('https://skylight-1.onrender.com');alert('Link copied!')">📋 COPY LINK</button>
+</div>
 <input id="logPhone" placeholder="Phone">
-<input id="logPass" type="password" placeholder="Password">
-<button class="btn btn-gold" onclick="login()">LOGIN</button>
-<span class="small" style="text-align:center;display:block;cursor:pointer" onclick="showRegister()">No account? Register</span>
+<input id="logPass" type="password" placeholder="Password - Must login to enter inside">
+<button class="btn btn-gold" onclick="login()">LOGIN & ENTER INSIDE</button>
+<span class="small" style="display:block;cursor:pointer;margin-top:8px" onclick="showRegister()">No account? Register here</span>
+<div class="small" style="margin-top:10px;color:#f87171">⚠️ Password required before entering inside!</div>
 </div>
 </div>
 
-<!-- GAME TAB -->
 <div id="gameTab">
-<div style="padding:8px"><span class="small">Welcome</span> <b id="userName" style="color:#facc15"></b> <span class="tag" id="userLevelTag">MEDIUM</span> <button onclick="logout()" style="font-size:10px;padding:3px 6px;border-radius:4px;margin-left:8px">Logout</button> <button onclick="clearAll()" style="font-size:10px;padding:3px 6px;background:red;color:white;border-radius:4px">Clear</button></div>
+<div style="padding:8px"><span class="small">Welcome</span> <b id="userName" style="color:#facc15"></b> <span class="tag" id="userLevelTag">MEDIUM</span> <button onclick="logout()" style="font-size:10px;padding:3px 6px;border-radius:4px;margin-left:8px">Logout</button></div>
 <div>Score: <b id="score">0</b> | High: <b id="high" style="color:#facc15">0</b> | Level: <b id="levelShow">MEDIUM</b></div>
 <canvas id="game" width="300" height="300"></canvas>
 <div>
@@ -69,220 +79,48 @@ canvas{background:#000;border:3px solid #facc15;border-radius:12px;display:block
 <button onclick="setDir(1,0)" style="padding:10px 20px">▶</button>
 </div>
 <div class="box" style="text-align:center">
-<button class="btn btn-gold" onclick="unlockGold()">🔓 UNLOCK GOLD MODE - 2,000 UGX</button>
-<button class="btn btn-purple" onclick="unlockVIP()">👑 UNLOCK VIP MODE - 5,000 UGX</button>
-<div class="small">MoMo: 0793814204 - Skylight Games<br>Send receipt to Manager Chat</div>
+<button class="btn btn-gold" onclick="alert('MoMo 0793814204 - 2K')">🔓 GOLD 2K</button>
+<button class="btn btn-purple" onclick="alert('MoMo 0793814204 - 5K')">👑 VIP 5K</button>
 </div>
 </div>
 
-<!-- SETTINGS TAB -->
 <div id="settingsTab" class="box" style="display:none">
 <h2 style="color:#facc15">⚙️ Settings</h2>
-<label class="small">Difficulty Level</label>
-<select id="setLevel" onchange="changeLevel()"><option value="low">LOW - Easy & Slow (Speed 180)</option><option value="medium">MEDIUM - Normal (Speed 120)</option><option value="high">HIGH - Fast & Hard (Speed 70)</option></select>
-<label class="small">Game Sound</label>
-<select id="setSound"><option value="on">Sound ON</option><option value="off">Sound OFF</option></select>
-<label class="small">Snake Color</label>
-<select id="setColor"><option value="green">Green</option><option value="yellow">Gold</option><option value="purple">Purple</option></select>
+<label class="small">Difficulty - Low High Medium</label>
+<select id="setLevel" onchange="changeLevel()"><option value="low">LOW</option><option value="medium">MEDIUM</option><option value="high">HIGH</option></select>
 <button class="btn btn-gold" onclick="saveSettings()">SAVE SETTINGS</button>
-<button class="btn" style="background:#1e293b;color:white" onclick="clearAll()">RESET ALL DATA (Remove All Users)</button>
+<button class="btn" style="background:red;color:white" onclick="if(confirm('Clear all?')){localStorage.clear();location.reload();}">CLEAR ALL DATA</button>
 </div>
 
-<!-- RULES TAB -->
-<div id="rulesTab" class="box" style="display:none">
-<h2 style="color:#facc15">📜 Game Rules</h2>
-<p class="small" style="line-height:1.6">
-1. Use arrows to control snake.<br>
-2. Eat food (green) to get 10 points.<br>
-3. Don't hit yourself — game restarts.<br>
-4. <b>LOW:</b> Slow speed, good for beginners.<br>
-5. <b>MEDIUM:</b> Normal speed, normal points.<br>
-6. <b>HIGH:</b> Very fast, double points!<br>
-7. Gold Mode unlocks after 2K — no ads, special snake.<br>
-8. VIP Mode (5K) — your name on leaderboard, advertise business.<br>
-9. Top score wins weekly prize!<br>
-10. Payment: MoMo 0793814204 - Skylight Games. Send screenshot in Manager Chat.
-</p>
-</div>
-
-<!-- GROUP TAB -->
-<div id="groupTab" class="box" style="display:none;text-align:center">
-<h2 style="color:#facc15">👥 Join SKYLIGHT Community</h2>
-<p class="small">Join our WhatsApp groups for tournaments, prizes & updates!</p>
-<button class="btn btn-green" onclick="window.open('https://chat.whatsapp.com/YOUR-GROUP-LINK','_blank')">📱 JOIN WHATSAPP GROUP 1</button>
-<button class="btn btn-green" onclick="window.open('https://chat.whatsapp.com/YOUR-GROUP-LINK2','_blank')">📱 JOIN WHATSAPP GROUP 2</button>
-<button class="btn btn-gold" onclick="window.open('https://wa.me/256793814204?text=Hi%20SKYLIGHT%20I%20want%20to%20join','_blank')">💬 CHAT WITH SKYLIGHT ON WHATSAPP</button>
-<div class="small" style="margin-top:10px">Share your score screenshot in group to win!</div>
-<p style="margin-top:10px">Share Link:</p>
-<input value="https://skylight-1.onrender.com" readonly onclick="this.select()">
-</div>
-
-<!-- MANAGER TAB -->
-<div id="managerTab" class="box" style="display:none">
-<h2 style="color:#facc15">💬 Manager Chats</h2>
-<div class="small">Chat with manager about payments, VIP, advertising.</div>
-<textarea id="managerMsg" rows="3" placeholder="Type message: I paid 2K, phone 07..."></textarea>
-<button class="btn btn-gold" onclick="sendManager()">SEND TO MANAGER (WhatsApp)</button>
-<div style="margin-top:12px;background:#1e293b;padding:10px;border-radius:8px">
-<b class="small">Recent Chats (Saved on this phone):</b>
-<div id="chatList" class="small"></div>
-</div>
-</div>
-
-<!-- PLAYERS TAB -->
-<div id="playersTab" class="box" style="display:none">
-<h2 style="color:#facc15">🏆 Top Players</h2>
-<div id="playersList" class="small"></div>
-</div>
+<div id="rulesTab" class="box" style="display:none"><h2 style="color:#facc15">📜 Rules</h2><p class="small">1. Login with password before entering.<br>2. LOW=Slow, MEDIUM=Normal, HIGH=Fast=More Points<br>3. Don't hit yourself<br>4. Share link on login page to friends<br>5. Pay MoMo 0793814204</p></div>
+<div id="groupTab" class="box" style="display:none;text-align:center"><h2 style="color:#facc15">👥 Join Group</h2><button class="btn btn-green" onclick="window.open('https://wa.me/256793814204','_blank')">JOIN WHATSAPP</button><input value="https://skylight-1.onrender.com" readonly onclick="this.select()"></div>
+<div id="managerTab" class="box" style="display:none"><h2 style="color:#facc15">💬 Manager Chats</h2><textarea id="managerMsg" rows="3" placeholder="I paid 2K..."></textarea><button class="btn btn-gold" onclick="sendManager()">SEND TO MANAGER</button><div id="chatList" class="small"></div></div>
+<div id="playersTab" class="box" style="display:none"><h2 style="color:#facc15">🏆 Players</h2><div id="playersList" class="small"></div></div>
 
 <script>
-// STORAGE
-let users = JSON.parse(localStorage.getItem('skylight_users')||'{}');
-let currentUser = localStorage.getItem('skylight_current');
-let chats = JSON.parse(localStorage.getItem('skylight_chats')||'[]');
-let settings = JSON.parse(localStorage.getItem('skylight_settings')||'{"level":"medium","sound":"on","color":"green"}');
-
-function showTab(t){
- document.getElementById('gameTab').style.display='none';
- document.getElementById('settingsTab').style.display='none';
- document.getElementById('rulesTab').style.display='none';
- document.getElementById('groupTab').style.display='none';
- document.getElementById('managerTab').style.display='none';
- document.getElementById('playersTab').style.display='none';
- document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
- if(document.getElementById(t+'Tab')) document.getElementById(t+'Tab').style.display='block';
- if(t==='game') document.getElementById('gameTab').style.display='block';
- if(document.getElementById('tab-'+t)) document.getElementById('tab-'+t).classList.add('active');
- if(t==='players') renderPlayers();
- if(t==='manager') renderChats();
-}
+let users=JSON.parse(localStorage.getItem('skylight_users')||'{}');
+let currentUser=localStorage.getItem('skylight_current');
+let chats=JSON.parse(localStorage.getItem('skylight_chats')||'[]');
+let settings=JSON.parse(localStorage.getItem('skylight_settings')||'{"level":"medium"}');
+function showTab(t){document.getElementById('gameTab').style.display='none';document.getElementById('settingsTab').style.display='none';document.getElementById('rulesTab').style.display='none';document.getElementById('groupTab').style.display='none';document.getElementById('managerTab').style.display='none';document.getElementById('playersTab').style.display='none';document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));if(document.getElementById(t+'Tab'))document.getElementById(t+'Tab').style.display='block';if(t==='game')document.getElementById('gameTab').style.display='block';if(document.getElementById('tab-'+t))document.getElementById('tab-'+t).classList.add('active');if(t==='players')renderPlayers();if(t==='manager')renderChats();}
 function showLogin(){document.getElementById('registerBox').style.display='none';document.getElementById('loginBox').style.display='block';}
 function showRegister(){document.getElementById('loginBox').style.display='none';document.getElementById('registerBox').style.display='block';}
-function showGameAuth(show){
- document.getElementById('authBox').style.display=show?'none':'block';
- document.getElementById('gameTab').style.display=show?'block':'none';
- document.querySelector('.nav').style.display=show?'flex':'none';
-}
-
-function register(){
- let n=document.getElementById('regName').value.trim();
- let p=document.getElementById('regPhone').value.trim();
- let pw=document.getElementById('regPass').value.trim();
- let lvl=document.getElementById('regLevel').value;
- if(!n||!p||!pw){alert('Fill all fields');return;}
- users[p]={name:n,pass:pw,high:0,level:lvl};
- localStorage.setItem('skylight_users',JSON.stringify(users));
- localStorage.setItem('skylight_current',p);
- currentUser=p;
- document.getElementById('userName').innerText=n;
- document.getElementById('userLevelTag').innerText=lvl.toUpperCase();
- document.getElementById('levelShow').innerText=lvl.toUpperCase();
- settings.level=lvl; localStorage.setItem('skylight_settings',JSON.stringify(settings));
- document.getElementById('setLevel').value=lvl;
- showGameAuth(true); initGame(); renderPlayers();
-}
-function login(){
- let p=document.getElementById('logPhone').value.trim();
- let pw=document.getElementById('logPass').value.trim();
- if(!users[p]||users[p].pass!==pw){alert('Wrong phone or password!');return;}
- currentUser=p; localStorage.setItem('skylight_current',p);
- document.getElementById('userName').innerText=users[p].name;
- document.getElementById('userLevelTag').innerText=(users[p].level||'medium').toUpperCase();
- document.getElementById('levelShow').innerText=(users[p].level||'medium').toUpperCase();
- document.getElementById('setLevel').value=users[p].level||'medium';
- settings.level=users[p].level||'medium';
- showGameAuth(true); initGame(); renderPlayers();
-}
-function logout(){
- localStorage.removeItem('skylight_current');
- showGameAuth(false);
- document.getElementById('registerBox').style.display='block';
- document.getElementById('loginBox').style.display='none';
-}
-function clearAll(){
- if(confirm('Remove ALL users including Benson?')){
-   localStorage.clear(); location.reload();
- }
-}
-function saveSettings(){
- let lvl=document.getElementById('setLevel').value;
- settings.level=lvl; settings.sound=document.getElementById('setSound').value; settings.color=document.getElementById('setColor').value;
- localStorage.setItem('skylight_settings',JSON.stringify(settings));
- if(currentUser&&users[currentUser]){users[currentUser].level=lvl; localStorage.setItem('skylight_users',JSON.stringify(users));}
- document.getElementById('userLevelTag').innerText=lvl.toUpperCase();
- document.getElementById('levelShow').innerText=lvl.toUpperCase();
- alert('Settings saved! Level: '+lvl.toUpperCase());
- initGame();
-}
-function changeLevel(){ document.getElementById('levelShow').innerText=document.getElementById('setLevel').value.toUpperCase(); }
-
-function sendManager(){
- let m=document.getElementById('managerMsg').value.trim();
- if(!m){alert('Type message');return;}
- let name=users[currentUser]?.name||'Guest';
- chats.push({name,msg:m,time:new Date().toLocaleString()});
- localStorage.setItem('skylight_chats',JSON.stringify(chats));
- renderChats();
- window.open('https://wa.me/256793814204?text='+encodeURIComponent('SKYLIGHT MANAGER: '+name+' says: '+m),'_blank');
- document.getElementById('managerMsg').value='';
-}
-function renderChats(){
- let html=''; chats.slice(-10).reverse().forEach(c=>{html+=`<div style="border-bottom:1px solid #334155;padding:4px 0"><b>${c.name}</b> <span style="font-size:10px">${c.time}</span><br>${c.msg}</div>`});
- document.getElementById('chatList').innerHTML=html||'No chats yet';
-}
-function renderPlayers(){
- let arr=Object.entries(users).map(([phone,u])=>({phone,...u})).sort((a,b)=>b.high-a.high);
- let html=''; arr.forEach((u,i)=>{html+=`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #334155"><span>${i+1}. ${u.name} <span class="tag">${(u.level||'medium').toUpperCase()}</span></span><b style="color:#facc15">${u.high}</b></div>`});
- document.getElementById('playersList').innerHTML=html||'No players yet';
- if(currentUser&&users[currentUser]) document.getElementById('high').innerText=users[currentUser].high;
-}
-
-function unlockGold(){alert('To unlock GOLD MODE (Low/Medium/High + No Ads):\n\n1. MoMo 0793814204 - Skylight Games\n2. Send 2,000 UGX\n3. Send receipt in Manager Chat\n\nThank you!');}
-function unlockVIP(){alert('To unlock VIP MODE (Advertise + Top Rank):\n\n1. MoMo 0793814204 - Skylight Games\n2. Send 5,000 UGX\n3. Send business name in Manager Chat\n\nWe will add your advert!');}
-
-// GAME ENGINE
+function showGameAuth(show){document.getElementById('authBox').style.display=show?'none':'block';document.getElementById('gameTab').style.display=show?'block':'none';document.querySelector('.nav').style.display=show?'flex':'none';}
+function register(){let n=document.getElementById('regName').value.trim();let p=document.getElementById('regPhone').value.trim();let pw=document.getElementById('regPass').value.trim();let lvl=document.getElementById('regLevel').value;if(!n||!p||!pw){alert('Fill all');return;}users[p]={name:n,pass:pw,high:0,level:lvl};localStorage.setItem('skylight_users',JSON.stringify(users));localStorage.setItem('skylight_current',p);currentUser=p;document.getElementById('userName').innerText=n;document.getElementById('userLevelTag').innerText=lvl.toUpperCase();document.getElementById('levelShow').innerText=lvl.toUpperCase();settings.level=lvl;localStorage.setItem('skylight_settings',JSON.stringify(settings));showGameAuth(true);initGame();}
+function login(){let p=document.getElementById('logPhone').value.trim();let pw=document.getElementById('logPass').value.trim();if(!users[p]||users[p].pass!==pw){alert('Wrong password! Must enter correct password before inside!');return;}currentUser=p;localStorage.setItem('skylight_current',p);document.getElementById('userName').innerText=users[p].name;document.getElementById('userLevelTag').innerText=(users[p].level||'medium').toUpperCase();document.getElementById('levelShow').innerText=(users[p].level||'medium').toUpperCase();settings.level=users[p].level||'medium';showGameAuth(true);initGame();}
+function logout(){localStorage.removeItem('skylight_current');showGameAuth(false);document.getElementById('registerBox').style.display='block';document.getElementById('loginBox').style.display='none';}
+function saveSettings(){let lvl=document.getElementById('setLevel').value;settings.level=lvl;localStorage.setItem('skylight_settings',JSON.stringify(settings));if(currentUser&&users[currentUser]){users[currentUser].level=lvl;localStorage.setItem('skylight_users',JSON.stringify(users));}document.getElementById('userLevelTag').innerText=lvl.toUpperCase();document.getElementById('levelShow').innerText=lvl.toUpperCase();alert('Saved '+lvl);initGame();}
+function changeLevel(){document.getElementById('levelShow').innerText=document.getElementById('setLevel').value.toUpperCase();}
+function sendManager(){let m=document.getElementById('managerMsg').value.trim();if(!m)return;let name=users[currentUser]?.name||'Guest';chats.push({name,msg:m,time:new Date().toLocaleString()});localStorage.setItem('skylight_chats',JSON.stringify(chats));renderChats();window.open('https://wa.me/256793814204?text='+encodeURIComponent(name+': '+m),'_blank');document.getElementById('managerMsg').value='';}
+function renderChats(){let html='';chats.slice(-10).reverse().forEach(c=>{html+=`<div style="border-bottom:1px solid #334155;padding:4px 0"><b>${c.name}</b> ${c.time}<br>${c.msg}</div>`});document.getElementById('chatList').innerHTML=html||'No chats';}
+function renderPlayers(){let arr=Object.entries(users).map(([phone,u])=>({phone,...u})).sort((a,b)=>b.high-a.high);let html='';arr.forEach((u,i)=>{html+=`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #334155"><span>${i+1}. ${u.name} ${(u.level||'').toUpperCase()}</span><b style="color:#facc15">${u.high}</b></div>`});document.getElementById('playersList').innerHTML=html||'No players';}
 let snake,food,dir,nextDir,score,gameInterval;
-function initGame(){
- if(gameInterval) clearInterval(gameInterval);
- snake=[{x:10,y:10}]; food={x:15,y:15}; dir={x:1,y:0}; nextDir={x:1,y:0}; score=0;
- document.getElementById('score').innerText=0;
- if(currentUser&&users[currentUser]) document.getElementById('high').innerText=users[currentUser].high||0;
- randFood();
- let speed = settings.level==='low'?180:settings.level==='high'?70:120;
- gameInterval=setInterval(gameLoop,speed);
-}
+function initGame(){if(gameInterval)clearInterval(gameInterval);snake=[{x:10,y:10}];food={x:15,y:15};dir={x:1,y:0};nextDir={x:1,y:0};score=0;document.getElementById('score').innerText=0;if(currentUser&&users[currentUser])document.getElementById('high').innerText=users[currentUser].high||0;randFood();let speed=settings.level==='low'?180:settings.level==='high'?70:120;gameInterval=setInterval(gameLoop,speed);}
 function setDir(x,y){if(dir.x===-x&&dir.y===-y)return;nextDir={x,y};}
 function randFood(){food={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)};}
-function gameLoop(){
- dir=nextDir;let head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};
- if(head.x<0)head.x=19;if(head.x>19)head.x=0;if(head.y<0)head.y=19;if(head.y>19)head.y=0;
- if(snake.some(s=>s.x===head.x&&s.y===head.y)){
-   let add = settings.level==='high'?20:settings.level==='low'?5:10;
-   if(score>0 && currentUser && users[currentUser] && score>users[currentUser].high){users[currentUser].high=score;localStorage.setItem('skylight_users',JSON.stringify(users));document.getElementById('high').innerText=score;renderPlayers();}
-   snake=[{x:10,y:10}];score=0;document.getElementById('score').innerText=0;dir={x:1,y:0};nextDir={x:1,y:0};return;
- }
- snake.unshift(head);
- if(head.x===food.x&&head.y===food.y){
-   let add = settings.level==='high'?20:settings.level==='low'?5:10;
-   score+=add;document.getElementById('score').innerText=score;randFood();
- } else snake.pop();
- const c=document.getElementById('game');const ctx=c.getContext('2d');
- ctx.fillStyle='#000';ctx.fillRect(0,0,300,300);
- ctx.fillStyle='#22c55e';ctx.fillRect(food.x*15,food.y*15,14,14);
- let col = settings.color==='yellow'?'#facc15':settings.color==='purple'?'#a855f7':'#4ade80';
- ctx.fillStyle=col; snake.forEach(s=>ctx.fillRect(s.x*15,s.y*15,14,14));
-}
-
-// INIT
-if(currentUser&&users[currentUser]){
- document.getElementById('userName').innerText=users[currentUser].name;
- document.getElementById('userLevelTag').innerText=(users[currentUser].level||'medium').toUpperCase();
- document.getElementById('levelShow').innerText=(users[currentUser].level||'medium').toUpperCase();
- document.getElementById('setLevel').value=users[currentUser].level||'medium';
- settings.level=users[currentUser].level||'medium';
- showGameAuth(true); initGame();
-} else { showGameAuth(false); }
-renderPlayers(); renderChats();
+function gameLoop(){dir=nextDir;let head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};if(head.x<0)head.x=19;if(head.x>19)head.x=0;if(head.y<0)head.y=19;if(head.y>19)head.y=0;if(snake.some(s=>s.x===head.x&&s.y===head.y)){if(currentUser&&users[currentUser]&&score>users[currentUser].high){users[currentUser].high=score;localStorage.setItem('skylight_users',JSON.stringify(users));document.getElementById('high').innerText=score;}snake=[{x:10,y:10}];score=0;document.getElementById('score').innerText=0;dir={x:1,y:0};nextDir={x:1,y:0};return;}snake.unshift(head);if(head.x===food.x&&head.y===food.y){let add=settings.level==='high'?20:settings.level==='low'?5:10;score+=add;document.getElementById('score').innerText=score;randFood();}else snake.pop();const c=document.getElementById('game');const ctx=c.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,300,300);ctx.fillStyle='#22c55e';ctx.fillRect(food.x*15,food.y*15,14,14);ctx.fillStyle='#4ade80';snake.forEach(s=>ctx.fillRect(s.x*15,s.y*15,14,14));}
+if(currentUser&&users[currentUser]){document.getElementById('userName').innerText=users[currentUser].name;document.getElementById('userLevelTag').innerText=(users[currentUser].level||'medium').toUpperCase();document.getElementById('levelShow').innerText=(users[currentUser].level||'medium').toUpperCase();showGameAuth(true);initGame();}else{showGameAuth(false);}
+renderPlayers();renderChats();
 </script>
 </body>
 </html>
