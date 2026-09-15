@@ -1,126 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SKYLIGHT GAMES</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skylight Capital 3%</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#020617;color:white;font-family:Arial;text-align:center}
-.header{background:#0f172a;padding:14px;border-bottom:3px solid #facc15}
-.logo{font-size:26px;font-weight:900;color:#facc15;letter-spacing:3px}
-.nav{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px}
-.nav button{padding:6px 12px;border-radius:20px;border:1px solid #334155;background:#1e293b;color:white;font-size:11px;font-weight:700}
-.nav button.active{background:#facc15;color:black}
-.box{background:#0f172a;max-width:380px;margin:15px auto;padding:18px;border-radius:14px;border:1px solid #1e293b;text-align:left}
-input,select,textarea{width:100%;padding:11px;margin:6px 0;border-radius:8px;border:1px solid #334155;background:#1e293b;color:white}
-.btn{width:100%;padding:12px;margin:8px 0;border:none;border-radius:8px;font-weight:900;cursor:pointer}
-.btn-gold{background:#facc15;color:black}
-.btn-purple{background:#a855f7;color:white}
-.btn-green{background:#22c55e;color:black}
-canvas{background:#000;border:3px solid #facc15;border-radius:12px;display:block;margin:10px auto}
-.small{font-size:12px;color:#94a3b8}
-.tag{display:inline-block;background:#1e293b;border:1px solid #334155;padding:4px 8px;border-radius:12px;font-size:11px;margin:2px}
+body{background:#0a1a2f;color:white;font-family:Arial;padding:15px}
+.card{background:#102a4d;border-radius:15px;padding:15px;margin:10px 0;border:1px solid #1e4a7e}
+.btn{background:#00d2ff;color:#000;padding:12px;border-radius:10px;border:none;width:100%;font-weight:bold;margin-top:10px}
+.small{color:#8aa8c8;font-size:12px}
+h2{margin:0}
 </style>
 </head>
 <body>
-<div class="header">
-<div class="logo">💡 SKYLIGHT GAMES</div>
-<div class="small">MoMo: 0793814204 - SKYLIGHT GAMES</div>
-<div class="nav">
-<button onclick="showTab('game')" id="tab-game" class="active">🎮 GAME</button>
-<button onclick="showTab('settings')" id="tab-settings">⚙️ SETTINGS</button>
-<button onclick="showTab('rules')" id="tab-rules">📜 RULES</button>
-<button onclick="showTab('group')" id="tab-group">👥 GROUP</button>
-<button onclick="showTab('manager')" id="tab-manager">💬 MANAGER</button>
-<button onclick="showTab('players')" id="tab-players">🏆 PLAYERS</button>
-</div>
+<h2>Skylight Capital Club</h2>
+<p class="small">Honest 3% Monthly Growth - Kampala, UG</p>
+
+<div class="card">
+<p class="small">CAPITAL WALLET</p>
+<h2>0 UGX</h2>
+<p class="small">Your active deposit</p>
+<button class="btn">+ Add Capital</button>
 </div>
 
-<div id="authBox">
-<div id="registerBox" class="box" style="text-align:center">
-<h2 style="color:#facc15">📝 Create SKYLIGHT Account</h2>
-<div style="background:#1e293b;padding:8px;border-radius:8px;margin:8px 0;border:1px dashed #facc15">
-<div class="small">YOUR GAME LINK (Share before entering):</div>
-<div style="color:#facc15;font-weight:900;word-break:break-all;font-size:13px">https://skylight-1.onrender.com</div>
-<button class="btn" style="background:#22c55e;color:black;padding:6px;margin-top:6px" onclick="navigator.clipboard.writeText('https://skylight-1.onrender.com');alert('Link copied!')">📋 COPY LINK</button>
-</div>
-<input id="regName" placeholder="Full Name">
-<input id="regPhone" placeholder="Phone 07XX">
-<input id="regPass" type="password" placeholder="Create Password - You need this to enter">
-<select id="regLevel"><option value="low">LOW - Slow</option><option value="medium" selected>MEDIUM - Normal</option><option value="high">HIGH - Fast</option></select>
-<button class="btn btn-gold" onclick="register()">REGISTER & ENTER INSIDE</button>
-<span class="small" style="display:block;cursor:pointer;margin-top:8px" onclick="showLogin()">Already have account? Login here</span>
+<div class="card">
+<p class="small">PROFITS WALLET</p>
+<h2>0 UGX</h2>
+<p class="small">3% monthly = 0.1% daily</p>
+<button class="btn">Claim Profit</button>
 </div>
 
-<div id="loginBox" class="box" style="display:none;text-align:center">
-<h2 style="color:#facc15">🔐 Login to SKYLIGHT</h2>
-<div style="background:#1e293b;padding:8px;border-radius:8px;margin:8px 0;border:1px dashed #facc15">
-<div class="small">YOUR GAME LINK (Share before entering):</div>
-<div style="color:#facc15;font-weight:900;word-break:break-all;font-size:13px">https://skylight-1.onrender.com</div>
-<button class="btn" style="background:#22c55e;color:black;padding:6px;margin-top:6px" onclick="navigator.clipboard.writeText('https://skylight-1.onrender.com');alert('Link copied!')">📋 COPY LINK</button>
-</div>
-<input id="logPhone" placeholder="Phone">
-<input id="logPass" type="password" placeholder="Password - Must login to enter inside">
-<button class="btn btn-gold" onclick="login()">LOGIN & ENTER INSIDE</button>
-<span class="small" style="display:block;cursor:pointer;margin-top:8px" onclick="showRegister()">No account? Register here</span>
-<div class="small" style="margin-top:10px;color:#f87171">⚠️ Password required before entering inside!</div>
-</div>
+<div class="card">
+<p class="small">REFERRAL LINK</p>
+<input value="https://thembobenson585-byte.github.io/BenYt.skylight/?ref=YOURNAME" style="width:100%;padding:10px;border-radius:8px">
+<p class="small">Earn 5% on friends deposit - Instant to MoMo</p>
 </div>
 
-<div id="gameTab">
-<div style="padding:8px"><span class="small">Welcome</span> <b id="userName" style="color:#facc15"></b> <span class="tag" id="userLevelTag">MEDIUM</span> <button onclick="logout()" style="font-size:10px;padding:3px 6px;border-radius:4px;margin-left:8px">Logout</button></div>
-<div>Score: <b id="score">0</b> | High: <b id="high" style="color:#facc15">0</b> | Level: <b id="levelShow">MEDIUM</b></div>
-<canvas id="game" width="300" height="300"></canvas>
-<div>
-<button onclick="setDir(0,-1)" style="padding:10px 20px">▲</button><br>
-<button onclick="setDir(-1,0)" style="padding:10px 20px">◀</button>
-<button onclick="setDir(0,1)" style="padding:10px 20px">▼</button>
-<button onclick="setDir(1,0)" style="padding:10px 20px">▶</button>
+<div class="card">
+<h3>How it Works (Honest)</h3>
+<p class="small">1. Deposit Min 10,000 UGX via MoMo<br>2. Earn 3% per month (0.1% daily)<br>3. Withdraw anytime to MTN/Airtel<br>4. We invest in T-Bills & your games</p>
 </div>
-<div class="box" style="text-align:center">
-<button class="btn btn-gold" onclick="alert('MoMo 0793814204 - 2K')">🔓 GOLD 2K</button>
-<button class="btn btn-purple" onclick="alert('MoMo 0793814204 - 5K')">👑 VIP 5K</button>
-</div>
-</div>
-
-<div id="settingsTab" class="box" style="display:none">
-<h2 style="color:#facc15">⚙️ Settings</h2>
-<label class="small">Difficulty - Low High Medium</label>
-<select id="setLevel" onchange="changeLevel()"><option value="low">LOW</option><option value="medium">MEDIUM</option><option value="high">HIGH</option></select>
-<button class="btn btn-gold" onclick="saveSettings()">SAVE SETTINGS</button>
-<button class="btn" style="background:red;color:white" onclick="if(confirm('Clear all?')){localStorage.clear();location.reload();}">CLEAR ALL DATA</button>
-</div>
-
-<div id="rulesTab" class="box" style="display:none"><h2 style="color:#facc15">📜 Rules</h2><p class="small">1. Login with password before entering.<br>2. LOW=Slow, MEDIUM=Normal, HIGH=Fast=More Points<br>3. Don't hit yourself<br>4. Share link on login page to friends<br>5. Pay MoMo 0793814204</p></div>
-<div id="groupTab" class="box" style="display:none;text-align:center"><h2 style="color:#facc15">👥 Join Group</h2><button class="btn btn-green" onclick="window.open('https://wa.me/256793814204','_blank')">JOIN WHATSAPP</button><input value="https://skylight-1.onrender.com" readonly onclick="this.select()"></div>
-<div id="managerTab" class="box" style="display:none"><h2 style="color:#facc15">💬 Manager Chats</h2><textarea id="managerMsg" rows="3" placeholder="I paid 2K..."></textarea><button class="btn btn-gold" onclick="sendManager()">SEND TO MANAGER</button><div id="chatList" class="small"></div></div>
-<div id="playersTab" class="box" style="display:none"><h2 style="color:#facc15">🏆 Players</h2><div id="playersList" class="small"></div></div>
-
-<script>
-let users=JSON.parse(localStorage.getItem('skylight_users')||'{}');
-let currentUser=localStorage.getItem('skylight_current');
-let chats=JSON.parse(localStorage.getItem('skylight_chats')||'[]');
-let settings=JSON.parse(localStorage.getItem('skylight_settings')||'{"level":"medium"}');
-function showTab(t){document.getElementById('gameTab').style.display='none';document.getElementById('settingsTab').style.display='none';document.getElementById('rulesTab').style.display='none';document.getElementById('groupTab').style.display='none';document.getElementById('managerTab').style.display='none';document.getElementById('playersTab').style.display='none';document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));if(document.getElementById(t+'Tab'))document.getElementById(t+'Tab').style.display='block';if(t==='game')document.getElementById('gameTab').style.display='block';if(document.getElementById('tab-'+t))document.getElementById('tab-'+t).classList.add('active');if(t==='players')renderPlayers();if(t==='manager')renderChats();}
-function showLogin(){document.getElementById('registerBox').style.display='none';document.getElementById('loginBox').style.display='block';}
-function showRegister(){document.getElementById('loginBox').style.display='none';document.getElementById('registerBox').style.display='block';}
-function showGameAuth(show){document.getElementById('authBox').style.display=show?'none':'block';document.getElementById('gameTab').style.display=show?'block':'none';document.querySelector('.nav').style.display=show?'flex':'none';}
-function register(){let n=document.getElementById('regName').value.trim();let p=document.getElementById('regPhone').value.trim();let pw=document.getElementById('regPass').value.trim();let lvl=document.getElementById('regLevel').value;if(!n||!p||!pw){alert('Fill all');return;}users[p]={name:n,pass:pw,high:0,level:lvl};localStorage.setItem('skylight_users',JSON.stringify(users));localStorage.setItem('skylight_current',p);currentUser=p;document.getElementById('userName').innerText=n;document.getElementById('userLevelTag').innerText=lvl.toUpperCase();document.getElementById('levelShow').innerText=lvl.toUpperCase();settings.level=lvl;localStorage.setItem('skylight_settings',JSON.stringify(settings));showGameAuth(true);initGame();}
-function login(){let p=document.getElementById('logPhone').value.trim();let pw=document.getElementById('logPass').value.trim();if(!users[p]||users[p].pass!==pw){alert('Wrong password! Must enter correct password before inside!');return;}currentUser=p;localStorage.setItem('skylight_current',p);document.getElementById('userName').innerText=users[p].name;document.getElementById('userLevelTag').innerText=(users[p].level||'medium').toUpperCase();document.getElementById('levelShow').innerText=(users[p].level||'medium').toUpperCase();settings.level=users[p].level||'medium';showGameAuth(true);initGame();}
-function logout(){localStorage.removeItem('skylight_current');showGameAuth(false);document.getElementById('registerBox').style.display='block';document.getElementById('loginBox').style.display='none';}
-function saveSettings(){let lvl=document.getElementById('setLevel').value;settings.level=lvl;localStorage.setItem('skylight_settings',JSON.stringify(settings));if(currentUser&&users[currentUser]){users[currentUser].level=lvl;localStorage.setItem('skylight_users',JSON.stringify(users));}document.getElementById('userLevelTag').innerText=lvl.toUpperCase();document.getElementById('levelShow').innerText=lvl.toUpperCase();alert('Saved '+lvl);initGame();}
-function changeLevel(){document.getElementById('levelShow').innerText=document.getElementById('setLevel').value.toUpperCase();}
-function sendManager(){let m=document.getElementById('managerMsg').value.trim();if(!m)return;let name=users[currentUser]?.name||'Guest';chats.push({name,msg:m,time:new Date().toLocaleString()});localStorage.setItem('skylight_chats',JSON.stringify(chats));renderChats();window.open('https://wa.me/256793814204?text='+encodeURIComponent(name+': '+m),'_blank');document.getElementById('managerMsg').value='';}
-function renderChats(){let html='';chats.slice(-10).reverse().forEach(c=>{html+=`<div style="border-bottom:1px solid #334155;padding:4px 0"><b>${c.name}</b> ${c.time}<br>${c.msg}</div>`});document.getElementById('chatList').innerHTML=html||'No chats';}
-function renderPlayers(){let arr=Object.entries(users).map(([phone,u])=>({phone,...u})).sort((a,b)=>b.high-a.high);let html='';arr.forEach((u,i)=>{html+=`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #334155"><span>${i+1}. ${u.name} ${(u.level||'').toUpperCase()}</span><b style="color:#facc15">${u.high}</b></div>`});document.getElementById('playersList').innerHTML=html||'No players';}
-let snake,food,dir,nextDir,score,gameInterval;
-function initGame(){if(gameInterval)clearInterval(gameInterval);snake=[{x:10,y:10}];food={x:15,y:15};dir={x:1,y:0};nextDir={x:1,y:0};score=0;document.getElementById('score').innerText=0;if(currentUser&&users[currentUser])document.getElementById('high').innerText=users[currentUser].high||0;randFood();let speed=settings.level==='low'?180:settings.level==='high'?70:120;gameInterval=setInterval(gameLoop,speed);}
-function setDir(x,y){if(dir.x===-x&&dir.y===-y)return;nextDir={x,y};}
-function randFood(){food={x:Math.floor(Math.random()*20),y:Math.floor(Math.random()*20)};}
-function gameLoop(){dir=nextDir;let head={x:snake[0].x+dir.x,y:snake[0].y+dir.y};if(head.x<0)head.x=19;if(head.x>19)head.x=0;if(head.y<0)head.y=19;if(head.y>19)head.y=0;if(snake.some(s=>s.x===head.x&&s.y===head.y)){if(currentUser&&users[currentUser]&&score>users[currentUser].high){users[currentUser].high=score;localStorage.setItem('skylight_users',JSON.stringify(users));document.getElementById('high').innerText=score;}snake=[{x:10,y:10}];score=0;document.getElementById('score').innerText=0;dir={x:1,y:0};nextDir={x:1,y:0};return;}snake.unshift(head);if(head.x===food.x&&head.y===food.y){let add=settings.level==='high'?20:settings.level==='low'?5:10;score+=add;document.getElementById('score').innerText=score;randFood();}else snake.pop();const c=document.getElementById('game');const ctx=c.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,300,300);ctx.fillStyle='#22c55e';ctx.fillRect(food.x*15,food.y*15,14,14);ctx.fillStyle='#4ade80';snake.forEach(s=>ctx.fillRect(s.x*15,s.y*15,14,14));}
-if(currentUser&&users[currentUser]){document.getElementById('userName').innerText=users[currentUser].name;document.getElementById('userLevelTag').innerText=(users[currentUser].level||'medium').toUpperCase();document.getElementById('levelShow').innerText=(users[currentUser].level||'medium').toUpperCase();showGameAuth(true);initGame();}else{showGameAuth(false);}
-renderPlayers();renderChats();
-</script>
 </body>
-  </html>
+</html>
