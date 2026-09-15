@@ -2,70 +2,71 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Skylight AI Machines</title>
+<title>Skylight AI</title>
 <style>
-body{background:#050b18;color:#e0f0ff;font-family:Arial;margin:0;padding:0}
-#login{height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;background:radial-gradient(circle at top,#0f2340,#050b18);padding:20px}
-.logo{font-size:36px;font-weight:900;background:linear-gradient(90deg,#00d2ff,#7000ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
-.card{background:linear-gradient(145deg,#0f2340,#0a1930);border-radius:18px;padding:18px;margin:12px;border:1px solid #1a3a6a}
-.btn{background:linear-gradient(90deg,#00d2ff,#7000ff);color:white;padding:14px;border:none;border-radius:12px;width:100%;font-weight:bold;font-size:16px}
-.btn2{background:#0a2a4a;border:1px solid #00d2ff;color:#00d2ff;padding:12px;border-radius:12px;width:100%;font-weight:bold}
+body{background:#050b18;color:#fff;font-family:Arial;margin:0;padding:15px}
+.logo{font-size:32px;font-weight:900;text-align:center;background:linear-gradient(90deg,#00d2ff,#7000ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.card{background:#0f2340;border-radius:18px;padding:18px;margin:12px 0;border:1px solid #1a3a6a}
+.btn{background:linear-gradient(90deg,#00d2ff,#7000ff);color:#fff;padding:14px;border:none;border-radius:12px;width:100%;font-weight:bold;font-size:18px}
+input{width:100%;padding:14px;border-radius:12px;background:#050b18;border:1px solid #1a3a6a;color:#fff;box-sizing:border-box;margin:8px 0}
 .small{color:#7da0c8;font-size:12px}
-input{width:100%;padding:14px;border-radius:12px;background:#050b18;border:1px solid #1a3a6a;color:white;margin:8px 0;box-sizing:border-box}
-.machine{display:flex;justify-content:space-between;align-items:center;background:#0a1930;padding:12px;border-radius:12px;margin:8px 0;border:1px solid #1a3a6a}
-.hide{display:none}
+.hide{display:none !important}
 </style>
 </head>
 <body>
-
-<!-- LOGIN -->
 <div id="login">
 <div class="logo">SKYLIGHT AI</div>
-<p class="small">AI Mining Machines • 3% Monthly</p>
-<div class="card" style="width:100%;max-width:350px">
-<h3 style="margin:0">Enter Access Code</h3>
+<p style="text-align:center" class="small">AI Mining Machines • 3% Monthly</p>
+<div class="card">
+<h3>Enter Access Code</h3>
 <p class="small">Password required before inside</p>
-<input id="pass" type="password" placeholder="Enter password">
-<button class="btn" onclick="checkPass()">UNLOCK DASHBOARD</button>
-<p class="small" id="err" style="color:#ff4444"></p>
-<p class="small">Default: skylight123</p>
+<input id="pass" type="password" placeholder="skylight123">
+<button class="btn" onclick="go()">UNLOCK DASHBOARD</button>
+<p id="err" style="color:red" class="small"></p>
 </div>
 </div>
 
-<!-- DASHBOARD -->
-<div id="dash" class="hide" style="padding:15px">
-<div style="text-align:center;padding:10px">
-<div class="logo" style="font-size:28px">SKYLIGHT AI</div>
-<p class="small">Live Mining • Machines from 2K UGX</p>
+<div id="dash" class="hide">
+<div class="logo" style="font-size:26px">SKYLIGHT AI</div>
+<p style="text-align:center" class="small">Machines from 2K UGX</p>
+
+<div class="card"><p class="small">CAPITAL WALLET</p><h2 id="cap">0 UGX</h2><button class="btn" onclick="addCap()">+ Deposit 2000+ UGX</button></div>
+<div class="card"><p class="small">PROFITS WALLET - LIVE 3% Monthly</p><h2 id="prof">0 UGX</h2><p class="small">● Growing every second</p><button class="btn" onclick="claim()" style="background:#0a2a4a;border:1px solid #00d2ff;color:#00d2ff">Claim Daily</button></div>
+<div class="card"><p class="small">BUY MACHINE - START 2K</p>
+<button class="btn" onclick="buy(2000)" style="margin:5px 0">AI Starter - 2000 UGX (Earn 60/mo)</button>
+<button class="btn" onclick="buy(5000)" style="margin:5px 0">AI Lite - 5000 UGX (Earn 150/mo)</button>
+<button class="btn" onclick="buy(20000)" style="margin:5px 0">AI Pro - 20000 UGX (Earn 600/mo)</button>
+</div>
+<div class="card"><button class="btn" style="background:#00c853" onclick="alert('Withdrawal: '+prof+' UGX - Send manually via MoMo')">Withdraw to MoMo</button></div>
 </div>
 
-<div class="card">
-<p class="small">CAPITAL WALLET</p>
-<h2 id="cap">0 UGX</h2>
-<p class="small">Active Deposit</p>
-<button class="btn" onclick="deposit()">+ Deposit via MoMo</button>
-</div>
-
-<div class="card">
-<p class="small">PROFITS WALLET - 3% Monthly (0.1% Daily)</p>
-<h2 id="prof">0 UGX</h2>
-<p class="small">Auto-growing by AI <span id="live" style="color:#00d2ff">● LIVE</span></p>
-<button class="btn2" onclick="claim()">Claim Daily Profit</button>
-</div>
-
-<div class="card">
-<p class="small">YOUR MACHINES</p>
-<div id="myMachines"><p class="small">No machines yet. Buy below starting 2K</p></div>
-</div>
-
-<div class="card">
-<p class="small">🤖 AI MACHINES MARKET - Start 2K</p>
-<div class="machine"><div><b>AI Starter</b><br><span class="small">2,000 UGX • Earn 60 UGX/mo</span></div><button class="btn2" style="width:auto" onclick="buy(2000,2)">Buy</button></div>
-<div class="machine"><div><b>AI Lite</b><br><span class="small">5,000 UGX • Earn 150 UGX/mo</span></div><button class="btn2" style="width:auto" onclick="buy(5000,5)">Buy</button></div>
-<div class="machine"><div><b>AI Pro</b><br><span class="small">20,000 UGX • Earn 600 UGX/mo</span></div><button class="btn2" style="width:auto" onclick="buy(20000,20)">Buy</button></div>
-<div class="machine"><div><b>AI Ultra</b><br><span class="small">50,000 UGX • Earn 1,500 UGX/mo</span></div><button class="btn2" style="width:auto" onclick="buy(50000,50)">Buy</button></div>
-</div>
-
-<div class="card">
-<p class="small">YOUR AI REFERRAL LINK</p>
-<input id="ref" value="https://thembobenson585-byte.github.io/BenYt.skylight/capital.html?
+<script>
+let cap = Number(localStorage.getItem('cap')||0);
+let prof = Number(localStorage.getItem('prof')||0);
+let machines = Number(localStorage.getItem('machCount')||0);
+function go(){
+ let p=document.getElementById('pass').value;
+ if(p==='skylight123'){
+  document.getElementById('login').className='hide';
+  document.getElementById('dash').className='';
+  show();
+  setInterval(function(){
+   if(machines>0){ prof+= (machines*2)/86400; localStorage.setItem('prof',prof); document.getElementById('prof').innerText=Math.floor(prof)+' UGX'; }
+  },1000);
+ } else { document.getElementById('err').innerText='Wrong! Use skylight123'; }
+}
+function show(){
+ document.getElementById('cap').innerText=cap+' UGX';
+ document.getElementById('prof').innerText=Math.floor(prof)+' UGX';
+}
+function addCap(){
+ let a=prompt('Enter amount min 2000'); if(!a)return; cap+=Number(a); localStorage.setItem('cap',cap); show();
+}
+function buy(cost){
+ if(cap<cost){alert('Deposit first! Need '+cost);return;}
+ cap-=cost; machines++; localStorage.setItem('cap',cap); localStorage.setItem('machCount',machines); show(); alert('Machine bought! Now profit will move!');
+}
+function claim(){ prof+=machines*2; localStorage.setItem('prof',prof); show(); alert('Claimed!'); }
+</script>
+</body>
+</html>
