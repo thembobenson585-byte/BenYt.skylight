@@ -1,116 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Skylight AI - M1 Machines</title>
-<style>
-:root{--bg:#050b18;--card:#0f2340;--card2:#0a1930;--line:#1a3a6a;--blue:#00d2ff;--purple:#7000ff;--green:#00ff88}
-body{margin:0;background:var(--bg);color:#fff;font-family:Arial;padding-bottom:85px}
-.top{position:sticky;top:0;background:var(--card2);padding:12px 15px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;z-index:10}
-.logo{font-weight:900;font-size:20px;background:linear-gradient(90deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.card{background:linear-gradient(145deg,var(--card),var(--card2));border-radius:16px;padding:14px;margin:10px;border:1px solid var(--line)}
-.btn{background:linear-gradient(90deg,var(--blue),var(--purple));color:#fff;border:none;padding:13px;border-radius:12px;width:100%;font-weight:bold;font-size:15px}
-.btn2{background:var(--card2);border:1px solid var(--blue);color:var(--blue);padding:11px;border-radius:11px;width:100%;font-weight:bold}
-.small{color:#7da0c8;font-size:11px;line-height:1.4}
-.machine{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
-.machine.vip{border-color:var(--green);background:linear-gradient(145deg,#0a2a1a,var(--card2))}
-.nav{position:fixed;bottom:0;left:0;right:0;background:#0a1930;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 0;z-index:30}
-.nav div{text-align:center;font-size:9px;color:#7da0c8;cursor:pointer;min-width:45px}
-.nav div.active{color:var(--blue)}
-.hide{display:none!important}
-input,select{width:100%;padding:12px;border-radius:10px;background:#050b18;border:1px solid var(--line);color:#fff;box-sizing:border-box;margin:6px 0}
-.tag{background:linear-gradient(90deg,var(--blue),var(--purple));padding:3px 8px;border-radius:20px;font-size:10px}
-.badge{background:var(--green);color:#000;padding:2px 6px;border-radius:10px;font-size:9px;font-weight:bold}
-</style>
-</head>
-<body>
-<div class="top"><div class="logo">SKYLIGHT AI</div><div><span class="tag" id="accTop">SKY-2026</span></div></div>
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Skylight AI</title><style>body{margin:0;background:#050b18;color:#fff;font-family:Arial;padding-bottom:85px}.top{position:sticky;top:0;background:#0a1930;padding:12px 15px;border-bottom:1px solid #1a3a6a;display:flex;justify-content:space-between;z-index:10}.logo{font-weight:900;font-size:20px;background:linear-gradient(90deg,#00d2ff,#7000ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.card{background:#0f2340;border-radius:16px;padding:14px;margin:10px;border:1px solid #1a3a6a}.btn{background:linear-gradient(90deg,#00d2ff,#7000ff);color:#fff;border:none;padding:13px;border-radius:12px;width:100%;font-weight:bold}.btn2{background:#0a1930;border:1px solid #00d2ff;color:#00d2ff;padding:11px;border-radius:11px;width:100%;font-weight:bold}.small{color:#7da0c8;font-size:11px}.machine{background:#0a1930;border:1px solid #1a3a6a;border-radius:14px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}.machine.vip{border-color:#00ff88}.nav{position:fixed;bottom:0;left:0;right:0;background:#0a1930;border-top:1px solid #1a3a6a;display:flex;justify-content:space-around;padding:8px 0;z-index:20}.nav div{text-align:center;font-size:9px;color:#7da0c8}.nav div.active{color:#00d2ff}.hide{display:none!important}input{width:100%;padding:12px;border-radius:10px;background:#050b18;border:1px solid #1a3a6a;color:#fff;margin:6px 0;box-sizing:border-box}.tag{background:linear-gradient(90deg,#00d2ff,#7000ff);padding:3px 8px;border-radius:20px;font-size:10px}.badge{background:#00ff88;color:#000;padding:2px 6px;border-radius:10px;font-size:9px;font-weight:bold}</style></head><body>
+<div class="top"><div class="logo">SKYLIGHT AI</div><div class="tag" id="accTop">SKY-2026</div></div>
 
-<!-- LOGIN -->
-<div id="login" style="padding:20px;text-align:center">
-<div class="logo" style="font-size:34px;margin-top:30px">SKYLIGHT AI</div>
-<p class="small">M1 Skylight Machines • Start 2K UGX</p>
-<div class="card" style="margin-top:25px;text-align:left">
-<h3 style="margin:0">Access Code</h3>
-<input id="pass" type="password" placeholder="skylight123">
-<button class="btn" onclick="login()">UNLOCK</button>
-<p class="small" id="err" style="color:#ff4444"></p>
-</div>
-</div>
+<div id="login" style="padding:20px;text-align:center"><div class="logo" style="font-size:34px;margin-top:30px">SKYLIGHT AI</div><p class="small">Machines M1,U,L,Y,A • Start 2K UGX</p><div class="card" style="margin-top:25px;text-align:left"><h3>Access Code</h3><input id="pass" type="password" placeholder="skylight123"><button class="btn" onclick="login()">UNLOCK</button><p class="small" id="err" style="color:red"></p></div></div>
 
-<!-- APP -->
 <div id="app" class="hide">
-
-<!-- HOME - MACHINES -->
 <div id="t-home">
-<div style="display:flex;gap:0"><div class="card" style="flex:1"><p class="small">CAPITAL WALLET</p><h2 id="cap" style="margin:5px 0">0 UGX</h2><button class="btn2" onclick="deposit()">+ Deposit</button></div><div class="card" style="flex:1"><p class="small">PROFITS WALLET</p><h2 id="prof" style="margin:5px 0">0 UGX</h2><p class="small" style="color:#00ff88">● LIVE Every Sec</p></div></div>
-
-<div class="card"><div style="display:flex;justify-content:space-between"><h3 style="margin:0">My Machines <span id="mCount" style="color:var(--blue)">0</span></h3><span class="small" id="earnRate">0 UGX/day</span></div><div id="myM" class="small" style="margin-top:8px">No machines. Buy M1 Skylight below.</div><button class="btn2" style="margin-top:10px" onclick="claim()">Claim Daily Profit</button></div>
-
-<div class="card">
-<h3 style="margin:0 0 10px 0">🤖 Skylight Machines Market</h3>
-
-<div class="machine"><div><b>M1 Skylight</b> <span class="badge">STARTER</span><br><span class="small">2,000 UGX • 30 Days • 60 UGX/mo</span><br><span class="small" style="color:#00ff88">Daily: 2 UGX</span></div><button class="btn2" style="width:65px" onclick="buy(2000,60,'M1 Skylight',30)">Buy</button></div>
-
-<div class="machine"><div><b>U Skylight</b><br><span class="small">5,000 UGX • 35 Days • 200 UGX/mo</span><br><span class="small" style="color:#00ff88">Daily: 6 UGX</span></div><button class="btn2" style="width:65px" onclick="buy(5000,200,'U Skylight',35)">Buy</button></div>
-
-<div class="machine"><div><b>L Skylight</b><br><span class="small">15,000 UGX • 45 Days • 750 UGX/mo</span><br><span class="small" style="color:#00ff88">Daily: 25 UGX</span></div><button class="btn2" style="width:65px" onclick="buy(15000,750,'L Skylight',45)">Buy</button></div>
-
-<div class="machine"><div><b>Y Skylight</b><br><span class="small">30,000 UGX • 60 Days • 1,800 UGX/mo</span><br><span class="small" style="color:#00ff88">Daily: 60 UGX</span></div><button class="btn2" style="width:65px" onclick="buy(30000,1800,'Y Skylight',60)">Buy</button></div>
-
-<div class="machine"><div><b>A Skylight</b><br><span class="small">60,000 UGX • 90 Days • 4,200 UGX/mo</span><br><span class="small" style="color:#00ff88">Daily: 140 UGX</span></div><button class="btn2" style="width:65px" onclick="buy(60000,4200,'A Skylight',90)">Buy</button></div>
+<div style="display:flex;gap:0"><div class="card" style="flex:1"><p class="small">CAPITAL</p><h2 id="cap">0 UGX</h2><button class="btn2" onclick="deposit()">+ Deposit</button></div><div class="card" style="flex:1"><p class="small">PROFITS</p><h2 id="prof">0 UGX</h2><p class="small" style="color:#00ff88">● LIVE</p></div></div>
+<div class="card"><h3>My Machines <span id="mCount" style="color:#00d2ff">0</span></h3><div id="myM" class="small">No machines. Buy M1 Skylight.</div><button class="btn2" style="margin-top:10px" onclick="claim()">Claim Daily</button></div>
+<div class="card"><h3>Skylight Machines</h3>
+<div class="machine"><div><b>M1 Skylight</b> <span class="badge">START</span><br><span class="small">2,000 UGX • 30D • 60/mo • 2/day</span></div><button class="btn2" style="width:60px" onclick="buy(2000,60,'M1 Skylight',30)">Buy</button></div>
+<div class="machine"><div><b>U Skylight</b><br><span class="small">5,000 UGX • 35D • 200/mo • 6/day</span></div><button class="btn2" style="width:60px" onclick="buy(5000,200,'U Skylight',35)">Buy</button></div>
+<div class="machine"><div><b>L Skylight</b><br><span class="small">15,000 UGX • 45D • 750/mo • 25/day</span></div><button class="btn2" style="width:60px" onclick="buy(15000,750,'L Skylight',45)">Buy</button></div>
+<div class="machine"><div><b>Y Skylight</b><br><span class="small">30,000 UGX • 60D • 1800/mo • 60/day</span></div><button class="btn2" style="width:60px" onclick="buy(30000,1800,'Y Skylight',60)">Buy</button></div>
+<div class="machine"><div><b>A Skylight</b><br><span class="small">60,000 UGX • 90D • 4200/mo • 140/day</span></div><button class="btn2" style="width:60px" onclick="buy(60000,4200,'A Skylight',90)">Buy</button></div>
 
 <div id="vipSection" class="hide">
-<h3 style="margin:15px 0 5px 0;color:var(--green)">🔥 VIP Machines - Unlock by Inviting 10 Friends</h3>
-<div class="machine vip"><div><b>VIP-1 Skylight</b> <span class="badge">VIP</span><br><span class="small">100,000 UGX • 90 Days • 9,000 UGX/mo</span><br><span class="small" style="color:#00ff88">Daily: 300 UGX • +50% Bonus</span></div><button class="btn2" style="width:65px;border-color:var(--green);color:var(--green)" onclick="buy(100000,9000,'VIP-1 Skylight',90)">Buy</button></div>
-<div class="machine vip"><div><b>VIP-2 Skylight</b> <span class="badge">VIP</span><br><span class="small">200,000 UGX • 120 Days • 24,000 UGX/mo</span><br><span class="small" style="color:#00ff88">Daily: 800 UGX • +80% Bonus</span></div><button class="btn2" style="width:65px;border-color:var(--green);color:var(--green)" onclick="buy(200000,24000,'VIP-2 Skylight',120)">Buy</button></div>
+<h3 style="color:#00ff88">🔥 VIP Machines Unlocked!</h3>
+<div class="machine vip"><div><b>VIP-1 Skylight</b> <span class="badge">VIP</span><br><span class="small">100,000 UGX • 90D • 9000/mo • 300/day • +50%</span></div><button class="btn2" style="width:60px;border-color:#00ff88;color:#00ff88" onclick="buy(100000,9000,'VIP-1 Skylight',90)">Buy</button></div>
+<div class="machine vip"><div><b>VIP-2 Skylight</b> <span class="badge">VIP</span><br><span class="small">200,000 UGX • 120D • 24000/mo • 800/day • +80%</span></div><button class="btn2" style="width:60px;border-color:#00ff88;color:#00ff88" onclick="buy(200000,24000,'VIP-2 Skylight',120)">Buy</button></div>
 </div>
-
-<div id="vipLock" class="card" style="border-color:var(--green);text-align:center">
-<p class="small">🔒 VIP Machines Locked</p><h3 style="margin:5px 0">Invite 10 Friends to Unlock VIP</h3><p class="small">You have invited <b id="vipCount">0</b>/10</p><button class="btn" onclick="go('group')">Invite Now</button>
-</div>
-
+<div id="vipLock" class="card" style="border-color:#00ff88;text-align:center"><p class="small">🔒 VIP Locked</p><h3>Invite 10 = Unlock VIP Profits</h3><p class="small">You invited <b id="vipCount">0</b>/10</p><button class="btn" onclick="go('group')">Invite Now</button></div>
 </div>
 </div>
 
-<!-- WITHDRAW -->
-<div id="t-with" class="hide">
-<div class="card"><h3>Withdraw to MoMo</h3><p class="small">Min 1,000 UGX • Fee 5% • To 0793814204 Admin</p><select id="wNet"><option>MTN Uganda</option><option>Airtel Uganda</option></select><input id="wNum" placeholder="Your MoMo Number 0793..."><input id="wAmt" type="number" placeholder="Amount UGX"><button class="btn" onclick="withdraw()">Submit Withdrawal</button><div id="wHist" style="margin-top:12px"></div></div>
-<div class="card"><h3>History</h3><div id="wList" class="small">No withdrawals yet</div></div>
-</div>
+<div id="t-with" class="hide"><div class="card"><h3>Withdraw to MoMo</h3><p class="small">Min 1000 UGX • Admin: 0793814204</p><input id="wNum" placeholder="Your MoMo 0793814204"><input id="wAmt" type="number" placeholder="Amount"><button class="btn" onclick="withdraw()">Withdraw</button><div id="wList" class="small" style="margin-top:10px"></div></div></div>
 
-<!-- GROUP - INVITE 10 VIP -->
-<div id="t-group" class="hide">
-<div class="card"><h3>Team & VIP Upgrade</h3><p class="small">Invite 10 friends → Unlock VIP machines with 50-80% extra profits!</p><input id="ref" value="https://thembobenson585-byte.github.io/BenYt.skylight/capital.html?ref=SKYLIGHT"><button class="btn" onclick="copyRef()">Copy Referral Link</button>
-<div style="display:flex;gap:0;margin-top:10px"><div class="card" style="flex:1;margin:0 5px 0 0"><p class="small">Invited</p><h2 id="team">0</h2><p class="small">/10 for VIP</p></div><div class="card" style="flex:1;margin:0 0 0 5px"><p class="small">Referral Earnings</p><h2 id="refEarn">0 UGX</h2></div></div>
-<div id="vipProgress" style="background:#050b18;border:1px solid var(--line);border-radius:10px;height:12px;margin-top:10px;overflow:hidden"><div id="vipBar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--green),var(--blue))"></div></div>
-<p class="small" id="vipMsg">Invite 10 to unlock VIP-1 & VIP-2 Skylight with huge profits!</p>
-</div>
-<div class="card"><h3>Official Groups</h3><button class="btn" style="background:#25D366" onclick="window.open('https://wa.me/256793814204?text=Hello Skylight Admin, I want to join group','_blank')">Join WhatsApp Group</button></div>
-</div>
+<div id="t-group" class="hide"><div class="card"><h3>Invite 10 = VIP</h3><p class="small">Invite friends, unlock VIP machines with huge profits</p><input id="ref" value="https://thembobenson585-byte.github.io/BenYt.skylight/capital.html?ref=SKY"><button class="btn" onclick="copyRef()">Copy Link & Invite</button><div style="display:flex;gap:0;margin-top:10px"><div class="card" style="flex:1;margin:0 5px 0 0"><p class="small">Invited</p><h2 id="team">0</h2><p class="small">/10 VIP</p></div><div class="card" style="flex:1;margin:0 0 0 5px"><p class="small">Bonus</p><h2 id="refEarn">0 UGX</h2></div></div><div style="background:#050b18;border:1px solid #1a3a6a;border-radius:10px;height:12px;margin-top:10px;overflow:hidden"><div id="vipBar" style="height:100%;width:0%;background:linear-gradient(90deg,#00ff88,#00d2ff)"></div></div><p class="small" id="vipMsg">Invite 10 to unlock VIP</p></div><div class="card"><button class="btn" style="background:#25D366" onclick="window.open('https://wa.me/256793814204?text=Join Skylight AI','_blank')">Join WhatsApp Group</button></div></div>
 
-<!-- RULES -->
-<div id="t-rules" class="hide"><div class="card"><h3>📜 Skylight Rules - M1 Edition</h3><p class="small" style="line-height:1.7">
-<b>Machines:</b><br>
-M1 Skylight = 2K UGX - Starter<br>
-U Skylight = 5K UGX<br>
-L Skylight = 15K UGX<br>
-Y Skylight = 30K UGX<br>
-A Skylight = 60K UGX<br><br>
-
-<b>VIP Upgrade:</b> Invite 10 friends → Unlock VIP-1 (100K) & VIP-2 (200K) with 50-80% more profit!<br><br>
-
-<b>Profits:</b> Live every second. Claim daily to Profits Wallet.<br>
-<b>Withdraw:</b> Min 1000 UGX, fee 5%, sent to your MoMo by admin 0793814204.<br>
-<b>Referral:</b> 5% instant per machine your friend buys.
+<div id="t-rules" class="hide"><div class="card"><h3>Rules - M1 Skylight</h3><p class="small" style="line-height:1.7">
+M1 Skylight: 2000 UGX • 30 days<br>
+U Skylight: 5000 UGX • 35 days<br>
+L Skylight: 15000 UGX • 45 days<br>
+Y Skylight: 30000 UGX • 60 days<br>
+A Skylight: 60000 UGX • 90 days<br><br>
+Invite 10 friends = Unlock VIP-1 & VIP-2 with 50-80% extra profit<br>
+Min withdraw 1000 UGX, admin 0793814204<br>
+Referral 5% instant
 </p></div></div>
 
-<!-- SETTINGS -->
-<div id="t-set" class="hide"><div class="card"><h3>⚙️ Settings</h3><p class="small">Bind MoMo Number</p><input id="sMoMo" placeholder="0793814204 or your number"><p class="small">Full Name on MoMo</p><input id="sName" placeholder="Name"><button class="btn" onclick="saveSet()">Save Settings</button><p id="sMsg" class="small" style="color:#00ff88"></p></div><div class="card"><p class="small">Account ID</p><h3 id="accId">SKY-XXXX</h3><p class="small">Skylight AI M1 Edition • Admin: 0793814204</p></div></div>
+<div id="t-set" class="hide"><div class="card"><h3>Settings</h3><input id="sMoMo" placeholder="Your MoMo number"><button class="btn" onclick="saveSet()">Save</button><p id="sMsg" class="small" style="color:#00ff88"></p></div><div class="card"><p class="small">Account</p><h3 id="accId">SKY-XXXX</h3><p class="small">Admin WhatsApp: 0793814204</p></div></div>
 
-<!-- ADMIN CHAT - 0793814204 -->
-<div id="t-admin" class="hide"><div class="card"><h3>💬 Admin Chat</h3><p class="small">Admin: 0793814204 • Reply 1-5 mins</p><div id="chat" style="background:#050b18;border:1px solid var(--line);border-radius:10px;height:220px;overflow:auto;padding:10px" class="small"><div style="margin-bottom:8px"><b style="color:var(--blue)">Admin (0793814204):</b> Hello! Welcome to Skylight AI M1 Machines 🤖 How can I help? Machines from 2K UGX.</div></div><input id="cIn" placeholder="Type message..."><button class="btn" onclick="sendAdmin()">Send to 0793814204 on WhatsApp</button></div></div>
-
+<div id="t-admin" class="hide"><div class="card"><h3>Admin Chat - 0793814204</h3><div id="chat" style="background:#050b18;border:1px solid #1a3a6a;border-radius:10px;height:200px;overflow:auto;padding:10px" class="small"><div><b style="color:#00d2ff">Admin 0793814204:</b> Hello! Welcome to Skylight AI - M1,U,L,Y,A Machines. How can I help?</div></div><input id="cIn" placeholder="Type..."><button class="btn" onclick="sendAdmin()">Send to 0793814204</button></div></div>
 </div>
 
 <div id="nav" class="nav hide">
@@ -118,25 +48,28 @@ A Skylight = 60K UGX<br><br>
 <div id="n-with" onclick="go('with')">💸<br>Withdraw</div>
 <div id="n-group" onclick="go('group')">👥<br>Team 10=VIP</div>
 <div id="n-rules" onclick="go('rules')">📜<br>Rules</div>
-<div id="n-set" onclick="go('set')">⚙️<br>Settings</div>
+<div id="n-set" onclick="go('set')">⚙️<br>Set</div>
 <div id="n-admin" onclick="go('admin')">💬<br>Admin</div>
 </div>
 
 <script>
-let cap=Number(localStorage.getItem('cap')||0),prof=Number(localStorage.getItem('prof')||0),mach=JSON.parse(localStorage.getItem('mach')||'[]'),wHist=JSON.parse(localStorage.getItem('wh')||'[]'),team=Number(localStorage.getItem('team')||0);
-function login(){if(document.getElementById('pass').value==='skylight123'){loginEl();}else{err.innerText='Wrong! Use skylight123'}}
-function loginEl(){document.getElementById('login').style.display='none';document.getElementById('app').classList.remove('hide');document.getElementById('nav').classList.remove('hide');render();live();checkVIP();}
-function render(){document.getElementById('cap').innerText=cap.toLocaleString()+' UGX';document.getElementById('prof').innerText=Math.floor(prof).toLocaleString()+' UGX';document.getElementById('accId').innerText=localStorage.getItem('acc')||'SKY-'+Math.floor(1000+Math.random()*9000);document.getElementById('accTop').innerText=document.getElementById('accId').innerText;localStorage.setItem('acc',document.getElementById('accId').innerText);let h='',d=0;mach.forEach(m=>{d+=m.earn/30;h+=`<div class="machine"><div><b>${m.id} • ${m.cost} UGX</b><br><span class="small">Earns ${m.earn}/mo • ${m.days} days</span></div><span class="small" style="color:#00d2ff">+${(m.earn/30).toFixed(0)}/day</span></div>`});document.getElementById('myM').innerHTML=mach.length?h:'No machines yet. Buy M1 Skylight starting 2K.';document.getElementById('mCount').innerText=mach.length;document.getElementById('earnRate').innerText=d.toFixed(0)+' UGX/day';let wh='';wHist.forEach(x=>wh+=`<div class="machine" style="padding:8px"><span class="small">${x}</span></div>`);document.getElementById('wList').innerHTML=wh||'No withdrawals';document.getElementById('wHist').innerHTML=wh;document.getElementById('team').innerText=team;document.getElementById('vipCount').innerText=team;document.getElementById('team').innerText=team;document.getElementById('refEarn').innerText=(team*200).toLocaleString()+' UGX';document.getElementById('vipBar').style.width=Math.min(team*10,100)+'%';}
-function checkVIP(){if(team>=10){document.getElementById('vipSection').classList.remove('hide');document.getElementById('vipLock').classList.add('hide');document.getElementById('vipMsg').innerText='✅ VIP UNLOCKED! You invited '+team+' friends!';}else{document.getElementById('vipSection').classList.add('hide');document.getElementById('vipLock').classList.remove('hide');}}
-function deposit(){let a=prompt('Deposit amount UGX (Min 2000)');if(!a)return;cap+=Number(a);localStorage.setItem('cap',cap);render();}
-function buy(cost,earn,id,days){if(cap<cost){alert('Not enough Capital! Need '+cost+' UGX. Deposit first.');deposit();return;}cap-=cost;mach.push({cost:cost,earn:earn,id:id,days:days});localStorage.setItem('cap',cap);localStorage.setItem('mach',JSON.stringify(mach));render();alert(id+' bought! Earns '+earn+' UGX/mo');}
-function claim(){let d=0;mach.forEach(m=>d+=m.earn/30);if(d==0){alert('Buy M1 Skylight starting 2K first!');return;}prof+=d;localStorage.setItem('prof',prof);render();alert('Claimed '+d.toFixed(0)+' UGX!');}
-function live(){setInterval(()=>{let d=0;mach.forEach(m=>d+=m.earn/30/86400);if(d>0){prof+=d;localStorage.setItem('prof',prof);let el=document.getElementById('prof');if(el)el.innerText=Math.floor(prof).toLocaleString()+' UGX'}},1000)}
+let cap=Number(localStorage.cap||0),prof=Number(localStorage.prof||0),mach=JSON.parse(localStorage.mach||'[]'),wHist=JSON.parse(localStorage.wh||'[]'),team=Number(localStorage.team||0);
+if(new URLSearchParams(location.search).has('ref')){localStorage.setItem('invited','true');}
+function login(){if(pass.value==='skylight123'){loginEl()}else{err.innerText='Wrong! skylight123'}}
+function loginEl(){login.style.display='none';app.classList.remove('hide');nav.classList.remove('hide');render();live();checkVIP();}
+function render(){capEl();profEl();accId.innerText=localStorage.acc||'SKY-'+Math.floor(1000+Math.random()*9000);accTop.innerText=accId.innerText;localStorage.acc=accId.innerText;let h='',d=0;mach.forEach(m=>{d+=m.earn/30;h+=`<div class="machine"><div><b>${m.id}</b><br><span class="small">${m.cost} UGX • ${m.days}D</span></div><span class="small" style="color:#00d2ff">${m.earn}/mo</span></div>`});myM.innerHTML=mach.length?h:'No machines. Buy M1 Skylight 2K.';mCount.innerText=mach.length;let wh='';wHist.forEach(x=>wh+=`<div class="small">• ${x}</div>`);wList.innerHTML=wh||'No withdrawals';teamEl();vipCount.innerText=team;vipBar.style.width=Math.min(team*10,100)+'%';}
+function teamEl(){document.getElementById('team').innerText=team;document.getElementById('refEarn').innerText=(team*300).toLocaleString()+' UGX';}
+function capEl(){document.getElementById('cap').innerText=cap.toLocaleString()+' UGX'}function profEl(){document.getElementById('prof').innerText=Math.floor(prof).toLocaleString()+' UGX'}
+function checkVIP(){if(team>=10){vipSection.classList.remove('hide');vipLock.classList.add('hide');vipMsg.innerText='✅ VIP UNLOCKED! '+team+' invites!';}else{vipSection.classList.add('hide');vipLock.classList.remove('hide');vipMsg.innerText='Invite '+(10-team)+' more to unlock VIP';}}
+function deposit(){let a=prompt('Deposit UGX Min 2000');if(!a)return;cap+=Number(a);localStorage.cap=cap;render();}
+function buy(c,e,id,d){if(cap<c){alert('Need '+c+' UGX. Deposit.');deposit();return;}cap-=c;mach.push({cost:c,earn:e,id:id,days:d});localStorage.cap=cap;localStorage.mach=JSON.stringify(mach);render();alert(id+' bought!');}
+function claim(){let d=0;mach.forEach(m=>d+=m.earn/30);if(d==0){alert('Buy M1 Skylight 2K first');return;}prof+=d;localStorage.prof=prof;render();alert('Claimed '+d.toFixed(0)+' UGX');}
+function live(){setInterval(()=>{let d=0;mach.forEach(m=>d+=m.earn/30/86400);if(d){prof+=d;localStorage.prof=prof;let e=document.getElementById('prof');if(e)e.innerText=Math.floor(prof).toLocaleString()+' UGX'}},1000)}
 function go(t){['home','with','group','rules','set','admin'].forEach(x=>{document.getElementById('t-'+x).classList.add('hide');document.getElementById('n-'+x).classList.remove('active')});document.getElementById('t-'+t).classList.remove('hide');document.getElementById('n-'+t).classList.add('active')}
-function withdraw(){let a=Number(document.getElementById('wAmt').value),n=document.getElementById('wNum').value;if(a<1000){alert('Min 1000');return}if(prof<a){alert('Not enough profits');return}prof-=a;wHist.unshift(a+' UGX to '+n+' - Pending via admin 0793814204');localStorage.setItem('prof',prof);localStorage.setItem('wh',JSON.stringify(wHist));render();alert('Withdrawal '+a+' UGX requested! Admin 0793814204 will send.');}
-function copyRef(){navigator.clipboard.writeText(document.getElementById('ref').value);team++;localStorage.setItem('team',team);render();checkVIP();alert('Link copied! Invite count: '+team+'/10 for VIP. Share to WhatsApp!');}
-function saveSet(){localStorage.setItem('momo',document.getElementById('sMoMo').value);document.getElementById('sMsg').innerText='Settings saved! Admin 0793814204 will use: '+document.getElementById('sMoMo').value}
-function sendAdmin(){let txt=document.getElementById('cIn').value;if(!txt)return;document.getElementById('chat').innerHTML+=`<div style="margin-bottom:6px"><b>You:</b> ${txt}</div>`;window.open('https://wa.me/256793814204?text='+encodeURIComponent('Skylight AI M1: '+txt),'_blank');document.getElementById('cIn').value='';}
-</script>
-</body>
-  </html>
+function withdraw(){let a=Number(wAmt.value),n=wNum.value;if(a<1000){alert('Min 1000');return}if(prof<a){alert('No enough profit');return}prof-=a;wHist.unshift(a+' UGX to '+n+' - Pending via 0793814204');localStorage.prof=prof;localStorage.wh=JSON.stringify(wHist);render();alert('Withdrawal sent to admin 0793814204');}
+function copyRef(){navigator.clipboard.writeText(ref.value);team++;localStorage.team=team;render();checkVIP();let shareUrl='https://wa.me/?text='+encodeURIComponent('Join Skylight AI M1 Machines! Start 2K UGX: '+ref.value);window.open(shareUrl,'_blank');}
+function saveSet(){localStorage.momo=sMoMo.value;sMsg.innerText='Saved! Admin 0793814204 will use: '+sMoMo.value}
+function sendAdmin(){let t=cIn.value;if(!t)return;chat.innerHTML+=`<div><b>You:</b> ${t}</div>`;window.open('https://wa.me/256793814204?text='+encodeURIComponent('Skylight AI: '+t),'_blank');cIn.value='';}
+// Auto-invite logic: if link has ?ref, count as invited and auto add 1 invite to inviter simulation (for demo)
+if(localStorage.getItem('invited')){team=Math.max(team,1);localStorage.team=team;}
+</script></body></html>
