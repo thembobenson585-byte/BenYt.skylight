@@ -2,62 +2,70 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Skylight AI - Capital</title>
+<title>Skylight AI Machines</title>
 <style>
-body{background:#050b18;color:#e0f0ff;font-family:Arial;padding:15px;margin:0}
-.header{text-align:center;padding:20px 0}
-.logo{font-size:32px;font-weight:900;letter-spacing:2px;background:linear-gradient(90deg,#00d2ff,#7000ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.card{background:linear-gradient(145deg,#0f2340,#0a1930);border-radius:18px;padding:18px;margin:12px 0;border:1px solid #1a3a6a;box-shadow:0 4px 20px rgba(0,210,255,0.1)}
-.btn{background:linear-gradient(90deg,#00d2ff,#7000ff);color:white;padding:14px;border-radius:12px;border:none;width:100%;font-weight:bold;margin-top:12px;font-size:16px}
-.small{color:#7da0c8;font-size:12px;line-height:1.5}
-h2{margin:5px 0}
-.tag{display:inline-block;background:#00d2ff20;color:#00d2ff;padding:4px 10px;border-radius:20px;font-size:11px;border:1px solid #00d2ff40}
+body{background:#050b18;color:#e0f0ff;font-family:Arial;margin:0;padding:0}
+#login{height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;background:radial-gradient(circle at top,#0f2340,#050b18);padding:20px}
+.logo{font-size:36px;font-weight:900;background:linear-gradient(90deg,#00d2ff,#7000ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:2px}
+.card{background:linear-gradient(145deg,#0f2340,#0a1930);border-radius:18px;padding:18px;margin:12px;border:1px solid #1a3a6a}
+.btn{background:linear-gradient(90deg,#00d2ff,#7000ff);color:white;padding:14px;border:none;border-radius:12px;width:100%;font-weight:bold;font-size:16px}
+.btn2{background:#0a2a4a;border:1px solid #00d2ff;color:#00d2ff;padding:12px;border-radius:12px;width:100%;font-weight:bold}
+.small{color:#7da0c8;font-size:12px}
+input{width:100%;padding:14px;border-radius:12px;background:#050b18;border:1px solid #1a3a6a;color:white;margin:8px 0;box-sizing:border-box}
+.machine{display:flex;justify-content:space-between;align-items:center;background:#0a1930;padding:12px;border-radius:12px;margin:8px 0;border:1px solid #1a3a6a}
+.hide{display:none}
 </style>
 </head>
 <body>
-<div class="header">
+
+<!-- LOGIN -->
+<div id="login">
 <div class="logo">SKYLIGHT AI</div>
-<p class="small">Intelligent Capital Growth • 3% Monthly</p>
-<span class="tag">● AI Powered • Kampala</span>
+<p class="small">AI Mining Machines • 3% Monthly</p>
+<div class="card" style="width:100%;max-width:350px">
+<h3 style="margin:0">Enter Access Code</h3>
+<p class="small">Password required before inside</p>
+<input id="pass" type="password" placeholder="Enter password">
+<button class="btn" onclick="checkPass()">UNLOCK DASHBOARD</button>
+<p class="small" id="err" style="color:#ff4444"></p>
+<p class="small">Default: skylight123</p>
+</div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dash" class="hide" style="padding:15px">
+<div style="text-align:center;padding:10px">
+<div class="logo" style="font-size:28px">SKYLIGHT AI</div>
+<p class="small">Live Mining • Machines from 2K UGX</p>
 </div>
 
 <div class="card">
 <p class="small">CAPITAL WALLET</p>
-<h2>0 UGX</h2>
-<p class="small">AI-Managed Capital - Secured</p>
-<button class="btn">+ Deposit Capital</button>
+<h2 id="cap">0 UGX</h2>
+<p class="small">Active Deposit</p>
+<button class="btn" onclick="deposit()">+ Deposit via MoMo</button>
 </div>
 
 <div class="card">
-<p class="small">PROFITS WALLET</p>
-<h2>0 UGX</h2>
-<p class="small">Earning 3% Monthly • AI Trading</p>
-<button class="btn" style="background:#0a2a4a;border:1px solid #00d2ff;color:#00d2ff">Claim Daily Profit</button>
+<p class="small">PROFITS WALLET - 3% Monthly (0.1% Daily)</p>
+<h2 id="prof">0 UGX</h2>
+<p class="small">Auto-growing by AI <span id="live" style="color:#00d2ff">● LIVE</span></p>
+<button class="btn2" onclick="claim()">Claim Daily Profit</button>
 </div>
 
 <div class="card">
-<p class="small">TOTAL EARNINGS</p>
-<h2>0 UGX</h2>
-<p class="small">Lifetime AI Profits</p>
+<p class="small">YOUR MACHINES</p>
+<div id="myMachines"><p class="small">No machines yet. Buy below starting 2K</p></div>
+</div>
+
+<div class="card">
+<p class="small">🤖 AI MACHINES MARKET - Start 2K</p>
+<div class="machine"><div><b>AI Starter</b><br><span class="small">2,000 UGX • Earn 60 UGX/mo</span></div><button class="btn2" style="width:auto" onclick="buy(2000,2)">Buy</button></div>
+<div class="machine"><div><b>AI Lite</b><br><span class="small">5,000 UGX • Earn 150 UGX/mo</span></div><button class="btn2" style="width:auto" onclick="buy(5000,5)">Buy</button></div>
+<div class="machine"><div><b>AI Pro</b><br><span class="small">20,000 UGX • Earn 600 UGX/mo</span></div><button class="btn2" style="width:auto" onclick="buy(20000,20)">Buy</button></div>
+<div class="machine"><div><b>AI Ultra</b><br><span class="small">50,000 UGX • Earn 1,500 UGX/mo</span></div><button class="btn2" style="width:auto" onclick="buy(50000,50)">Buy</button></div>
 </div>
 
 <div class="card">
 <p class="small">YOUR AI REFERRAL LINK</p>
-<input id="ref" value="https://skylight-ai.club/?ref=SKYLIGHT" style="width:100%;padding:12px;border-radius:10px;background:#050b18;border:1px solid #1a3a6a;color:#00d2ff">
-<p class="small">Share and earn 5% instantly • AI tracks all</p>
-<button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('ref').value);alert('Copied!')">Copy Link</button>
-</div>
-
-<div class="card" style="border:1px solid #00d2ff40">
-<h3 style="margin:0 0 8px 0">⚡ How Skylight AI Works</h3>
-<p class="small">
-1. Deposit 10,000 UGX Min via MoMo<br>
-2. AI manages & grows 3% monthly<br>
-3. Withdraw anytime to MTN/Airtel<br>
-4. 100% Transparent Dashboard
-</p>
-</div>
-
-<p class="small" style="text-align:center;margin-top:20px">Skylight AI © 2026 • Not affiliated with Zeus Stocks • Honest Growth</p>
-</body>
-</html>
+<input id="ref" value="https://thembobenson585-byte.github.io/BenYt.skylight/capital.html?
