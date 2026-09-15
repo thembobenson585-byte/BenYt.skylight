@@ -1,14 +1,115 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Skylight AI Hut8</title><style>body{margin:0;background:#050b18;color:#fff;font-family:Arial;padding-bottom:80px}.top{background:#0a1930;padding:12px;border-bottom:1px solid #1a3a6a;display:flex;justify-content:space-between}.logo{font-weight:900;background:linear-gradient(90deg,#00d2ff,#7000ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.card{background:#0f2340;border-radius:16px;padding:14px;margin:10px;border:1px solid #1a3a6a}.btn{background:linear-gradient(90deg,#00d2ff,#7000ff);color:#fff;border:none;padding:12px;border-radius:12px;width:100%;font-weight:bold}.btn2{background:#0a2a4a;border:1px solid #00d2ff;color:#00d2ff;padding:10px;border-radius:10px;width:100%}.small{color:#7da0c8;font-size:11px}.machine{background:#0a1930;border:1px solid #1a3a6a;border-radius:12px;padding:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}.nav{position:fixed;bottom:0;left:0;right:0;background:#0a1930;border-top:1px solid #1a3a6a;display:flex;justify-content:space-around;padding:8px 0}.nav div{text-align:center;font-size:10px;color:#7da0c8}.nav div.active{color:#00d2ff}.hide{display:none}input{width:100%;padding:12px;border-radius:10px;background:#050b18;border:1px solid #1a3a6a;color:#fff;margin:6px 0;box-sizing:border-box}</style></head><body>
-<div class="top"><div class="logo">SKYLIGHT AI</div><div class="small">HUT8 • 2K Start</div></div>
-<div id="L" style="padding:20px"><div class="logo" style="font-size:32px;text-align:center">SKYLIGHT AI</div><p style="text-align:center" class="small">Machines from 2K • Hut8 Edition</p><div class="card"><h3>Access Code</h3><input id="p" type="password" placeholder="skylight123"><button class="btn" onclick="if(document.getElementById('p').value==='skylight123'){document.getElementById('L').style.display='none';document.getElementById('A').style.display='block';document.getElementById('N').style.display='flex'}else{alert('Use skylight123')}">UNLOCK</button></div></div>
-<div id="A" style="display:none">
-<div id="t-home"><div style="display:flex;gap:10px;margin:10px"><div class="card" style="flex:1;margin:0"><p class="small">CAPITAL</p><h2 id="c">0 UGX</h2></div><div class="card" style="flex:1;margin:0"><p class="small">PROFITS LIVE</p><h2 id="pr">0 UGX</h2></div></div><div class="card"><h3>My Machines</h3><div id="my" class="small">No machines. Buy below.</div><button class="btn2" onclick="claim()">Claim Daily</button></div><div class="card"><h3>Machines Market - Start 2K</h3><div class="machine"><div><b>AI S1 Starter</b><br><span class="small">2000 UGX • 60/mo</span></div><button class="btn2" style="width:60px" onclick="buy(2000,60,'S1')">Buy</button></div><div class="machine"><div><b>AI S2 Lite</b><br><span class="small">5000 UGX • 150/mo</span></div><button class="btn2" style="width:60px" onclick="buy(5000,150,'S2')">Buy</button></div><div class="machine"><div><b>AI S3 Pro</b><br><span class="small">20000 UGX • 600/mo</span></div><button class="btn2" style="width:60px" onclick="buy(20000,600,'S3')">Buy</button></div><div class="machine"><div><b>AI S4 Ultra</b><br><span class="small">50000 UGX • 1500/mo</span></div><button class="btn2" style="width:60px" onclick="buy(50000,1500,'S4')">Buy</button></div></div></div>
-<div id="t-with" class="hide"><div class="card"><h3>Withdraw</h3><input id="wn" placeholder="MoMo 077..."><input id="wa" placeholder="Amount"><button class="btn" onclick="wd()">Request Withdraw</button><div id="wh" class="small"></div></div></div>
-<div id="t-group" class="hide"><div class="card"><h3>Group & Referral</h3><input value="https://thembobenson585-byte.github.io/BenYt.skylight/?ref=SKY" id="rl"><button class="btn" onclick="navigator.clipboard.writeText(document.getElementById('rl').value);alert('Copied')">Copy Referral Link</button><button class="btn2" style="margin-top:8px" onclick="window.open('https://wa.me/','_blank')">Join WhatsApp Group</button></div></div>
-<div id="t-rules" class="hide"><div class="card"><h3>Rules</h3><p class="small" style="line-height:1.6">1. Machines from 2K UGX.<br>2. 3% monthly (0.1% daily).<br>3. S1=30d, S3=60d, S4=90d.<br>4. Min withdraw 1000 UGX 5% fee.<br>5. Referral 5% instant.<br>6. Admin never asks password.</p></div></div>
-<div id="t-set" class="hide"><div class="card"><h3>Settings</h3><input placeholder="Bind MoMo number"><input placeholder="New Password"><button class="btn" onclick="alert('Saved')">Save</button></div></div>
-<div id="t-admin" class="hide"><div class="card"><h3>Admin Chat</h3><div style="background:#050b18;border:1px solid #1a3a6a;border-radius:10px;padding:10px;height:120px" class="small">Admin: Welcome to Skylight AI! How can I help?</div><input id="ci" placeholder="Type..."><button class="btn" onclick="let t=document.getElementById('ci').value;window.open('https://wa.me/256700000000?text='+encodeURIComponent(t),'_blank')">Send to Admin WhatsApp</button></div></div>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Skylight AI - Hut8 Pro</title>
+<style>
+:root{--bg:#050b18;--card:#0f2340;--card2:#0a1930;--line:#1a3a6a;--blue:#00d2ff;--purple:#7000ff}
+body{margin:0;background:var(--bg);color:#fff;font-family:Arial;padding-bottom:85px}
+.top{position:sticky;top:0;background:var(--card2);padding:12px 15px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;z-index:10}
+.logo{font-weight:900;font-size:20px;background:linear-gradient(90deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px}
+.card{background:linear-gradient(145deg,var(--card),var(--card2));border-radius:16px;padding:14px;margin:10px;border:1px solid var(--line)}
+.btn{background:linear-gradient(90deg,var(--blue),var(--purple));color:#fff;border:none;padding:13px;border-radius:12px;width:100%;font-weight:bold;font-size:15px}
+.btn2{background:var(--card2);border:1px solid var(--blue);color:var(--blue);padding:11px;border-radius:11px;width:100%;font-weight:bold}
+.small{color:#7da0c8;font-size:11px;line-height:1.4}
+.machine{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center}
+.machine b{font-size:14px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#0a1930;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 0 6px 0;z-index:30}
+.nav div{text-align:center;font-size:9px;color:#7da0c8;cursor:pointer;min-width:45px}
+.nav div.active{color:var(--blue)}
+.hide{display:none!important}
+input,select{width:100%;padding:12px;border-radius:10px;background:#050b18;border:1px solid var(--line);color:#fff;box-sizing:border-box;margin:6px 0}
+.tag{background:linear-gradient(90deg,var(--blue),var(--purple));padding:3px 8px;border-radius:20px;font-size:10px}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">SKYLIGHT AI</div><div><span class="tag" id="accTop">SKY-2026</span></div></div>
+
+<!-- LOGIN -->
+<div id="login" style="padding:20px;text-align:center">
+<div class="logo" style="font-size:34px;margin-top:30px">SKYLIGHT AI</div>
+<p class="small">Hut8 Pro Edition • Machines from 2K UGX</p>
+<div class="card" style="margin-top:25px;text-align:left">
+<h3 style="margin:0">Access Code</h3>
+<p class="small">Enter password to unlock</p>
+<input id="pass" type="password" placeholder="skylight123">
+<button class="btn" onclick="login()">UNLOCK DASHBOARD</button>
+<p class="small" id="err" style="color:#ff4444"></p>
+<p class="small">Default: skylight123</p>
 </div>
-<div id="N" class="nav" style="display:none"><div id="nh" class="active" onclick="tab('home')">🏠<br>Home</div><div onclick="tab('with')">💸<br>Withdraw</div><div onclick="tab('group')">👥<br>Group</div><div onclick="tab('rules')">📜<br>Rules</div><div onclick="tab('set')">⚙️<br>Set</div><div onclick="tab('admin')">💬<br>Admin</div></div>
-<script>let cap=Number(localStorage.c||0),prof=Number(localStorage.pr||0),ms=JSON.parse(localStorage.ms||'[]');function upd(){document.getElementById('c').innerText=cap+' UGX';document.getElementById('pr').innerText=Math.floor(prof)+' UGX';let h='';ms.forEach(m=>h+=`<div class="machine"><div><b>${m.id}</b><br><span class="small">${m.cost} UGX</span></div><span class="small" style="color:#00d2ff">${m.earn}/mo</span></div>`);document.getElementById('my').innerHTML=ms.length?h:'No machines';}upd();function buy(cst,ern,id){if(cap<cst){let a=prompt('Deposit min 2000');if(a){cap+=Number(a);localStorage.c=cap;upd();}}else{cap-=cst;ms.push({cost:cst,earn:ern,id:id});localStorage.c=cap;localStorage.ms=JSON.stringify(ms);upd();alert('Bought '+id)}}function claim(){let d=0;ms.forEach(m=>d+=m.earn/30);if(d==0){alert('Buy 2K machine first');return;}prof+=d;localStorage.pr=prof;upd();alert('Claimed '+d+' UGX')}function tab(t){['home','with','group','rules','set','admin'].forEach(x=>document.getElementById('t-'+x).style.display='none');document.getElementById('t-'+t).style.display='block'}function wd(){let a=document.getElementById('wa').value;alert('Withdrawal '+a+' UGX requested to '+document.getElementById('wn').value)}setInterval(()=>{let d=0;ms.forEach(m=>d+=m.earn/30/86400);if(d){prof+=d;localStorage.pr=prof;let e=document.getElementById('pr');if(e)e.innerText=Math.floor(prof)+' UGX'}},1000)</script>
-</body></html>
+</div>
+
+<!-- APP -->
+<div id="app" class="hide">
+
+<!-- HOME -->
+<div id="t-home">
+<div style="display:flex;gap:0"><div class="card" style="flex:1"><p class="small">CAPITAL WALLET</p><h2 id="cap" style="margin:5px 0">0 UGX</h2><button class="btn2" onclick="deposit()">+ Deposit</button></div><div class="card" style="flex:1"><p class="small">PROFITS WALLET</p><h2 id="prof" style="margin:5px 0">0 UGX</h2><p class="small" style="color:#00ff88">● LIVE 3% Monthly</p></div></div>
+<div class="card"><div style="display:flex;justify-content:space-between"><h3 style="margin:0">My Machines <span id="mCount" style="color:var(--blue)">0</span></h3><span class="small" id="earnRate">0 UGX/day</span></div><div id="myM" class="small" style="margin-top:8px">No machines yet. Buy starting 2K below to start earning every second.</div><button class="btn2" style="margin-top:10px" onclick="claim()">Claim Daily Profit</button></div>
+<div class="card"><h3 style="margin:0 0 10px 0">🤖 AI Machines Market - Start 2K</h3>
+<div class="machine"><div><b>AI Starter S1</b><br><span class="small">2,000 UGX • 30 Days • 60 UGX/mo</span><br><span class="small" style="color:#00ff88">Daily: 2 UGX</span></div><button class="btn2" style="width:65px" onclick="buy(2000,60,'S1',30)">Buy</button></div>
+<div class="machine"><div><b>AI Lite S2</b><br><span class="small">5,000 UGX • 30 Days • 150 UGX/mo</span><br><span class="small" style="color:#00ff88">Daily: 5 UGX</span></div><button class="btn2" style="width:65px" onclick="buy(5000,150,'S2',30)">Buy</button></div>
+<div class="machine"><div><b>AI Pro S3</b><br><span class="small">20,000 UGX • 60 Days • 600 UGX/mo</span><br><span class="small" style="color:#00ff88">Daily: 20 UGX</span></div><button class="btn2" style="width:65px" onclick="buy(20000,600,'S3',60)">Buy</button></div>
+<div class="machine"><div><b>AI Ultra S4</b><br><span class="small">50,000 UGX • 90 Days • 1,500 UGX/mo</span><br><span class="small" style="color:#00ff88">Daily: 50 UGX</span></div><button class="btn2" style="width:65px" onclick="buy(50000,1500,'S4',90)">Buy</button></div>
+<div class="machine"><div><b>AI Beast S5</b><br><span class="small">100,000 UGX • 90 Days • 3,000 UGX/mo</span><br><span class="small" style="color:#00ff88">Daily: 100 UGX</span></div><button class="btn2" style="width:65px" onclick="buy(100000,3000,'S5',90)">Buy</button></div>
+</div>
+</div>
+
+<!-- WITHDRAW -->
+<div id="t-with" class="hide">
+<div class="card"><h3>Withdraw to MoMo</h3><p class="small">Min 1,000 UGX • Fee 5% • MTN / Airtel</p><select id="wNet"><option>MTN Uganda</option><option>Airtel Uganda</option></select><input id="wNum" placeholder="Number 077XXXXXXX"><input id="wAmt" type="number" placeholder="Amount UGX"><button class="btn" onclick="withdraw()">Submit Withdrawal</button><div id="wHist" style="margin-top:12px"></div></div>
+<div class="card"><h3>History</h3><div id="wList" class="small">No withdrawals yet</div></div>
+</div>
+
+<!-- GROUP -->
+<div id="t-group" class="hide">
+<div class="card"><h3>Team / Group</h3><p class="small">Your referral link - earn 5% per machine</p><input id="ref" value="https://thembobenson585-byte.github.io/BenYt.skylight/?ref=SKYLIGHT"><button class="btn" onclick="copyRef()">Copy Link</button><div style="display:flex;gap:0;margin-top:10px"><div class="card" style="flex:1;margin:0 5px 0 0"><p class="small">Team</p><h2 id="team">0</h2></div><div class="card" style="flex:1;margin:0 0 0 5px"><p class="small">Ref Earnings</p><h2 id="refEarn">0 UGX</h2></div></div></div>
+<div class="card"><h3>Official Groups</h3><button class="btn" style="background:#25D366" onclick="window.open('https://chat.whatsapp.com/','_blank')">Join WhatsApp Group</button><button class="btn2" style="margin-top:8px" onclick="window.open('https://t.me/','_blank')">Join Telegram Channel</button></div>
+</div>
+
+<!-- RULES -->
+<div id="t-rules" class="hide"><div class="card"><h3>📜 Skylight AI Rules</h3><p class="small" style="line-height:1.7">
+<b>1. Machines:</b> Start from 2,000 UGX only. S1/S2=30 days, S3=60 days, S4/S5=90 days.<br><br>
+<b>2. Profits:</b> 3% monthly (0.1% daily) honest AI mining. Profit grows every second in Profits Wallet.<br><br>
+<b>3. Withdrawal:</b> Minimum 1,000 UGX. 5% fee for MoMo charges. Processed 24hrs.<br><br>
+<b>4. Deposit:</b> Via MTN/Airtel MoMo - capital goes to Capital Wallet, then buy machines.<br><br>
+<b>5. Referral:</b> 5% instant bonus when friend buys machine. Team unlimited.<br><br>
+<b>6. Settings:</b> Bind your MoMo number in Settings to receive withdrawals.<br><br>
+<b>7. Safety:</b> Admin never asks password. Don't share login.<br><br>
+<b>8. Honesty:</b> This is AI mining simulation platform, not a bank. 3% only to keep sustainable.
+</p></div></div>
+
+<!-- SETTINGS -->
+<div id="t-set" class="hide"><div class="card"><h3>⚙️ Settings</h3><p class="small">Bind MoMo Number for Withdrawal</p><input id="sMoMo" placeholder="077XXXXXXX"><p class="small">MTN / Airtel Name</p><input id="sName" placeholder="Full name on MoMo"><p class="small">New Password</p><input id="sPass" placeholder="New password"><button class="btn" onclick="saveSet()">Save Settings</button><p id="sMsg" class="small" style="color:#00ff88"></p></div><div class="card"><p class="small">Account ID</p><h3 id="accId">SKY-XXXX</h3><p class="small">Version: Hut8 Pro 2K Edition • Kampala, UG</p><button class="btn2" onclick="if(confirm('Reset all data?')){localStorage.clear();location.reload()}">Logout & Reset Test Data</button></div></div>
+
+<!-- ADMIN CHAT -->
+<div id="t-admin" class="hide"><div class="card"><h3>💬 Admin Chat</h3><p class="small">Support: Kampala • Reply 1-5 mins</p><div id="chat" style="background:#050b18;border:1px solid var(--line);border-radius:10px;height:220px;overflow:auto;padding:10px" class="small"><div style="margin-bottom:8px"><b style="color:var(--blue)">Admin:</b> Hello! Welcome to Skylight AI Hut8 Pro 🤖 Machines from 2K UGX. How can we help?</div></div><input id="cIn" placeholder="Type message..."><button class="btn" onclick="sendAdmin()">Send to Admin WhatsApp</button><p class="small">Chat connects directly to Admin WhatsApp</p></div></div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<div id="nav" class="nav hide">
+<div id="n-home" class="active" onclick="go('home')">🏠<br>Home</div>
+<div id="n-with" onclick="go('with')">💸<br>Withdraw</div>
+<div id="n-group" onclick="go('group')">👥<br>Group</div>
+<div id="n-rules" onclick="go('rules')">📜<br>Rules</div>
+<div id="n-set" onclick="go('set')">⚙️<br>Settings</div>
+<div id="n-admin" onclick="go('admin')">💬<br>Admin</div>
+</div>
+
+<script>
+let cap=Number(localStorage.getItem('cap')||0),prof=Number(localStorage.getItem('prof')||0),mach=JSON.parse(localStorage.getItem('mach')||'[]'),wHist=JSON.parse(localStorage.getItem('wh')||'[]');
+function login(){if(document.getElementById('pass').value==='skylight123'){document.getElementById('login').style.display='none';document.getElementById('app').classList.remove('hide');document.getElementById('nav').classList.remove('hide');render();live();}else{err.innerText='Wrong! Use skylight123'}}
+function render(){document.getElementById('cap').innerText=cap.toLocaleString()+' UGX';document.getElementById('prof').innerText=Math.floor(prof).toLocaleString()+' UGX';document.getElementById('accId').innerText=localStorage.getItem('acc')||'SKY-'+Math.floor(1000+Math.random()*9000);document.getElementById('accTop').innerText=document.getElementById('accId').innerText;localStorage.setItem('acc',document.getElementById('accId').innerText);let h='',d=0;mach.forEach(m=>{d+=m.earn/30;h+=`<div class="machine"><div><b>${m.id} • ${m.cost} UGX</b><br><span class="small">Earns ${m.earn}/mo • ${m.days} days left</span></div><span class="small" style="color:#00d2ff">+${(m.earn/30).toFixed(0)}/day</span></div>`});document.getElementById('myM').innerHTML=mach.length?h:'No machines yet. Buy starting 2K below.';document.getElementById('mCount').innerText=mach.length;document.getElementById('earnRate').innerText=d.toFixed(0)+' UGX/day';let wh='';wHist.forEach(x=>wh+=`<div class="machine" style="padding:8px"><span class="small">${x}</span></div>`);document.getElementById('wList').innerHTML=wh||'No withdrawals';document.getElementById('wHist').innerHTML=wh;}
+function deposit(){let a=prompt('Deposit amount UGX (Min 2000)');if(!a)return;cap+=Number(a);localStorage.setItem('cap',cap);render();}
+function buy(cost,earn,id,days){if(cap<cost){alert('Not enough Capital! Deposit first. Need '+cost);deposit();return;}cap-=cost;mach.push({cost:cost,earn:earn,id:id,days:days});localStorage.setItem('cap',cap);localStorage.setItem('mach',JSON.stringify(mach));render();alert(id+' bought! Earns '+earn+' UGX/mo');}
+function claim(){let d=0;mach.forEach(m=>d+=m.earn/30);if(d==0){alert('Buy machine starting 2K first!');return;}prof+=d;localStorage.setItem('prof',prof);render();alert('Claimed '+d.toFixed(0)+' UGX!');}
+function live(){setInterval(()=>{let d=0;mach.forEach(m=>d+=m.earn/30/86400);if(d>0){prof+=d;localStorage.setItem('prof',prof);let el=document.getElementById('prof');if(el)el.innerText=Math.floor(prof).toLocaleString()+' UGX'}},1000)}
+function go(t){['home','with','group','rules','set','admin'].forEach(x=>{document.getElementById('t-'+x).classList.add('hide');document.getElementById('n-'+x).classList.remove('active')});document.getElementById('t-'+t).classList.remove('hide');document.getElementById('n-'+t).classList.add('active')}
+function withdraw(){let a=Number(document.getElementById('wAmt').value),n=document.getElementById('wNum').value;if(a<1000){alert('Min 1000');return}if(prof<a){alert('Not enough profits');return}prof-=a;wHist.unshift(a+' UGX to '+n+' - Pending 24h');localStorage.setItem('prof',prof);localStorage.setItem('wh',JSON.stringify(wHist));render();alert('Withdrawal '+a+' UGX to '+n+' requested!')}
+function copyRef(){let l=document.getElementById('ref');navigator.clipboard.writeText(l.value);alert('Referral link copied!');localStorage.setItem('team',Number(localStorage.getItem('team')||0)+1);document.getElementById('team').innerText=localStorage.getItem('team')}
+function saveSet(){localStorage.setItem('momo',document.getElementById('sMoMo').value);document.getElementById('sMsg').innerText='Settings saved! MoMo bound: '+document.getElementById('sMoMo').value}
+function sendAdmin(){let txt=document.getElementById('cIn').value;if(!txt)return;document.getElementById('chat').innerHTML+=`<div style="margin-bottom:6px"><b>You:</b> ${txt}</div>`;window.open('https://wa.me/256700000000?text='+encodeURIComponent('Skylight AI Hut8: '+txt),'_blank');document.getElementById('cIn').value='';}
+</script>
+</body>
+</html>
