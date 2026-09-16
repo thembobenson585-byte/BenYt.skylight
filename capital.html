@@ -9,18 +9,20 @@ body{margin:0;background:#0a1220;font-family:Arial;color:white}
 .header{background:#08101f;padding:12px;display:flex;justify-content:space-between}
 .header b{background:linear-gradient(90deg,#00d4ff,#8a2be2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .live{color:#00ff88;font-size:12px}
-.nav{display:flex;gap:8px;padding:10px;justify-content:center}
-.nav button{padding:10px 15px;border:none;border-radius:10px;font-weight:bold;cursor:pointer}
+.nav{display:flex;gap:6px;padding:10px;justify-content:center;flex-wrap:wrap}
+.nav button{padding:10px 12px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;font-size:12px}
+#btn0{background:white;color:black}
 #btn1{background:gold;color:black}
 #btn2{background:cyan;color:black}
 #btn3{background:#8a2be2;color:white}
 .box{display:none;margin:20px;border-radius:15px;padding:20px;text-align:center}
 .active{display:block}
+.login{border:2px solid #00d4ff;box-shadow:0 0 15px #00d4ff;background:#112040}
 .founder{border:2px solid gold;box-shadow:0 0 15px gold}
 .official{border:2px solid cyan;box-shadow:0 0 15px cyan}
 .machine{border:2px solid #8a2be2;box-shadow:0 0 15px #8a2be2}
 input{width:100%;padding:14px;margin:8px 0;background:#0a1830;border:1px solid #1e345e;border-radius:12px;color:white;box-sizing:border-box}
-.btn{width:100%;padding:14px;background:linear-gradient(90deg,#00c6ff,#7d2ae8);border:none;border-radius:12px;color:white;font-weight:bold;margin-top:10px}
+.btn{width:100%;padding:14px;background:linear-gradient(90deg,#00c6ff,#7d2ae8);border:none;border-radius:12px;color:white;font-weight:bold;margin-top:10px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -28,50 +30,62 @@ input{width:100%;padding:14px;margin:8px 0;background:#0a1830;border:1px solid #
 <div class="header"><b>SKYLIGHT AI COMPANY</b><span class="live">● AI LIVE 7%</span></div>
 
 <div class="nav">
+<button id="btn0" onclick="show('login')">LOGIN</button>
 <button id="btn1" onclick="show('founders')">FOUNDERS</button>
 <button id="btn2" onclick="show('official')">OFFICIAL GROUP</button>
 <button id="btn3" onclick="show('machines')">MACHINES</button>
 </div>
 
-<!-- PAGE 1: FOUNDERS - SEPARATED -->
-<div id="founders" class="box founder active">
+<!-- LOGIN - NOW OPENED FIRST -->
+<div id="login" class="box login active">
+<h2>Login - Skylight AI Company</h2>
+<p style="color:#8aa0c0;font-size:13px">If you registered before, click LOGIN now</p>
+<input id="phone" placeholder="Phone">
+<input id="pass" type="password" placeholder="Login Password">
+<button class="btn" onclick="doLogin()">LOGIN - 7% LIVE</button>
+<p style="font-size:12px;margin-top:10px;color:#8aa0c0">No account? REGISTER</p>
+</div>
+
+<!-- FOUNDERS -->
+<div id="founders" class="box founder">
 <h2>👑 VERIFIED FOUNDER</h2>
 <p><b>0793814204</b></p>
 <div style="text-align:left;background:#0005;padding:10px;border-radius:10px">
 <p>Inside Founders People:</p>
 <p>• Vision & Growth Strategy</p>
 <p>• Community Leadership</p>
-<p>• Product Direction</p>
 </div>
 <p>✓ VERIFIED FOUNDER</p>
 </div>
 
-<!-- PAGE 2: OFFICIAL GROUP - SEPARATED -->
+<!-- OFFICIAL GROUP -->
 <div id="official" class="box official">
 <h2>OFFICIAL GROUP MEMBER</h2>
 <h1>SKY-####</h1>
 <p>MEMBER STATUS: ACTIVE</p>
-<p>TIER: BETA FOUNDER</p>
-<p>✓ OFFICIAL GROUP</p>
 </div>
 
-<!-- PAGE 3: MACHINES - SEPARATED -->
+<!-- MACHINES -->
 <div id="machines" class="box machine">
 <h2>🤖 MACHINES</h2>
-<p>Skylight AI Machines</p>
-<p>• AI LIVE 7% - Auto Trading</p>
-<p>• Login - Skylight AI Company</p>
-<input placeholder="Phone">
-<input type="password" placeholder="Login Password">
-<button class="btn">LOGIN - 7% LIVE</button>
+<p>AI LIVE 7% - Auto Trading</p>
+<p>Machine Status: ONLINE</p>
 </div>
 
 <script>
 function show(id){
+document.getElementById('login').classList.remove('active');
 document.getElementById('founders').classList.remove('active');
 document.getElementById('official').classList.remove('active');
 document.getElementById('machines').classList.remove('active');
 document.getElementById(id).classList.add('active');
+}
+function doLogin(){
+let p=document.getElementById('phone').value;
+let ps=document.getElementById('pass').value;
+if(p==''||ps==''){alert('Enter Phone and Password');return;}
+alert('Login Success! Welcome '+p);
+show('founders');
 }
 </script>
 
