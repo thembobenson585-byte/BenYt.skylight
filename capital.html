@@ -1,54 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SKYLIGHT AI</title>
 <style>
-body{margin:0;background:#0b1529;color:white;font-family:Arial}
-.top{padding:15px;background:#080e1f;text-align:center;font-weight:bold;letter-spacing:1px}
+body{margin:0;background:#0b1529;color:white;font-family:Arial;padding-bottom:70px}
+.top{padding:15px;background:#080e1f;text-align:center;font-weight:bold}
 .box{margin:12px;background:#13233f;border-radius:15px;padding:15px;border:1px solid #1d3a6b}
-.btn{width:100%;padding:14px;background:linear-gradient(90deg,#00c6ff,#7d2ae8);border:none;border-radius:12px;color:white;font-weight:bold;margin-top:10px}
-.row{display:flex;justify-content:space-between;padding:12px;background:#0e1c36;border-radius:10px;margin:8px 0}
+.row{display:flex;justify-content:space-between;align-items:center;padding:12px;background:#0e1c36;border-radius:10px;margin:8px 0}
+.btn{padding:12px;background:linear-gradient(90deg,#00c6ff,#7d2ae8);border:none;border-radius:10px;color:white;font-weight:bold}
+.btn-full{width:100%;padding:14px;background:linear-gradient(90deg,#00c6ff,#7d2ae8);border:none;border-radius:12px;color:white;font-weight:bold;margin-top:10px}
 .b{position:fixed;bottom:0;left:0;right:0;background:#080e1f;display:flex;justify-content:space-around;padding:8px 0;border-top:1px solid #1d3a6b}
-.b span{font-size:10px;color:#7a90b5;text-align:center}
+.b button{background:none;border:none;color:#7a90b5;font-size:10px}
+.on{color:#00d4ff!important}
+.page{display:none}.show{display:block}
+input{width:100%;padding:12px;border-radius:8px;border:1px solid #1d3a6b;background:#0e1c36;color:white;margin:6px 0}
 </style>
 </head>
 <body>
-<div class="top">SKYLIGHT AI COMPANY</div>
 
+<div class="top">SKYLIGHT AI COMPANY - 7% DAILY</div>
+
+<!-- HOME -->
+<div id="home" class="page show">
 <div class="box" style="display:flex;justify-content:space-between">
-<div><small>CAPITAL</small><h2 style="margin:5px 0">2,000 UGX</h2></div>
-<div style="text-align:right"><small>PROFITS 7%</small><h2 style="margin:5px 0;color:#00ff88">0 UGX</h2></div>
+<div><small>CAPITAL</small><h2 id="cap" style="margin:5px 0">2,000 UGX</h2></div>
+<div style="text-align:right"><small>PROFITS 7%</small><h2 id="prof" style="margin:5px 0;color:#00ff88">0 UGX</h2></div>
 </div>
-
-<div style="padding:0 12px"><button class="btn">+ Deposit - 0793814204</button></div>
-
-<div class="box">
-<b>⚡ My Real Machines - Lights LIVE</b>
-<p style="font-size:12px;color:#7a90b5">No machines. Buy M1 to see lights</p>
-<button class="btn" style="background:#0e1c36;border:1px solid #00c6ff;color:#00c6ff">Claim Daily 7%</button>
-</div>
-
-<div class="box">
-<b>🤖 Buy Real Machines - 7% DAILY - Lights ON</b>
-<div class="row"><span>🟢 M1 Skylight AI 7% DAILY<br><small>2,000 UGX → 140/day</small></span><button class="btn" style="width:70px">Buy</button></div>
-<div class="row"><span>🟢 U Skylight AI 7% DAILY<br><small>5,000 UGX → 350/day</small></span><button class="btn" style="width:70px">Buy</button></div>
-<div class="row"><span>🟢 L Skylight AI 7% DAILY<br><small>15,000 UGX → 1050/day</small></span><button class="btn" style="width:70px">Buy</button></div>
-<div class="row"><span>🟢 Y Skylight AI 7% DAILY<br><small>30,000 UGX → 2100/day</small></span><button class="btn" style="width:70px">Buy</button></div>
-</div>
-
-<div class="box">
-<b>👑 VIP LEVEL</b>
-<div class="row"><span>VIP1</span><span>→</span></div>
-</div>
-
-<div class="b">
-<span>🏠<br>Home</span>
-<span>📤<br>With</span>
-<span>👥<br>Group</span>
-<span>📜<br>Rules</span>
-<span>⚙️<br>Set</span>
-<span>👤<br>Admin</span>
-</div>
-
-</body>
-</html>
+<div style="padding:
