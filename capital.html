@@ -6,86 +6,66 @@
 <title>SKYLIGHT AI COMPANY</title>
 <style>
 body{margin:0;background:#0a1220;color:white;font-family:Arial;padding-bottom:70px}
-.h{padding:12px;display:flex;justify-content:space-between;background:#08101f}
+.top{padding:12px;display:flex;justify-content:space-between;align-items:center;background:#0a1220;border-bottom:1px solid #112040}
+.top b{background:linear-gradient(90deg,#00d4ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:15px}
+.live{color:#00ff88;font-size:11px}
 .card{margin:12px;background:#112040;border-radius:16px;padding:15px;border:1px solid #1e345e}
-.row{display:flex;justify-content:space-between;background:#0a1830;padding:12px;border-radius:10px;margin:6px 0;align-items:center}
-.btn{padding:8px 16px;background:linear-gradient(90deg,#00d4ff,#7d2ae8);border:none;border-radius:20px;color:white;font-weight:bold}
-.ticker{height:90px;overflow:hidden}
-.move{animation:up 10s linear infinite}
-@keyframes up{0%{transform:translateY(100%)}100%{transform:translateY(-100%)}}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#08101f;display:flex;justify-content:space-around;padding:6px 0;border-top:1px solid #1e345e}
-.bottom button{background:none;border:none;color:#8aa0c0;font-size:10px}
-.on{color:#00d4ff!important}
-.p{display:none}.show{display:block}
+.card h2{margin:8px 0 4px;font-size:18px}
+.card p{color:#8aa0c0;font-size:12px;margin:2px 0}
+.join{width:100%;padding:10px;background:#0a1830;border:1px solid #1e345e;border-radius:20px;color:#00d4ff;margin-top:10px}
+.team-title{margin:18px 12px 8px;font-weight:bold}
+.member{display:flex;align-items:center;background:#0a1830;padding:10px;border-radius:12px;margin:8px 0;border:1px solid #162a4d}
+.member img{width:50px;height:50px;border-radius:50%;margin-right:12px;object-fit:cover}
+.member b{font-size:14px}
+.member span{font-size:11px;color:#8aa0c0;display:block}
+.welcome{background:#112040;margin:12px;border-radius:16px;padding:15px;border:1px solid #1e345e}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#08101f;display:flex;justify-content:space-around;padding:8px 0;border-top:1px solid #1e345e}
+.bottom div{font-size:10px;text-align:center;color:#8aa0c0}
+.bottom .active{color:#00d4ff}
 </style>
 </head>
 <body>
+<div class="top"><b>SKYLIGHT AI COMPANY</b><span class="live">● AI LIVE 7%</span></div>
 
-<div class="h"><b style="color:#00d4ff">SKYLIGHT AI COMPANY</b><span style="color:#00ff88;font-size:11px">● AI LIVE 7%</span></div>
-
-<div id="home" class="p show">
-<div class="card" style="display:flex;justify-content:space-between">
-<div><small>CAPITAL</small><h2 style="margin:0">2,000 UGX</h2></div>
-<div style="text-align:right"><small>PROFITS 7%</small><h2 style="margin:0;color:#00ff88">0 UGX</h2></div>
-</div>
-<div style="margin:0 12px"><button class="btn" style="width:100%">+ Deposit 0793814204</button></div>
-
-<div class="card"><b>👑 FOUNDER</b><p>0793814204 - VERIFIED</p></div>
-
-<div class="card"><b>💸 Site Settlement</b>
-<div class="ticker"><div class="move">
-<div class="row"><span>070****123 withdrew 14K</span><span style="color:#00ff88">✓</span></div>
-<div class="row"><span>078****456 withdrew 35K</span><span style="color:#00ff88">✓</span></div>
-<div class="row"><span>079****420 withdrew 7K</span><span style="color:#00ff88">✓</span></div>
-</div></div>
-</div>
+<div class="card">
+<div style="display:flex;align-items:center"><span style="font-size:20px">🤖</span><h2 style="margin-left:8px">Skylight AI Company - Official Sites</h2></div>
+<p>Kampala, Uganda • AI Live Sites • 7% Daily Profit • Since 2023</p>
+<p>🌐 Official Group LIVE</p>
+<button class="join">💬 Join Official Group</button>
 </div>
 
-<div id="ai" class="p">
-<div class="card"><b>⚡ My Real Machines - Lights LIVE</b><p style="color:#8aa0c0;font-size:12px">No machines. Buy M1 to see lights</p><button class="btn" style="width:100%">Claim Daily 7%</button></div>
-<div class="card"><b>🤖 Buy Real Machines - 7% DAILY - Lights ON</b>
-<div class="row"><span>🟢🔵 M1 Skylight AI<br><small>2K → 140/day</small></span><button class="btn">Buy</button></div>
-<div class="row"><span>🟢🔵 U Skylight AI<br><small>5K → 350/day</small></span><button class="btn">Buy</button></div>
-<div class="row"><span>🟢🟣 L Skylight AI<br><small>15K → 1050/day</small></span><button class="btn">Buy</button></div>
-<div class="row"><span>🟢🟣 Y Skylight AI<br><small>30K → 2100/day</small></span><button class="btn">Buy</button></div>
+<div class="team-title">👑 Founding Team - 4 Leaders</div>
+<div style="margin:0 12px">
+<div class="member">
+<img src="https://i.pravatar.cc/100?img=32">
+<div><b>Dr. Sarah Nakimuli - CTO</b><span>AI Engineer, Makerere University</span></div>
 </div>
-<div class="card"><b>👑 VIP LEVEL</b>
-<div class="row"><span>VIP1</span><span>→</span></div>
-<div class="row"><span>VIP2</span><span>→</span></div>
+<div class="member">
+<img src="https://i.pravatar.cc/100?img=15">
+<div><b>Alex Kintu - Operations Director</b><span>Manages 24 AI Servers LIVE</span></div>
+</div>
+<div class="member">
+<img src="https://i.pravatar.cc/100?img=23">
+<div><b>Grace Achieng - Finance Head</b><span>CPA - Payouts to 12,000+ members</span></div>
+</div>
+<div class="member">
+<img src="https://i.pravatar.cc/100?img=59">
+<div><b>Musa Okello - Community Lead</b><span>Official Group Admin - 0793814204</span></div>
 </div>
 </div>
 
-<div id="rules" class="p">
-<div class="card"><b>📜 RULES</b>
-<div class="row"><span>1. How to Deposit</span></div><p style="font-size:13px;color:#aaa">Go My → Deposit → Send to 0793814204 → Upload proof</p>
-<div class="row"><span>2. No Multiple Accounts</span></div><p style="font-size:13px;color:#aaa">One phone one account. Multiple will be banned.</p>
-<div class="row"><span>3. Withdrawal</span></div><p style="font-size:13px;color:#aaa">9AM-6PM, min 3000 UGX</p>
-</div>
-</div>
-
-<div id="my" class="p">
-<div class="card"><b>👤 My</b>
-<div class="row"><span>📤 Withdrawal</span><span>→</span></div>
-<div class="row"><span>📥 Deposit</span><span>→</span></div>
-<div class="row"><span>👥 Invite</span><span>→</span></div>
-<div class="row"><span>⚙️ Settings</span><span>→</span></div>
-</div>
+<div class="welcome">
+<b>Welcome Benson Mulyatha - 7% LIVE ⬆️</b>
+<p style="margin-top:6px">0779434443 | Skylight AI</p>
 </div>
 
 <div class="bottom">
-<button id="b-home" class="on" onclick="go('home')">🏠<br>Home</button>
-<button onclick="go('ai')">🤖<br>Ai Sky</button>
-<button onclick="go('rules')">📜<br>Rules</button>
-<button onclick="go('my')">👤<br>My</button>
+<div class="active">🏠<br>Home</div>
+<div>💰<br>With</div>
+<div>👥<br>Group</div>
+<div>📜<br>Rules</div>
+<div>⚙️<br>Set</div>
+<div>👑<br>Admin</div>
 </div>
-
-<script>
-function go(id){
-document.querySelectorAll('.p').forEach(p=>p.classList.remove('show'));
-document.getElementById(id).classList.add('show');
-document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('on'));
-event.currentTarget.classList.add('on');
-}
-</script>
 </body>
 </html>
