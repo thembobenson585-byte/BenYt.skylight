@@ -5,136 +5,87 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SKYLIGHT AI COMPANY</title>
 <style>
-body{margin:0;background:#0a1220;font-family:Arial;color:white;padding-bottom:70px}
-.header{padding:12px 15px;display:flex;justify-content:space-between;background:#08101f;position:sticky;top:0;z-index:10}
-.header b{background:linear-gradient(90deg,#00d4ff,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.live{color:#00ff88;font-size:11px}
+body{margin:0;background:#0a1220;color:white;font-family:Arial;padding-bottom:70px}
+.h{padding:12px;display:flex;justify-content:space-between;background:#08101f}
 .card{margin:12px;background:#112040;border-radius:16px;padding:15px;border:1px solid #1e345e}
-.gold{border:2px solid gold;box-shadow:0 0 15px gold;text-align:center}
-.cyan{border:2px solid cyan}
-.purple{border:2px solid #8a2be2}
-.title{font-weight:bold;margin-bottom:10px}
-.ticker{height:120px;overflow:hidden;background:#0a1830;border-radius:10px;position:relative}
-.ticker-inner{animation:up 12s linear infinite}
+.row{display:flex;justify-content:space-between;background:#0a1830;padding:12px;border-radius:10px;margin:6px 0;align-items:center}
+.btn{padding:8px 16px;background:linear-gradient(90deg,#00d4ff,#7d2ae8);border:none;border-radius:20px;color:white;font-weight:bold}
+.ticker{height:90px;overflow:hidden}
+.move{animation:up 10s linear infinite}
 @keyframes up{0%{transform:translateY(100%)}100%{transform:translateY(-100%)}}
-.row{display:flex;justify-content:space-between;padding:10px;background:#0a1830;border-radius:10px;margin:6px 0}
-.buy{padding:8px 16px;background:linear-gradient(90deg,#00d4ff,#7d2ae8);border:none;border-radius:20px;color:white;font-weight:bold}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#08101f;display:flex;justify-content:space-around;padding:8px 0;border-top:1px solid #1e345e}
-.bottom button{background:none;border:none;color:#8aa0c0;font-size:11px}
-.bottom .on{color:#00d4ff}
-.page{display:none}.show{display:block}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#08101f;display:flex;justify-content:space-around;padding:6px 0;border-top:1px solid #1e345e}
+.bottom button{background:none;border:none;color:#8aa0c0;font-size:10px}
+.on{color:#00d4ff!important}
+.p{display:none}.show{display:block}
 </style>
 </head>
 <body>
 
-<div class="header"><b>SKYLIGHT AI COMPANY</b><span class="live">● AI LIVE 7%</span></div>
+<div class="h"><b style="color:#00d4ff">SKYLIGHT AI COMPANY</b><span style="color:#00ff88;font-size:11px">● AI LIVE 7%</span></div>
 
-<!-- HOME PAGE -->
-<div id="home" class="page show">
-<div class="card gold">
-<h3>👑 VERIFIED FOUNDER</h3>
-<p><b>0793814204</b></p>
-<div style="text-align:left;background:rgba(0,0,0,0.4);padding:12px;border-radius:10px">
-<p>• Vision & Growth Strategy</p>
-<p>• Community Leadership</p>
+<div id="home" class="p show">
+<div class="card" style="display:flex;justify-content:space-between">
+<div><small>CAPITAL</small><h2 style="margin:0">2,000 UGX</h2></div>
+<div style="text-align:right"><small>PROFITS 7%</small><h2 style="margin:0;color:#00ff88">0 UGX</h2></div>
 </div>
-<p>✓ VERIFIED FOUNDER</p>
-</div>
+<div style="margin:0 12px"><button class="btn" style="width:100%">+ Deposit 0793814204</button></div>
 
-<div class="card cyan">
-<h3>👥 OFFICIAL GROUP</h3>
-<p>ID: SKY-####</p>
-<p>✓ OFFICIAL GROUP MEMBER</p>
-<button class="buy" style="width:100%">JOIN OFFICIAL GROUP</button>
-</div>
+<div class="card"><b>👑 FOUNDER</b><p>0793814204 - VERIFIED</p></div>
 
-<div class="card">
-<h3>💸 Site Settlement - Live Payouts</h3>
-<div class="ticker"><div class="ticker-inner">
-<div class="row"><span>070****123 withdrew 14,000 UGX</span><span style="color:#00ff88">✓</span></div>
-<div class="row"><span>078****456 withdrew 35,000 UGX</span><span style="color:#00ff88">✓</span></div>
-<div class="row"><span>075****789 withdrew 140,000 UGX</span><span style="color:#00ff88">✓</span></div>
-<div class="row"><span>070****234 withdrew 21,000 UGX</span><span style="color:#00ff88">✓</span></div>
-<div class="row"><span>079****420 withdrew 7,000 UGX</span><span style="color:#00ff88">✓</span></div>
+<div class="card"><b>💸 Site Settlement</b>
+<div class="ticker"><div class="move">
+<div class="row"><span>070****123 withdrew 14K</span><span style="color:#00ff88">✓</span></div>
+<div class="row"><span>078****456 withdrew 35K</span><span style="color:#00ff88">✓</span></div>
+<div class="row"><span>079****420 withdrew 7K</span><span style="color:#00ff88">✓</span></div>
 </div></div>
 </div>
 </div>
 
-<!-- AI SKYLIGHT - MACHINES -->
-<div id="ai" class="page">
-<div class="card">
-<h3>⚡ My Real Machines - Lights LIVE</h3>
-<p style="color:#8aa0c0;font-size:12px">No machines. Buy M1 to see lights</p>
-<button class="buy" style="width:100%;background:#0a1830;border:1px solid #00d4ff;color:#00d4ff">Claim Daily 7%</button>
+<div id="ai" class="p">
+<div class="card"><b>⚡ My Real Machines - Lights LIVE</b><p style="color:#8aa0c0;font-size:12px">No machines. Buy M1 to see lights</p><button class="btn" style="width:100%">Claim Daily 7%</button></div>
+<div class="card"><b>🤖 Buy Real Machines - 7% DAILY - Lights ON</b>
+<div class="row"><span>🟢🔵 M1 Skylight AI<br><small>2K → 140/day</small></span><button class="btn">Buy</button></div>
+<div class="row"><span>🟢🔵 U Skylight AI<br><small>5K → 350/day</small></span><button class="btn">Buy</button></div>
+<div class="row"><span>🟢🟣 L Skylight AI<br><small>15K → 1050/day</small></span><button class="btn">Buy</button></div>
+<div class="row"><span>🟢🟣 Y Skylight AI<br><small>30K → 2100/day</small></span><button class="btn">Buy</button></div>
 </div>
-
-<div class="card">
-<h3>🤖 Buy Real Machines - 7% DAILY - Lights ON</h3>
-<div class="row"><span>🟢🔵 M1 Skylight AI<br><small>2K → 140/day → 4.2K/mo</small></span><button class="buy">Buy</button></div>
-<div class="row"><span>🟢🔵 U Skylight AI<br><small>5K → 350/day → 10.5K/mo</small></span><button class="buy">Buy</button></div>
-<div class="row"><span>🟢🟣 L Skylight AI<br><small>15K → 1050/day → 31.5K/mo</small></span><button class="buy">Buy</button></div>
-<div class="row"><span>🟢🟣 Y Skylight AI<br><small>30K → 2100/day → 63K/mo</small></span><button class="buy">Buy</button></div>
-</div>
-
-<div class="card purple">
-<h3>👑 VIP LEVEL</h3>
-<div class="row"><span>VIP1 - 1 Team</span><span>→</span></div>
-<div class="row"><span>VIP2 - 3 Team</span><span>→</span></div>
-<div class="row"><span>VIP3 - 10 Team</span><span>→</span></div>
+<div class="card"><b>👑 VIP LEVEL</b>
+<div class="row"><span>VIP1</span><span>→</span></div>
+<div class="row"><span>VIP2</span><span>→</span></div>
 </div>
 </div>
 
-<!-- RULES -->
-<div id="rules" class="page">
-<div class="card">
-<h3>📜 RULES</h3>
-<div class="row"><span>1. How to Deposit</span></div>
-<p style="font-size:13px;color:#8aa0c0">Go to My → Deposit → Copy number 0793814204 → Send MTN/Airtel Money → Upload proof</p>
-<div class="row"><span>2. No Multiple Accounts</span></div>
-<p style="font-size:13px;color:#8aa0c0">One phone = One account. Multiple accounts will be banned and funds frozen.</p>
-<div class="row"><span>3. Withdrawal Time</span></div>
-<p style="font-size:13px;color:#8aa0c0">Daily 9AM - 6PM. Min 3000 UGX. 7% daily profit auto credited.</p>
-<div class="row"><span>4. Invite Bonus</span></div>
-<p style="font-size:13px;color:#8aa0c0">Invite friends and get 10% of their first deposit as bonus.</p>
+<div id="rules" class="p">
+<div class="card"><b>📜 RULES</b>
+<div class="row"><span>1. How to Deposit</span></div><p style="font-size:13px;color:#aaa">Go My → Deposit → Send to 0793814204 → Upload proof</p>
+<div class="row"><span>2. No Multiple Accounts</span></div><p style="font-size:13px;color:#aaa">One phone one account. Multiple will be banned.</p>
+<div class="row"><span>3. Withdrawal</span></div><p style="font-size:13px;color:#aaa">9AM-6PM, min 3000 UGX</p>
 </div>
 </div>
 
-<!-- MY -->
-<div id="my" class="page">
-<div class="card">
-<h3>👤 My Account</h3>
-<div class="row"><span>💰 Balance</span><span>2,000 UGX</span></div>
-<div class="row"><span>📈 Profits 7%</span><span>0 UGX</span></div>
-</div>
-<div class="card">
+<div id="my" class="p">
+<div class="card"><b>👤 My</b>
 <div class="row"><span>📤 Withdrawal</span><span>→</span></div>
-<div class="row"><span>📥 Deposit - 0793814204</span><span>→</span></div>
-<div class="row"><span>👥 Invite Friends</span><span>→</span></div>
+<div class="row"><span>📥 Deposit</span><span>→</span></div>
+<div class="row"><span>👥 Invite</span><span>→</span></div>
 <div class="row"><span>⚙️ Settings</span><span>→</span></div>
-<div class="row"><span>🔒 Logout</span><span>→</span></div>
-<button class="buy" style="width:100%;margin-top:10px">WITHDRAW NOW</button>
 </div>
 </div>
 
-<!-- BOTTOM MENU -->
 <div class="bottom">
 <button id="b-home" class="on" onclick="go('home')">🏠<br>Home</button>
-<button id="b-ai" onclick="go('ai')">🤖<br>Ai Sky</button>
-<button id="b-rules" onclick="go('rules')">📜<br>Rules</button>
-<button id="b-my" onclick="go('my')">👤<br>My</button>
+<button onclick="go('ai')">🤖<br>Ai Sky</button>
+<button onclick="go('rules')">📜<br>Rules</button>
+<button onclick="go('my')">👤<br>My</button>
 </div>
 
 <script>
 function go(id){
-document.getElementById('home').classList.remove('show');
-document.getElementById('ai').classList.remove('show');
-document.getElementById('rules').classList.remove('show');
-document.getElementById('my').classList.remove('show');
+document.querySelectorAll('.p').forEach(p=>p.classList.remove('show'));
 document.getElementById(id).classList.add('show');
 document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('on'));
-document.getElementById('b-'+id).classList.add('on');
+event.currentTarget.classList.add('on');
 }
 </script>
-
 </body>
 </html>
