@@ -3,58 +3,48 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SKYLIGHT AI COMPANY - v7 OLD</title>
+<title>SKYLIGHT v7 - 1234</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-html,body{height:auto;overflow:auto;background:#060e1d}
-body{color:#fff;padding-bottom:90px}
-.top{padding:12px 15px;display:flex;justify-content:space-between;background:#060e1d;position:sticky;top:0;z-index:5;border-bottom:1px solid #13203a}
+html,body{background:#070d1c;color:#fff;overflow:auto}
+body{padding-bottom:80px}
+.top{padding:12px 15px;display:flex;justify-content:space-between;background:#070d1c;position:sticky;top:0;border-bottom:1px solid #1a2a4a}
 .top b{background:linear-gradient(90deg,#00d4ff,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.live{color:#22c55e;font-size:12px}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-@keyframes glow{0%{box-shadow:0 0 4px #22c55e}50%{box-shadow:0 0 18px #22c55e}100%{box-shadow:0 0 4px #22c55e}}
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.6)}100%{transform:scale(1)}}
-.dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:4px;animation:pulse 1s infinite}
-.card{background:#101c33;border:1px solid #1b2c4d;border-radius:16px;margin:12px;padding:14px}
-.sub{color:#6b84a8;font-size:12px;margin-top:6px}
-.btn{width:100%;padding:11px;margin-top:10px;border-radius:20px;background:#0c1a30;border:1px solid #23406a;color:#00b7ff;font-weight:bold}
-.found{margin:16px 14px 8px;font-weight:bold}
-.person{display:flex;align-items:center;background:#101c33;border:1px solid #1b2c4d;border-radius:14px;padding:11px;margin:9px 12px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+@keyframes shine{0%{box-shadow:0 0 3px #22c55e}50%{box-shadow:0 0 15px #22c55e}100%{box-shadow:0 0 3px #22c55e}}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.8)}100%{transform:scale(1)}}
+.dot{width:8px;height:8px;background:#22c55e;border-radius:50%;display:inline-block;animation:pulse 1s infinite;margin-right:3px}
+.card{background:#101c33;border:1px solid #1c2e4f;border-radius:16px;margin:12px;padding:14px}
+.sub{color:#6b84a8;font-size:12px;margin-top:5px}
+.btn{width:100%;padding:11px;margin-top:10px;border-radius:20px;background:#0c1a30;border:1px solid #234065;color:#00b7ff;font-weight:bold}
+.person{display:flex;align-items:center;background:#101c33;border:1px solid #1c2e4f;border-radius:14px;padding:11px;margin:9px 12px}
 .person img{width:44px;height:44px;border-radius:50%;margin-right:10px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px}
-.box{background:#101c33;border:1px solid #1b2c4d;border-radius:16px;padding:14px}
+.box{background:#101c33;border:1px solid #1c2e4f;border-radius:16px;padding:14px}
 .box h2{margin:10px 0}
-.progress{height:5px;background:#0a1930;border-radius:10px;margin:10px 0;overflow:hidden}
-.progress i{display:block;height:100%;width:68%;background:linear-gradient(90deg,#00d4ff,#3b82f6)}
-.item{background:#0d1a30;border:1px solid #1b2c4d;border-radius:12px;padding:12px;margin:10px 0;display:flex;justify-content:space-between;align-items:center}
-.item.liveBox{border-color:#22c55e;animation:glow 2s infinite}
-.buy{padding:8px 18px;border-radius:18px;background:#131f36;border:1px solid #2a4a6b;color:#fff;font-weight:bold}
-.badge{background:#38bdf8;color:#000;font-size:9px;padding:2px 6px;border-radius:8px;margin-left:6px}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#0a1322;border-top:1px solid #1b2c4d;display:flex;justify-content:space-around;padding:8px 0}
+.item{background:#0d1a30;border:1px solid #1c2e4f;border-radius:12px;padding:12px;margin:10px 0;display:flex;justify-content:space-between;align-items:center;animation:shine 2s infinite}
+.buy{padding:8px 18px;border-radius:18px;background:#131f36;border:1px solid #2a4a6b;color:#fff}
+.badge{background:#38bdf8;color:#000;font-size:9px;padding:2px 6px;border-radius:8px;margin-left:5px}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#0a1322;border-top:1px solid #1c2e4f;display:flex;justify-content:space-around;padding:8px 0}
 .bottom div{font-size:10px;text-align:center;color:#4a6490}
 .bottom .on{color:#00d4ff}
-/* LOGIN PAGE - NOT STUCK */
-#loginPage{position:fixed;left:0;top:0;right:0;bottom:0;background:#060e1d;z-index:999;display:flex;align-items:center;justify-content:center;padding:18px}
-.loginCard{background:#101c33;border:1px solid #1b2c4d;border-radius:20px;padding:22px;width:100%;max-width:340px}
-.loginCard h2{text-align:center;background:linear-gradient(90deg,#00d4ff,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.loginCard input{width:100%;padding:12px;margin:8px 0;border-radius:12px;border:1px solid #1b2c4d;background:#060e1d;color:#fff;font-size:14px}
-.loginCard button{width:100%;padding:13px;margin-top:10px;border-radius:20px;background:linear-gradient(90deg,#00d4ff,#7c3aed);border:none;color:#fff;font-weight:bold;font-size:16px}
+#login{position:fixed;inset:0;background:#070d1c;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
+.log{background:#101c33;border:1px solid #1c2e4f;border-radius:20px;padding:22px;width:100%;max-width:330px}
+.log input{width:100%;padding:12px;margin:8px 0;border-radius:12px;border:1px solid #1c2e4f;background:#070d1c;color:#fff}
+.log button{width:100%;padding:13px;border-radius:20px;background:linear-gradient(90deg,#00d4ff,#7c3aed);border:none;color:#fff;font-weight:bold;font-size:16px;margin-top:10px}
 </style>
 </head>
 <body>
 
-<!-- LOGIN WITH PASSWORD - FIXED -->
-<div id="loginPage">
-<div class="loginCard">
-<h2>SKYLIGHT AI COMPANY</h2>
-<p style="text-align:center;color:#6b84a8;font-size:11px;margin:8px 0">AI LIVE 7% • Official Sites</p>
-<label style="color:#6b84a8;font-size:11px">Phone Number</label>
-<input id="phone" value="0779434443" placeholder="0779434443">
-<label style="color:#6b84a8;font-size:11px">Login Password</label>
-<input id="pwd" type="password" value="SKY-1250" placeholder="Enter Password SKY-1250">
-<button onclick="doLogin()">LOGIN</button>
-<p id="err" style="color:#ff4d4d;font-size:11px;text-align:center;margin-top:8px;display:none">Wrong password! Use SKY-1250</p>
-<p style="color:#4a6490;font-size:10px;text-align:center;margin-top:10px">Kampala • Since 2023 • 7% Daily</p>
+<div id="login">
+<div class="log">
+<h2 style="text-align:center;background:linear-gradient(90deg,#00d4ff,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent">SKYLIGHT AI COMPANY</h2>
+<p style="text-align:center;color:#6b84a8;font-size:11px;margin:8px 0">AI LIVE 7% - OLD VERSION v=7</p>
+<input id="ph" placeholder="Phone 0779434443" value="0779434443">
+<input id="pw" type="password" placeholder="Password is 1234" value="">
+<button onclick="loginNow()">LOGIN (1234)</button>
+<p id="er" style="color:#ff4444;font-size:11px;text-align:center;margin-top:8px;display:none">Wrong! Password is 1234</p>
+<p style="color:#4a6490;font-size:10px;text-align:center;margin-top:12px">Benson Mulyatha • SKY-1250</p>
 </div>
 </div>
 
@@ -62,43 +52,35 @@ body{color:#fff;padding-bottom:90px}
 
 <div class="card"><div style="font-weight:bold">🤖 Skylight AI Company - Official Sites</div><div class="sub">Kampala, Uganda • AI Live Sites • 7% Daily Profit • Since 2023<br>🌐 Official Group LIVE</div><button class="btn">💬 Join Official Group</button></div>
 
-<div class="found">👑 Founding Team - 4 Leaders</div>
+<div style="margin:16px 14px 8px;font-weight:bold">👑 Founding Team - 4 Leaders</div>
 <div class="person"><img src="https://i.pravatar.cc/100?img=32"><div><b style="font-size:13px">Dr. Sarah Nakimuli - CTO</b><br><span style="color:#6b84a8;font-size:11px">AI Engineer, Makerere University</span></div></div>
 <div class="person"><img src="https://i.pravatar.cc/100?img=15"><div><b style="font-size:13px">Alex Kintu - Operations Director</b><br><span style="color:#6b84a8;font-size:11px">Manages 24 AI Servers LIVE</span></div></div>
 <div class="person"><img src="https://i.pravatar.cc/100?img=47"><div><b style="font-size:13px">Grace Achieng - Finance Head</b><br><span style="color:#6b84a8;font-size:11px">CPA - Payouts to 12,000+ members</span></div></div>
-<div class="person"><img src="https://i.pravatar.cc/100?img=59"><div><b style="font-size:13px">Musa Okello - Community Lead</b><br><span style="color:#6b84a8;font-size:11px">Official Group Admin - 0793814204</span></div></div>
+<div class="person"><img src="https://i.pravatar.cc/100?img=59"><div><b style="font-size:13px">Musa Okello - Community Lead</b><br><span style="color:#6b84a8;font-size:11px">Admin - 0793814204</span></div></div>
 
-<div class="card"><div style="font-weight:bold;display:flex;justify-content:space-between"><span>Welcome Benson Mulyatha - 7% LIVE</span><span style="background:#e6eef8;color:#000;border-radius:4px;padding:1px 5px">⬆️</span></div><div class="sub">0779434443 | SKY-1250</div></div>
+<div class="card"><div style="font-weight:bold;display:flex;justify-content:space-between"><span>Welcome Benson Mulyatha - 7% LIVE</span><span style="background:#e8eef6;color:#000;border-radius:4px;padding:1px 5px">⬆️</span></div><div class="sub">0779434443 | SKY-1250</div></div>
 
 <div class="grid">
-<div class="box"><small style="color:#6b84a8">CAPITAL</small><h2>0 UGX</h2><button class="btn" style="padding:7px;font-size:12px">+ Deposit<br>0793814204</button></div>
-<div class="box"><small style="color:#6b84a8">PROFITS 7% ⬆️</small><h2>0 UGX</h2><span style="color:#22c55e;font-size:10px"><span class="dot" style="background:#22c55e"></span>LIVE Shining</span></div>
+<div class="box"><small style="color:#6b84a8">CAPITAL</small><h2>0 UGX</h2><button class="btn" style="padding:7px">+ Deposit<br>0793814204</button></div>
+<div class="box"><small style="color:#6b84a8">PROFITS 7% ⬆️</small><h2>0 UGX</h2><span style="color:#22c55e;font-size:10px"><span class="dot"></span>LIVE Shining</span></div>
 </div>
 
-<div class="card liveBox" style="animation:glow 2s infinite"><div style="font-weight:bold">⚡ My Real Machines - Lights LIVE</div><div style="display:flex;justify-content:space-between;margin-top:10px;font-size:12px;color:#6b84a8"><span><span class="dot" style="background:#22c55e"></span><span class="dot" style="background:#38bdf8"></span> M1 AI LIVE</span><span style="color:#38bdf8">4200/mo 7% ⬆️</span></div><div class="progress"><i></i></div><button class="btn">Claim Daily 7%</button></div>
+<div class="card" style="animation:shine 2s infinite"><div style="font-weight:bold">⚡ My Real Machines - Lights LIVE</div><div style="display:flex;justify-content:space-between;margin-top:10px;font-size:12px;color:#6b84a8"><span><span class="dot"></span><span class="dot" style="background:#38bdf8"></span> M1 AI LIVE</span><span style="color:#38bdf8">4200/mo 7% ⬆️</span></div><div style="height:5px;background:#0a1930;border-radius:10px;margin:10px 0"><div style="height:100%;width:70%;background:linear-gradient(90deg,#00d4ff,#3b82f6)"></div></div><button class="btn">Claim Daily 7%</button></div>
 
 <div class="card"><div style="font-weight:bold">🤖 Buy Real Machines - 7% DAILY - Lights ON</div>
-<div class="item liveBox"><div><div style="font-weight:bold;font-size:13px"><span class="dot" style="background:#22c55e"></span> M1 Skylight AI <span class="badge">7% DAILY</span></div><div class="sub">2K → 140/day → 4.2K/mo ⬆️</div></div><button class="buy">Buy</button></div>
-<div class="item liveBox"><div><div style="font-weight:bold;font-size:13px"><span class="dot" style="background:#22c55e"></span> U Skylight AI <span class="badge">7%</span></div><div class="sub">5K → 350/day → 10.5K/mo</div></div><button class="buy">Buy</button></div>
+<div class="item"><div><div style="font-weight:bold;font-size:13px"><span class="dot"></span> M1 Skylight AI <span class="badge">7% DAILY</span></div><div class="sub">2K → 140/day → 4.2K/mo ⬆️</div></div><button class="buy">Buy</button></div>
+<div class="item"><div><div style="font-weight:bold;font-size:13px"><span class="dot"></span> U Skylight AI <span class="badge">7%</span></div><div class="sub">5K → 350/day → 10.5K/mo</div></div><button class="buy">Buy</button></div>
 </div>
 
 <div class="bottom"><div class="on">🏠<br>Home</div><div>💰<br>With</div><div>👥<br>Group</div><div>📜<br>Rules</div><div>⚙️<br>Set</div><div>👑<br>Admin</div></div>
 
 <script>
-function doLogin(){
- var p=document.getElementById('pwd').value;
- if(p==='SKY-1250' || p==='1250' || p==='Benson'){
-   document.getElementById('loginPage').style.display='none';
-   localStorage.setItem('sky','in');
- } else {
-   document.getElementById('err').style.display='block';
- }
+function loginNow(){
+ var pw=document.getElementById('pw').value;
+ if(pw==='1234'){ document.getElementById('login').style.display='none'; localStorage.setItem('sky1234','yes'); }
+ else{ document.getElementById('er').style.display='block'; }
 }
-if(localStorage.getItem('sky')==='in'){document.getElementById('loginPage').style.display='none';}
-function resetLogin(){localStorage.removeItem('sky'); location.reload();}
-// Allow scroll - fix stuck
-document.documentElement.style.overflow='auto';
-document.body.style.overflow='auto';
+if(localStorage.getItem('sky1234')==='yes'){document.getElementById('login').style.display='none';}
 </script>
 </body>
 </html>
