@@ -1,161 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SKYLIGHT AI COMPANY - Official</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SKYLIGHT AI COMPANY</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#0a0f1e;color:#fff;padding-bottom:90px}
-.header{background:linear-gradient(90deg,#0d47a1,#1976d2);padding:15px;text-align:center;position:sticky;top:0;z-index:100}
-.header h1{font-size:18px}
-.badge{background:#ffeb3b;color:#000;padding:2px 8px;border-radius:10px;font-size:10px;margin-left:5px}
-.balance-card{background:linear-gradient(135deg,#1565c0,#0d47a1);margin:15px;border-radius:15px;padding:20px;text-align:center}
-.balance-card h2{font-size:14px;opacity:0.8}
-.balance-card.amount{font-size:32px;font-weight:bold;margin:10px 0}
-.balance-card.btns{display:flex;gap:10px;justify-content:center;margin-top:10px}
-.btn{padding:10px 20px;border-radius:20px;border:none;font-weight:bold;cursor:pointer}
-.btn-deposit{background:#00e676;color:#000}
-.btn-withdraw{background:#fff;color:#0d47a1}
-.founders{display:flex;justify-content:space-around;background:#101a33;margin:15px;border-radius:10px;padding:10px}
-.founders div{text-align:center;font-size:11px}
-.founders b{display:block;color:#ffeb3b;font-size:12px}
-.section-title{margin:20px 15px 10px;font-size:16px;color:#90caf9;border-left:3px solid #1976d2;padding-left:10px}
-.machines{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 15px}
-.card{background:#1a2440;border-radius:12px;padding:12px;border:1px solid #2a3a66}
-.card h3{font-size:13px;margin:8px 0 3px;color:#ffd54f}
-.card p{font-size:11px;opacity:0.7;line-height:1.4}
-.card.price{color:#00e676;font-weight:bold;margin:5px 0}
-.card.rent{background:#1976d2;color:#fff;width:100%;padding:8px;border:none;border-radius:8px;margin-top:5px;cursor:pointer;font-weight:bold}
-.groups{background:#101a33;margin:15px;border-radius:10px;padding:12px}
-.group-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #1e2d55;font-size:13px}
-.income-box{background:#1a2440;margin:15px;border-radius:12px;padding:15px}
-.income-row{display:flex;justify-content:space-between;padding:8px 0;font-size:13px}
-.menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:15px}
-.menu-item{background:#1a2440;padding:15px 5px;text-align:center;border-radius:10px;font-size:11px}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#0e1830;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #1e2d55}
-.bottom-nav div{text-align:center;font-size:10px;opacity:0.6}
-.bottom-nav.active{opacity:1;color:#90caf9}
-input,select{width:100%;padding:12px;border-radius:8px;border:1px solid #2a3a66;background:#0a0f1e;color:#fff;margin:8px 0}
-.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);z-index:200;align-items:center;justify-content:center;padding:20px}
-.modal-content{background:#1a2440;padding:20px;border-radius:15px;width:100%;max-width:350px}
+body{margin:0;background:#0a1220;color:white;font-family:Arial;padding-bottom:70px}
+.h{padding:12px;display:flex;justify-content:space-between;background:#08101f}
+.card{margin:12px;background:#112040;border-radius:16px;padding:15px;border:1px solid #1e345e}
+.row{display:flex;justify-content:space-between;background:#0a1830;padding:12px;border-radius:10px;margin:6px 0;align-items:center}
+.btn{padding:8px 16px;background:linear-gradient(90deg,#00d4ff,#7d2ae8);border:none;border-radius:20px;color:white;font-weight:bold}
+.ticker{height:90px;overflow:hidden}
+.move{animation:up 10s linear infinite}
+@keyframes up{0%{transform:translateY(100%)}100%{transform:translateY(-100%)}}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#08101f;display:flex;justify-content:space-around;padding:6px 0;border-top:1px solid #1e345e}
+.bottom button{background:none;border:none;color:#8aa0c0;font-size:10px}
+.on{color:#00d4ff!important}
+.p{display:none}.show{display:block}
 </style>
 </head>
 <body>
-<div class="header">
-<h1>SKYLIGHT AI COMPANY 👑 <span class="badge">OFFICIAL</span></h1>
-<p style="font-size:11px;margin-top:4px;opacity:0.8">Dealing with AI Technology | 7% Daily</p>
+
+<div class="h"><b style="color:#00d4ff">SKYLIGHT AI COMPANY</b><span style="color:#00ff88;font-size:11px">● AI LIVE 7%</span></div>
+
+<div id="home" class="p show">
+<div class="card" style="display:flex;justify-content:space-between">
+<div><small>CAPITAL</small><h2 style="margin:0">2,000 UGX</h2></div>
+<div style="text-align:right"><small>PROFITS 7%</small><h2 style="margin:0;color:#00ff88">0 UGX</h2></div>
 </div>
-<div class="balance-card">
-<h2>My Wallet Balance (UGX)</h2>
-<div class="amount" id="balance">0</div>
-<p style="font-size:11px">When someone deposite he see his money on account</p>
-<div class="btns">
-<button class="btn btn-deposit" onclick="showDeposit()">Deposit</button>
-<button class="btn btn-withdraw" onclick="showWithdraw()">Withdraw</button>
-</div>
-</div>
-<div class="founders">
-<div><b>🇺🇬 UG Admin</b>Thembo<br>Manager</div>
-<div><b>🇺🇸 US Admin</b>Skylight<br>Official</div>
-<div><b>🇳🇬 NG Admin</b>For Nigeria</div>
-<div><b>🌍 Global</b>Four Founders<br>Facing together</div>
-</div>
-<div class="section-title">Official Groups & Chats</div>
-<div class="groups">
-<div class="group-item"><span>📢 Official Channel</span><span style="color:#00e676">Join</span></div>
-<div class="group-item"><span>💬 Official Group + Admin US Number</span><span style="color:#00e676">Join</span></div>
-<div class="group-item"><span>👥 Four Founders Group - Together</span><span>Active</span></div>
-</div>
-<div class="section-title">AI Sky Machines - Daily 7% Shine</div>
-<p style="margin:0 15px;font-size:11px;opacity:0.7">Machines as shining and daily % - money should come on wallet when rent</p>
-<div class="machines" id="machineList"></div>
-<div class="section-title">VIP & Income Details</div>
-<div class="income-box">
-<div class="income-row"><span>M1 Sky - 2000 UGX</span><span style="color:#00e676">7% = 140/day</span></div>
-<div class="income-row"><span>M2 Sky - 5000 UGX (U1)</span><span style="color:#00e676">7% = 350/day</span></div>
-<div class="income-row"><span>M3 Sky - 15000 UGX (U2)</span><span style="color:#00e676">7% = 1050/day</span></div>
-<div class="income-row"><span>M4 Sky - 30000 UGX (U3/U4)</span><span style="color:#00e676">7% = 2100/day</span></div>
-<hr style="margin:10px 0;border:0;border-top:1px solid #2a3a66">
-<div class="income-row"><b>Your Income</b><b id="dailyIncome">0 UGX</b></div>
-<div class="income-row"><span>Invite Rewards</span><span>L1=15% L2=3% L3=2% = 20%</span></div>
-<div class="income-row"><span>V1=invite 8 | V2=invite 20 | V3=40 VIPs</span><span style="color:#ffeb3b">VIP</span></div>
-</div>
-<div class="section-title">My Menu - Like Paper</div>
-<div class="menu-grid">
-<div class="menu-item">💰<br>Deposit Details</div>
-<div class="menu-item">🏧<br>Withdraw Details</div>
-<div class="menu-item">📥<br>Download APP</div>
-<div class="menu-item">👤<br>Manager</div>
-<div class="menu-item">📜<br>Rules - How it started</div>
-<div class="menu-item">📄<br>PDF - Avoid multiple</div>
-<div class="menu-item">🎁<br>Invited Friends</div>
-<div class="menu-item">📨<br>Invite</div>
-<div class="menu-item">👑<br>Admins</div>
-<div class="menu-item">⚙️<br>Settings & Logout</div>
-<div class="menu-item">💵<br>Total Rented</div>
-<div class="menu-item">📊<br>Daily Profit</div>
-</div>
-<div style="height:80px"></div>
-<div class="bottom-nav">
-<div class="active">🏠<br>Home</div>
-<div>💰<br>Deposit</div>
-<div>📈<br>Income</div>
-<div>👤<br>Me</div>
-</div>
-<div class="modal" id="depositModal">
-<div class="modal-content">
-<h3>Deposit Amount</h3>
-<p style="font-size:12px;opacity:0.7;margin:8px 0">In Deposit -> five asked for amount number</p>
-<input type="number" id="depAmount" placeholder="Enter amount e.g 2000">
-<select>
-<option>Airtel Money - 0793814204</option>
-<option>MTN Money</option>
-</select>
-<button class="btn btn-deposit" style="width:100%;margin-top:10px" onclick="doDeposit()">Confirm Deposit</button>
-<button class="btn" style="width:100%;margin-top:8px;background:#333;color:#fff" onclick="closeModal()">Cancel</button>
+<div style="margin:0 12px"><button class="btn" style="width:100%">+ Deposit 0793814204</button></div>
+
+<div class="card"><b>👑 FOUNDER</b><p>0793814204 - VERIFIED</p></div>
+
+<div class="card"><b>💸 Site Settlement</b>
+<div class="ticker"><div class="move">
+<div class="row"><span>070****123 withdrew 14K</span><span style="color:#00ff88">✓</span></div>
+<div class="row"><span>078****456 withdrew 35K</span><span style="color:#00ff88">✓</span></div>
+<div class="row"><span>079****420 withdrew 7K</span><span style="color:#00ff88">✓</span></div>
+</div></div>
 </div>
 </div>
+
+<div id="ai" class="p">
+<div class="card"><b>⚡ My Real Machines - Lights LIVE</b><p style="color:#8aa0c0;font-size:12px">No machines. Buy M1 to see lights</p><button class="btn" style="width:100%">Claim Daily 7%</button></div>
+<div class="card"><b>🤖 Buy Real Machines - 7% DAILY - Lights ON</b>
+<div class="row"><span>🟢🔵 M1 Skylight AI<br><small>2K → 140/day</small></span><button class="btn">Buy</button></div>
+<div class="row"><span>🟢🔵 U Skylight AI<br><small>5K → 350/day</small></span><button class="btn">Buy</button></div>
+<div class="row"><span>🟢🟣 L Skylight AI<br><small>15K → 1050/day</small></span><button class="btn">Buy</button></div>
+<div class="row"><span>🟢🟣 Y Skylight AI<br><small>30K → 2100/day</small></span><button class="btn">Buy</button></div>
+</div>
+<div class="card"><b>👑 VIP LEVEL</b>
+<div class="row"><span>VIP1</span><span>→</span></div>
+<div class="row"><span>VIP2</span><span>→</span></div>
+</div>
+</div>
+
+<div id="rules" class="p">
+<div class="card"><b>📜 RULES</b>
+<div class="row"><span>1. How to Deposit</span></div><p style="font-size:13px;color:#aaa">Go My → Deposit → Send to 0793814204 → Upload proof</p>
+<div class="row"><span>2. No Multiple Accounts</span></div><p style="font-size:13px;color:#aaa">One phone one account. Multiple will be banned.</p>
+<div class="row"><span>3. Withdrawal</span></div><p style="font-size:13px;color:#aaa">9AM-6PM, min 3000 UGX</p>
+</div>
+</div>
+
+<div id="my" class="p">
+<div class="card"><b>👤 My</b>
+<div class="row"><span>📤 Withdrawal</span><span>→</span></div>
+<div class="row"><span>📥 Deposit</span><span>→</span></div>
+<div class="row"><span>👥 Invite</span><span>→</span></div>
+<div class="row"><span>⚙️ Settings</span><span>→</span></div>
+</div>
+</div>
+
+<div class="bottom">
+<button id="b-home" class="on" onclick="go('home')">🏠<br>Home</button>
+<button onclick="go('ai')">🤖<br>Ai Sky</button>
+<button onclick="go('rules')">📜<br>Rules</button>
+<button onclick="go('my')">👤<br>My</button>
+</div>
+
 <script>
-const machines=[
-{name:"M1 Sky",price:2000,daily:140,img:"🤖"},
-{name:"M2 Sky / U1",price:5000,daily:350,img:"⚡"},
-{name:"M3 Sky / U2",price:15000,daily:1050,img:"🚀"},
-{name:"M4 Sky / U3",price:30000,daily:2100,img:"👑"},
-{name:"M4 Sky / U4",price:50000,daily:3500,img:"💎"},
-{name:"VIP 1 Bonus",price:0,daily:0,img:"🔥"}
-];
-let balance=parseInt(localStorage.getItem('sky_balance')||0);
-let rented=JSON.parse(localStorage.getItem('sky_rented')||'[]');
-document.getElementById('balance').innerText=balance.toLocaleString()+' UGX';
-function renderMachines(){
-let html='';
-machines.forEach((m,i)=>{
-let isRented=rented.includes(i);
-html+=`<div class="card"><div style="font-size:40px;text-align:center">${m.img}</div><h3>${m.name}</h3><p>AI Machines as shining and daily 7%<br>Rent should appear in wallet if rented</p><div class="price">${m.price>0?m.price.toLocaleString()+' UGX':'VIP Level'}</div><div style="font-size:11px;color:#ffeb3b">Daily: ${m.daily} UGX</div><button class="rent" style="background:${isRented?'#333':'#1976d2'}" onclick="rentMachine(${i})">${isRented?'✅ Rented':'Rent Now'}</button></div>`;
-});
-document.getElementById('machineList').innerHTML=html;
-updateIncome();
+function go(id){
+document.querySelectorAll('.p').forEach(p=>p.classList.remove('show'));
+document.getElementById(id).classList.add('show');
+document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('on'));
+event.currentTarget.classList.add('on');
 }
-function rentMachine(i){
-if(rented.includes(i)){alert('Already rented!');return;}
-let m=machines[i];
-if(balance < m.price && m.price>0){alert('Not enough balance! Please deposit first.');showDeposit();return;}
-if(m.price>0){balance-=m.price;localStorage.setItem('sky_balance',balance);document.getElementById('balance').innerText=balance.toLocaleString()+' UGX';}
-rented.push(i);localStorage.setItem('sky_rented',JSON.stringify(rented));renderMachines();alert('Success! '+m.name+' rented. Daily 7% will shine to wallet!');
-}
-function showDeposit(){document.getElementById('depositModal').style.display='flex';}
-function closeModal(){document.getElementById('depositModal').style.display='none';}
-function doDeposit(){
-let amt=parseInt(document.getElementById('depAmount').value);
-if(!amt){alert('Enter amount');return;}
-balance+=amt;localStorage.setItem('sky_balance',balance);document.getElementById('balance').innerText=balance.toLocaleString()+' UGX';closeModal();alert('Deposit '+amt+' UGX added! Now rent machines.');
-}
-function showWithdraw(){alert('Withdraw Minimum 2000 UGX. Contact Admin 0793814204');}
-function updateIncome(){
-let total=0;rented.forEach(i=>{total+=machines[i].daily||0});document.getElementById('dailyIncome').innerText=total.toLocaleString()+' UGX /day';
-}
-renderMachines();
 </script>
 </body>
 </html>
