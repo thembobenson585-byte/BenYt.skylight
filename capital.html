@@ -1,18 +1,78 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;background:#0b142c;color:#fff;font-family:Arial} .top{padding:18px;text-align:center;font-weight:bold;background:#08101f} .card{margin:14px;background:#14233f;border-radius:18px;padding:16px;border:1px solid #1c335f} .big{font-size:28px;font-weight:bold} .green{color:#00ff88;font-size:26px;font-weight:bold} .dep{width:calc(100% - 28px);margin:0 14px;padding:14px;background:linear-gradient(90deg,#00c6ff,#7d3cf0);border:0;border-radius:12px;color:#fff;font-weight:bold} .claim{width:100%;padding:12px;background:transparent;border:1.5px solid #00a6d6;border-radius:12px;color:#00bfe6;font-weight:bold;margin-top:12px} .row{display:flex;justify-content:space-between;align-items:center;background:#0e1f3a;border-radius:12px;padding:12px;margin:8px 0} .dot{width:18px;height:18px;background:#00ff00;border-radius:50%;display:inline-block} .buy{padding:10px 22px;background:linear-gradient(90deg,#00bfff,#7d4cff);border:0;border-radius:10px;color:#fff;font-weight:bold}</style></head><body>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SKYLIGHT AI COMPANY</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#0b142c;color:white;font-family:Arial;padding-bottom:80px}
+.top{padding:18px;text-align:center;font-weight:bold;letter-spacing:1px;background:#08101f}
+.card{margin:14px;background:#14233f;border-radius:18px;padding:16px;border:1px solid #1c335f}
+.cap-card{display:flex;justify-content:space-between;align-items:center}
+.big{font-size:28px;font-weight:bold;margin:4px 0}
+.green{color:#00ff88;font-size:26px;font-weight:bold}
+.dep{width:100%;padding:14px;background:linear-gradient(90deg,#00c6ff,#7d3cf0);border:none;border-radius:12px;color:white;font-weight:bold;font-size:15px;margin:2px 14px;width:calc(100% - 28px)}
+.claim{width:100%;padding:13px;background:transparent;border:1.5px solid #00a6d6;border-radius:12px;color:#00bfe6;font-weight:bold;font-size:14px;margin-top:14px}
+.row{display:flex;justify-content:space-between;align-items:center;background:#0e1f3a;border-radius:12px;padding:12px 14px;margin:10px 0}
+.dot{width:22px;height:22px;background:radial-gradient(#7dff7d,#00c000);border-radius:50%;display:inline-block;margin-right:8px;box-shadow:0 0 8px #00ff00}
+.buy{padding:10px 24px;background:linear-gradient(90deg,#00bfff,#7d4cff);border:none;border-radius:10px;color:white;font-weight:bold}
+.bot{position:fixed;bottom:0;left:0;right:0;background:#08101f;display:flex;justify-content:space-around;padding:10px 0;border-top:1px solid #1c335f}
+.bot button{background:none;border:none;color:#7f95b5;font-size:11px}
+.on{color:#00d4ff!important}
+.page{display:none}.show{display:block}
+</style>
+</head>
+<body>
 <div class="top">SKYLIGHT AI COMPANY</div>
-<div class="card" style="display:flex;justify-content:space-between"><div><small>CAPITAL</small><div class="big" id="c">2,000 UGX</div></div><div style="text-align:right"><small>PROFITS 7%</small><div class="green" id="p">0 UGX</div></div></div>
-<button class="dep" onclick="dep()">+ Deposit - 0793814204</button>
-<div class="card"><b>⚡ My Real Machines - Lights LIVE</b><div id="m" style="color:#7f95b5;font-size:13px;margin-top:6px">No machines. Buy M1 to see lights</div><button class="claim" onclick="cl()">Claim Daily 7%</button></div>
-<div class="card"><b>🤖 Buy Real Machines - 7% DAILY - Lights ON</b>
-<div class="row"><div><span class="dot"></span> M1 2,000 → 140/day</div><button class="buy" onclick="bu('M1',2000,140)">Buy</button></div>
-<div class="row"><div><span class="dot"></span> U 5,000 → 350/day</div><button class="buy" onclick="bu('U',5000,350)">Buy</button></div>
-<div class="row"><div><span class="dot"></span> L 15,000 → 1050/day</div><button class="buy" onclick="bu('L',15000,1050)">Buy</button></div>
-<div class="row"><div><span class="dot"></span> Y 30,000 → 2100/day</div><button class="buy" onclick="bu('Y',30000,2100)">Buy</button></div>
+
+<div id="home" class="page show">
+<div class="card cap-card">
+<div><small style="color:#8aa0c0">CAPITAL</small><div class="big" id="cap">2,000 UGX</div></div>
+<div style="text-align:right"><small style="color:#8aa0c0">PROFITS 7%</small><div class="green" id="prof">0 UGX</div></div>
 </div>
+
+<button class="dep" onclick="goMy()">+ Deposit - 0793814204</button>
+
+<div class="card">
+<div style="font-weight:bold">⚡ My Real Machines - Lights LIVE</div>
+<div style="color:#7f95b5;font-size:13px;margin-top:6px" id="mylist">No machines. Buy M1 to see lights</div>
+<button class="claim" onclick="claim()">Claim Daily 7%</button>
+</div>
+
+<div class="card">
+<div style="font-weight:bold;margin-bottom:10px">🤖 Buy Real Machines - 7% DAILY - Lights ON</div>
+<div class="row"><div><span class="dot"></span>M1 Skylight AI 7% DAILY<br><small style="margin-left:32px">2,000 UGX → 140/day</small></div><button class="buy" onclick="buy('M1',2000,140)">Buy</button></div>
+<div class="row"><div><span class="dot"></span>U Skylight AI 7% DAILY<br><small style="margin-left:32px">5,000 UGX → 350/day</small></div><button class="buy" onclick="buy('U',5000,350)">Buy</button></div>
+<div class="row"><div><span class="dot"></span>L Skylight AI 7% DAILY<br><small style="margin-left:32px">15,000 UGX → 1050/day</small></div><button class="buy" onclick="buy('L',15000,1050)">Buy</button></div>
+<div class="row"><div><span class="dot"></span>Y Skylight AI 7% DAILY<br><small style="margin-left:32px">30,000 UGX → 2100/day</small></div><button class="buy" onclick="buy('Y',30000,2100)">Buy</button></div>
+</div>
+</div>
+
+<div class="bot">
+<button class="on" onclick="showPage('home',this)">🏠<br>Home</button>
+<button onclick="alert('With page')">📤<br>With</button>
+<button onclick="alert('Group: 0793814204')">👥<br>Group</button>
+<button onclick="alert('Rules: Min withdraw 3000, 7% daily')">📜<br>Rules</button>
+<button onclick="showPage('home',this)">⚙️<br>Set</button>
+<button onclick="goMy()">👤<br>Admin</button>
+</div>
+
 <script>
-let cap=2000,prof=0,ms=[];let sc=localStorage;cap=parseInt(sc.getItem('cap')||2000);prof=parseInt(sc.getItem('prof')||0);ms=JSON.parse(sc.getItem('ms')||'[]');
-function up(){document.getElementById('c').innerText=cap+' UGX';document.getElementById('p').innerText=prof+' UGX';let h='';if(ms.length==0)h='No machines. Buy M1 to see lights';else ms.forEach(x=>h+='🟢 '+x.n+' LIVE<br>');document.getElementById('m').innerHTML=h;sc.setItem('cap',cap);sc.setItem('prof',prof);sc.setItem('ms',JSON.stringify(ms));}
-function bu(n,p,d){if(cap<p){alert('Deposit first');return;}cap-=p;ms.push({n:n,d:d});up();alert(n+' bought Lights ON!');}
-function cl(){if(ms.length==0){alert('Buy M1 first');return;}let t=0;ms.forEach(x=>t+=x.d);prof+=t;cap+=t;up();alert('Claimed '+t+' UGX');}
-function dep(){let a=prompt('Deposit amount:');if(a){cap+=parseInt(a);up();alert('Deposited! Send proof to 0793814204');}}up();
-</script></body></html>
+let cap=parseInt(localStorage.getItem('cap')||'2000');
+let prof=parseInt(localStorage.getItem('prof')||'0');
+let ms=JSON.parse(localStorage.getItem('ms')||'[]');
+function upd(){
+document.getElementById('cap').innerText=cap.toLocaleString()+' UGX';
+document.getElementById('prof').innerText=prof.toLocaleString()+' UGX';
+if(ms.length>0){let h='';ms.forEach(m=>{h+=`<div style="margin:6px 0">🟢 ${m.name} - LIVE ${m.daily}/day</div>`});document.getElementById('mylist').innerHTML=h;}
+localStorage.setItem('cap',cap);localStorage.setItem('prof',prof);localStorage.setItem('ms',JSON.stringify(ms));
+}
+function buy(n,p,d){if(cap<p){alert('Deposit first! Need '+p);return;}cap-=p;ms.push({name:n,daily:d});upd();alert(n+' bought! Light ON 🟢');}
+function claim(){if(ms.length==0){alert('Buy M1 first');return;}let tot=0;ms.forEach(m=>tot+=m.daily);prof+=tot;cap+=tot;upd();alert('Claimed '+tot+' UGX!');}
+function showPage(id,el){document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));document.getElementById(id).classList.add('show');document.querySelectorAll('.bot button').forEach(b=>b.classList.remove('on'));if(el)el.classList.add('on');}
+function goMy(){alert('My → Deposit: Send to 0793814204, then amount added');let a=prompt('Enter deposit amount:');if(a){cap+=parseInt(a||0);upd();}}
+upd();
+</script>
+</body>
+</html>
