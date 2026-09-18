@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SKYLIGHT AI COMPANY - OLD v7 FIXED</title>
+<title>SKYLIGHT OLD v7 - 6 MACHINES FIXED</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#070d1c;color:#fff}
-.top{padding:12px 14px;display:flex;justify-content:space-between;background:#070d1c;border-bottom:1px solid #1a2d4a}
+body{background:#070d1c;color:#fff;padding-bottom:100px}
+.top{padding:12px 14px;display:flex;justify-content:space-between;background:#070d1c;border-bottom:1px solid #1a2d4a;position:sticky;top:0;z-index:10}
 .top b{background:linear-gradient(90deg,#00d4ff,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.6)}100%{transform:scale(1)}}
-@keyframes glow{0%{box-shadow:0 0 3px #22c55e}50%{box-shadow:0 0 14px #22c55e}100%{box-shadow:0 0 3px #22c55e}}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.7)}100%{transform:scale(1)}}
+@keyframes glow{0%{box-shadow:0 0 4px #22c55e}50%{box-shadow:0 0 14px #22c55e}100%{box-shadow:0 0 4px #22c55e}}
 .dot{width:8px;height:8px;background:#22c55e;border-radius:50%;display:inline-block;animation:pulse 1s infinite;margin-right:4px}
 .card{background:#101c33;border:1px solid #1b2c4d;border-radius:16px;margin:12px;padding:14px}
 .sub{color:#6b84a8;font-size:12px;margin-top:5px}
@@ -19,12 +19,12 @@ body{background:#070d1c;color:#fff}
 .person img{width:44px;height:44px;border-radius:50%;margin-right:10px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px}
 .box{background:#101c33;border:1px solid #1b2c4d;border-radius:16px;padding:14px}
-.box h2{margin:10px 0}
 .item{background:#0d1a30;border:1px solid #1b2c4d;border-radius:12px;padding:12px;margin:10px 0;display:flex;justify-content:space-between;align-items:center;animation:glow 2s infinite}
-.buy{padding:8px 18px;border-radius:18px;background:#131f36;border:1px solid #2a4a6b;color:#fff}
-.badge{background:#38bdf8;color:#000;font-size:9px;padding:2px 6px;border-radius:8px;margin-left:5px}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#0a1322;border-top:1px solid #1b2c4d;display:flex;justify-content:space-around;padding:8px 0}
-.bottom div{font-size:10px;text-align:center;color:#4a6490}
+.buy{padding:8px 20px;border-radius:18px;background:#131f36;border:1px solid #2a4a6b;color:#fff;font-weight:bold}
+.badge{background:#38bdf8;color:#000;font-size:9px;padding:3px 7px;border-radius:8px;margin-left:5px}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#0a1322;border-top:1px solid #1b2c4d;display:flex;justify-content:space-around;padding:10px 0 14px;z-index:99}
+.bottom div{font-size:11px;text-align:center;color:#5a7498;flex:1}
+.bottom .on{color:#00d4ff}
 .loginBox{border:2px solid #00d4ff}
 .loginBox input{width:100%;padding:11px;margin:6px 0;border-radius:12px;border:1px solid #1b2c4d;background:#070d1c;color:#fff}
 .loginBox button{width:100%;padding:12px;border-radius:20px;background:linear-gradient(90deg,#00d4ff,#7c3aed);border:none;color:#fff;font-weight:bold}
@@ -36,15 +36,14 @@ body{background:#070d1c;color:#fff}
 
 <div class="card loginBox">
 <div style="font-weight:bold">🔐 Login Password = 1234</div>
-<div class="sub">Phone 0779434443 | Old Pass 1234</div>
-<input id="ph" value="0779434443">
-<input id="pw" type="password" placeholder="Enter 1234" value="1234">
-<button onclick="let p=document.getElementById('pw').value; if(p=='1234'){document.getElementById('ok').style.display='block';document.getElementById('er').style.display='none'}else{document.getElementById('er').style.display='block';document.getElementById('ok').style.display='none'}">LOGIN 1234</button>
-<p id="ok" style="display:none;color:#22c55e;font-size:12px;text-align:center;margin-top:8px">✅ Correct! Welcome Benson!</p>
-<p id="er" style="display:none;color:#ff5555;font-size:12px;text-align:center;margin-top:8px">❌ Wrong! Use 1234</p>
+<div class="sub">Phone 0779434443 | Pass 1234</div>
+<input value="0779434443">
+<input type="password" placeholder="1234" value="1234" id="pw">
+<button onclick="if(document.getElementById('pw').value=='1234'){document.getElementById('ok').style.display='block'}">LOGIN 1234</button>
+<p id="ok" style="display:none;color:#22c55e;font-size:12px;text-align:center;margin-top:8px">✅ Welcome Benson!</p>
 </div>
 
-<div class="card"><b>🤖 Skylight AI Company - Official Sites</b><div class="sub">Kampala, Uganda • AI Live Sites • 7% Daily Profit • Since 2023<br>🌐 Official Group LIVE</div><button class="btn">💬 Join Official Group</button></div>
+<div class="card"><b>🤖 Skylight AI Company - Official Sites</b><div class="sub">Kampala, Uganda • AI Live Sites • 7% Daily Profit • Since 2023</div><button class="btn">💬 Join Official Group</button></div>
 
 <div style="margin:16px 14px 8px;font-weight:bold">👑 Founding Team - 4 Leaders</div>
 <div class="person"><img src="https://i.pravatar.cc/100?img=32"><div><b style="font-size:13px">Dr. Sarah Nakimuli - CTO</b><br><span style="color:#6b84a8;font-size:11px">AI Engineer, Makerere University</span></div></div>
@@ -55,19 +54,30 @@ body{background:#070d1c;color:#fff}
 <div class="card"><div style="font-weight:bold">Welcome Benson Mulyatha - 7% LIVE ⬆️</div><div class="sub">0779434443 | SKY-1250 | Pass 1234</div></div>
 
 <div class="grid">
-<div class="box"><small style="color:#6b84a8">CAPITAL</small><h2>0 UGX</h2><button class="btn" style="padding:7px;font-size:12px">+ Deposit<br>0793814204</button></div>
+<div class="box"><small style="color:#6b84a8">CAPITAL</small><h2>0 UGX</h2><button class="btn" style="padding:7px">+ Deposit 0793814204</button></div>
 <div class="box"><small style="color:#6b84a8">PROFITS 7% ⬆️</small><h2>0 UGX</h2><div style="color:#22c55e;font-size:10px"><span class="dot"></span>LIVE Shining</div></div>
 </div>
 
 <div class="card" style="animation:glow 2s infinite"><div style="font-weight:bold">⚡ My Real Machines - Lights LIVE</div><div style="display:flex;justify-content:space-between;margin-top:10px;font-size:12px"><span><span class="dot"></span><span class="dot" style="background:#38bdf8"></span> M1 AI LIVE</span><span style="color:#38bdf8">4200/mo 7% ⬆️</span></div><div style="height:5px;background:#0a1930;border-radius:10px;margin:10px 0"><div style="height:100%;width:70%;background:linear-gradient(90deg,#00d4ff,#3b82f6)"></div></div><button class="btn">Claim Daily 7%</button></div>
 
-<div class="card"><div style="font-weight:bold">🤖 Buy Real Machines - 7% DAILY - Lights ON</div>
+<!-- FIXED: 6 MACHINES NOW - NOT 2 -->
+<div class="card">
+<div style="font-weight:bold">🤖 Buy Real Machines - 7% DAILY - Lights ON</div>
 <div class="item"><div><div style="font-weight:bold;font-size:13px"><span class="dot"></span> M1 Skylight AI <span class="badge">7% DAILY</span></div><div class="sub">2K → 140/day → 4.2K/mo ⬆️</div></div><button class="buy">Buy</button></div>
 <div class="item"><div><div style="font-weight:bold;font-size:13px"><span class="dot"></span> U Skylight AI <span class="badge">7%</span></div><div class="sub">5K → 350/day → 10.5K/mo</div></div><button class="buy">Buy</button></div>
+<div class="item"><div><div style="font-weight:bold;font-size:13px"><span class="dot"></span> L Skylight AI <span class="badge">7%</span></div><div class="sub">15K → 1050/day → 31.5K/mo</div></div><button class="buy">Buy</button></div>
+<div class="item"><div><div style="font-weight:bold;font-size:13px"><span class="dot"></span> Y Skylight AI <span class="badge">7%</span></div><div class="sub">30K → 2100/day → 63K/mo</div></div><button class="buy">Buy</button></div>
+<div class="item"><div><div style="font-weight:bold;font-size:13px"><span class="dot"></span> B Skylight AI <span class="badge">7%</span></div><div class="sub">60K → 4200/day → 126K/mo</div></div><button class="buy">Buy</button></div>
+<div class="item"><div><div style="font-weight:bold;font-size:13px"><span class="dot"></span> G Skylight AI <span class="badge">VIP 7%</span></div><div class="sub">150K → 10500/day → 315K/mo 🔥</div></div><button class="buy">Buy</button></div>
 </div>
 
-<div style="height:70px"></div>
-<div class="bottom"><div style="color:#00d4ff">🏠<br>Home</div><div>💰<br>With</div><div>👥<br>Group</div><div>📜<br>Rules</div><div>⚙️<br>Set</div><div>👑<br>Admin</div></div>
+<!-- EXTRA SPACE SO BOTTOM DOESN'T COVER -->
+<div style="height:90px"></div>
+
+<!-- BOTTOM FIXED BUT NOT STUCK - NOW CLICKABLE -->
+<div class="bottom">
+<div class="on">🏠<br>Home</div><div>💰<br>With</div><div>👥<br>Group</div><div>📜<br>Rules</div><div>⚙️<br>Set</div><div>👑<br>Admin</div>
+</div>
 
 </body>
-</html>
+                                                                                                                            </html>
