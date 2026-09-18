@@ -3,67 +3,77 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SKYLIGHT - BOTTOM UNSTUCK</title>
+<title>SKYLIGHT OLD v7 - FACES + LIGHTS FIXED</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#070d1c;color:#fff}
+.top{padding:12px 14px;display:flex;justify-content:space-between;background:#070d1c;border-bottom:1px solid #1a2d4a;position:sticky;top:0;z-index:10}
+.top b{color:#00d4ff}
+@keyframes blink{0%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(1.8)}100%{opacity:1;transform:scale(1)}}
+@keyframes shine{0%{box-shadow:0 0 5px #22c55e,0 0 5px #00d4ff}50%{box-shadow:0 0 15px #22c55e,0 0 20px #00d4ff}100%{box-shadow:0 0 5px #22c55e}}
+.green{width:10px;height:10px;background:#22c55e;border-radius:50%;display:inline-block;animation:blink 1s infinite;box-shadow:0 0 8px #22c55e}
+.card{background:#101c33;border:1px solid #1b2c4d;border-radius:16px;margin:12px;padding:14px}
+.sub{color:#6b84a8;font-size:12px;margin-top:5px}
+.btn{width:100%;padding:11px;margin-top:10px;border-radius:20px;background:#0c1a30;border:1px solid #234065;color:#00b7ff;font-weight:bold}
+.person{display:flex;align-items:center;background:#101c33;border:1px solid #1b2c4d;border-radius:14px;padding:11px;margin:9px 12px}
+.person img{width:48px;height:48px;border-radius:50%;margin-right:12px;border:2px solid #22c55e;object-fit:cover}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px}
+.box{background:#101c33;border:1px solid #1b2c4d;border-radius:16px;padding:14px}
+.machine{background:#0d1a30;border:1px solid #22c55e;border-radius:12px;padding:12px;margin:10px 0;display:flex;justify-content:space-between;align-items:center;animation:shine 2s infinite}
+.buy{padding:9px 20px;border-radius:18px;background:linear-gradient(90deg,#22c55e,#00d4ff);border:none;color:#000;font-weight:bold}
+.badge{background:#22c55e;color:#000;font-size:9px;padding:3px 7px;border-radius:8px;margin-left:6px;font-weight:bold}
+.bottom{background:#0a1322;border-top:2px solid #1b2c4d;display:flex;justify-content:space-around;padding:14px 0;margin-top:25px}
+.bottom div{font-size:11px;text-align:center;color:#5a7498;flex:1}
+.bottom .on{color:#00d4ff}
+.login{border:2px solid #00d4ff}
+.login input{width:100%;padding:11px;margin:6px 0;border-radius:12px;border:1px solid #1b2c4d;background:#070d1c;color:#fff}
+.login button{width:100%;padding:12px;border-radius:20px;background:linear-gradient(90deg,#00d4ff,#7c3aed);border:none;color:#fff;font-weight:bold}
+</style>
 </head>
-<body style="margin:0;font-family:Arial;background:#070d1c;color:#fff">
+<body>
 
-<div style="padding:12px;display:flex;justify-content:space-between;border-bottom:1px solid #1a2d4a;background:#070d1c;position:sticky;top:0;z-index:10">
-<b style="color:#00d4ff">SKYLIGHT AI COMPANY</b>
-<span style="color:#22c55e">● AI LIVE 7%</span>
+<div class="top"><b>SKYLIGHT AI COMPANY</b><span style="color:#22c55e"><span class="green"></span> AI LIVE 7%</span></div>
+
+<div class="card login">
+<div style="font-weight:bold">🔐 Login Password = 1234</div>
+<div class="sub">Phone 0779434443 | Old Pass 1234</div>
+<input value="0779434443">
+<input type="password" value="1234">
+<button>LOGIN 1234</button>
 </div>
 
-<div style="background:#101c33;border-radius:16px;margin:12px;padding:14px;border:2px solid #00d4ff">
-<b>🔐 Login Password = 1234</b><br>
-<small style="color:#6b84a8">0779434443 | Pass 1234</small><br><br>
-<input value="0779434443" style="width:100%;padding:10px;border-radius:10px;border:1px solid #333;background:#070d1c;color:#fff"><br><br>
-<input value="1234" type="password" style="width:100%;padding:10px;border-radius:10px;border:1px solid #333;background:#070d1c;color:#fff">
+<div class="card"><b>🤖 Skylight AI Company - Official Sites</b><div class="sub">Kampala, Uganda • AI Live Sites • 7% Daily Profit • Since 2023<br>🌐 Official Group LIVE</div><button class="btn">💬 Join Official Group</button></div>
+
+<div style="margin:16px 14px 8px;font-weight:bold">👑 Founding Team - 4 Leaders - FACES BACK</div>
+<div class="person"><img src="https://randomuser.me/api/portraits/women/68.jpg"><div><b style="font-size:13px">Dr. Sarah Nakimuli - CTO</b><br><span style="color:#6b84a8;font-size:11px">AI Engineer, Makerere University</span></div></div>
+<div class="person"><img src="https://randomuser.me/api/portraits/men/32.jpg"><div><b style="font-size:13px">Alex Kintu - Operations Director</b><br><span style="color:#6b84a8;font-size:11px">Manages 24 AI Servers LIVE</span></div></div>
+<div class="person"><img src="https://randomuser.me/api/portraits/women/26.jpg"><div><b style="font-size:13px">Grace Achieng - Finance Head</b><br><span style="color:#6b84a8;font-size:11px">CPA - Payouts to 12,000+ members</span></div></div>
+<div class="person"><img src="https://randomuser.me/api/portraits/men/75.jpg"><div><b style="font-size:13px">Musa Okello - Community Lead</b><br><span style="color:#6b84a8;font-size:11px">Admin - 0793814204</span></div></div>
+
+<div class="card"><div style="font-weight:bold">Welcome Benson Mulyatha - 7% LIVE ⬆️</div><div class="sub">0779434443 | SKY-1250 | Pass 1234</div></div>
+
+<div class="grid">
+<div class="box"><small style="color:#6b84a8">CAPITAL</small><h2>0 UGX</h2><button class="btn">+ Deposit 0793814204</button></div>
+<div class="box"><small style="color:#6b84a8">PROFITS 7% ⬆️</small><h2>0 UGX</h2><div style="color:#22c55e;font-size:11px;margin-top:6px"><span class="green"></span> LIVE Shining</div></div>
 </div>
 
-<div style="background:#101c33;border-radius:16px;margin:12px;padding:14px">
-<b>🤖 Skylight AI Company - Official Sites</b><br>
-<small style="color:#6b84a8">Kampala • 7% Daily Profit • Since 2023</small>
+<div class="card" style="border:1px solid #22c55e;animation:shine 2s infinite"><div style="font-weight:bold">⚡ My Real Machines - Lights LIVE</div><div style="display:flex;justify-content:space-between;margin-top:12px;font-size:13px"><span><span class="green"></span> M1 AI LIVE ●</span><span style="color:#22c55e">4200/mo 7% ⬆️</span></div><div style="height:6px;background:#0a162c;border-radius:10px;margin:12px 0;overflow:hidden"><div style="height:100%;width:70%;background:linear-gradient(90deg,#22c55e,#00d4ff)"></div></div><button class="btn">Claim Daily 7%</button></div>
+
+<div class="card">
+<div style="font-weight:bold">🤖 Buy Real Machines - 7% DAILY - Green Lights ON</div>
+<div class="machine"><div><div style="font-weight:bold"><span class="green"></span> M1 Skylight AI <span class="badge">7% DAILY</span></div><div class="sub">2K → 140/day → 4.2K/mo ⬆️</div></div><button class="buy">Buy</button></div>
+<div class="machine"><div><div style="font-weight:bold"><span class="green"></span> U Skylight AI <span class="badge">7%</span></div><div class="sub">5K → 350/day → 10.5K/mo</div></div><button class="buy">Buy</button></div>
+<div class="machine"><div><div style="font-weight:bold"><span class="green"></span> L Skylight AI <span class="badge">7%</span></div><div class="sub">15K → 1050/day</div></div><button class="buy">Buy</button></div>
+<div class="machine"><div><div style="font-weight:bold"><span class="green"></span> Y Skylight AI <span class="badge">7%</span></div><div class="sub">30K → 2100/day</div></div><button class="buy">Buy</button></div>
+<div class="machine"><div><div style="font-weight:bold"><span class="green"></span> B Skylight AI <span class="badge">7%</span></div><div class="sub">60K → 4200/day</div></div><button class="buy">Buy</button></div>
+<div class="machine"><div><div style="font-weight:bold"><span class="green"></span> G Skylight AI VIP <span class="badge">VIP 7%</span></div><div class="sub">150K → 10500/day 🔥</div></div><button class="buy">Buy</button></div>
 </div>
 
-<div style="margin:16px 14px 8px;font-weight:bold">👑 Founding Team - 4 Leaders</div>
-<div style="background:#101c33;border-radius:14px;padding:11px;margin:9px 12px">Dr. Sarah Nakimuli - CTO</div>
-<div style="background:#101c33;border-radius:14px;padding:11px;margin:9px 12px">Alex Kintu - Operations - 24 AI Servers</div>
-<div style="background:#101c33;border-radius:14px;padding:11px;margin:9px 12px">Grace Achieng - Finance</div>
-<div style="background:#101c33;border-radius:14px;padding:11px;margin:9px 12px">Musa Okello - Admin 0793814204</div>
-
-<div style="background:#101c33;border-radius:16px;margin:12px;padding:14px">
-<b>Welcome Benson Mulyatha - 7% LIVE</b><br><small>0779434443 | SKY-1250 | Pass 1234</small>
+<!-- BOTTOM NOT FIXED - NO STUCK - SCROLLS NORMALLY -->
+<div class="bottom">
+<div class="on">🏠<br>Home</div><div>💰<br>With</div><div>👥<br>Group</div><div>📜<br>Rules</div><div>⚙️<br>Set</div><div>👑<br>Admin</div>
 </div>
-
-<div style="display:flex;gap:12px;margin:12px">
-<div style="background:#101c33;border-radius:16px;padding:14px;flex:1"><small>CAPITAL</small><h2>0 UGX</h2></div>
-<div style="background:#101c33;border-radius:16px;padding:14px;flex:1"><small>PROFITS 7%</small><h2>0 UGX</h2><small style="color:#22c55e">● LIVE Shining</small></div>
-</div>
-
-<div style="background:#101c33;border-radius:16px;margin:12px;padding:14px;border:1px solid #22c55e">
-<b>⚡ My Real Machines - Lights LIVE ●</b>
-</div>
-
-<div style="background:#101c33;border-radius:16px;margin:12px;padding:14px">
-<b>🤖 Buy Real Machines - 7% DAILY - 6 MACHINES</b><br><br>
-<div style="background:#0d1a30;border:1px solid #22c55e;border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;align-items:center"><div><b>🟢 M1 Skylight AI 7% DAILY</b><br><small>2K → 140/day → 4.2K/mo</small></div><button style="padding:8px 18px;border-radius:18px">Buy</button></div>
-<div style="background:#0d1a30;border:1px solid #22c55e;border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between"><div><b>🟢 U Skylight AI 7%</b><br><small>5K → 350/day → 10.5K/mo</small></div><button style="padding:8px 18px;border-radius:18px">Buy</button></div>
-<div style="background:#0d1a30;border:1px solid #22c55e;border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between"><div><b>🟢 L Skylight AI 7%</b><br><small>15K → 1050/day</small></div><button style="padding:8px 18px;border-radius:18px">Buy</button></div>
-<div style="background:#0d1a30;border:1px solid #22c55e;border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between"><div><b>🟢 Y Skylight AI 7%</b><br><small>30K → 2100/day</small></div><button style="padding:8px 18px;border-radius:18px">Buy</button></div>
-<div style="background:#0d1a30;border:1px solid #22c55e;border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between"><div><b>🟢 B Skylight AI 7%</b><br><small>60K → 4200/day</small></div><button style="padding:8px 18px;border-radius:18px">Buy</button></div>
-<div style="background:#0d1a30;border:1px solid #22c55e;border-radius:12px;padding:12px;margin:8px 0;display:flex;justify-content:space-between"><div><b>🔥 G Skylight AI VIP 7%</b><br><small>150K → 10500/day</small></div><button style="padding:8px 18px;border-radius:18px">Buy</button></div>
-</div>
-
-<!-- BOTTOM NOW NOT FIXED - IT SCROLLS - NOT STUCK -->
-<div style="background:#0a1322;border-top:1px solid #1b2c4d;display:flex;justify-content:space-around;padding:14px 0;margin-top:20px">
-<div style="text-align:center;color:#00d4ff">🏠<br>Home</div>
-<div style="text-align:center">💰<br>With</div>
-<div style="text-align:center">👥<br>Group</div>
-<div style="text-align:center">📜<br>Rules</div>
-<div style="text-align:center">⚙️<br>Set</div>
-<div style="text-align:center">👑<br>Admin</div>
-</div>
-
-<div style="text-align:center;padding:15px;color:#6b84a8;font-size:12px">✅ Bottom Unstuck • 6 Machines • Password 1234</div>
+<div style="text-align:center;padding:12px;color:#6b84a8;font-size:11px">✅ Faces + Green Lights + 6 Machines + Bottom Unstuck</div>
 
 </body>
 </html>
